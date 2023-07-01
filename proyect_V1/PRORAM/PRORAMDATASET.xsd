@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="PRORAMDATASET" targetNamespace="http://tempuri.org/PRORAMDATASET.xsd" xmlns:mstns="http://tempuri.org/PRORAMDATASET.xsd" xmlns="http://tempuri.org/PRORAMDATASET.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="PRORAMDATASET" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="PRORAMDATASET" msprop:Generator_UserDSName="PRORAMDATASET">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="RadarDeviceTable" msprop:Generator_TableClassName="RadarDeviceTableDataTable" msprop:Generator_TableVarName="tableRadarDeviceTable" msprop:Generator_TablePropName="RadarDeviceTable" msprop:Generator_RowDeletingName="RadarDeviceTableRowDeleting" msprop:Generator_RowChangingName="RadarDeviceTableRowChanging" msprop:Generator_RowEvHandlerName="RadarDeviceTableRowChangeEventHandler" msprop:Generator_RowDeletedName="RadarDeviceTableRowDeleted" msprop:Generator_UserTableName="RadarDeviceTable" msprop:Generator_RowChangedName="RadarDeviceTableRowChanged" msprop:Generator_RowEvArgName="RadarDeviceTableRowChangeEvent" msprop:Generator_RowClassName="RadarDeviceTableRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Id" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="1" msprop:Generator_ColumnVarNameInTable="columnId" msprop:Generator_ColumnPropNameInRow="Id" msprop:Generator_ColumnPropNameInTable="IdColumn" msprop:Generator_UserColumnName="Id" type="xs:int" />
+              <xs:element name="IdRadar" msprop:Generator_ColumnVarNameInTable="columnIdRadar" msprop:Generator_ColumnPropNameInRow="IdRadar" msprop:Generator_ColumnPropNameInTable="IdRadarColumn" msprop:Generator_UserColumnName="IdRadar" type="xs:int" minOccurs="0" />
+              <xs:element name="RadarName" msprop:Generator_ColumnVarNameInTable="columnRadarName" msprop:Generator_ColumnPropNameInRow="RadarName" msprop:Generator_ColumnPropNameInTable="RadarNameColumn" msprop:Generator_UserColumnName="RadarName" type="xs:string" minOccurs="0" />
+              <xs:element name="Azimuth" msprop:Generator_ColumnVarNameInTable="columnAzimuth" msprop:Generator_ColumnPropNameInRow="Azimuth" msprop:Generator_ColumnPropNameInTable="AzimuthColumn" msprop:Generator_UserColumnName="Azimuth" type="xs:double" minOccurs="0" />
+              <xs:element name="Coordinates" msprop:Generator_ColumnVarNameInTable="columnCoordinates" msprop:Generator_ColumnPropNameInRow="Coordinates" msprop:Generator_ColumnPropNameInTable="CoordinatesColumn" msprop:Generator_UserColumnName="Coordinates" type="xs:string" minOccurs="0" />
+              <xs:element name="StateConnection" msprop:Generator_ColumnVarNameInTable="columnStateConnection" msprop:Generator_ColumnPropNameInRow="StateConnection" msprop:Generator_ColumnPropNameInTable="StateConnectionColumn" msprop:Generator_UserColumnName="StateConnection" type="xs:boolean" minOccurs="0" />
+              <xs:element name="Latitud" msprop:Generator_ColumnVarNameInTable="columnLatitud" msprop:Generator_ColumnPropNameInRow="Latitud" msprop:Generator_ColumnPropNameInTable="LatitudColumn" msprop:Generator_UserColumnName="Latitud" type="xs:double" minOccurs="0" />
+              <xs:element name="Longitud" msprop:Generator_ColumnVarNameInTable="columnLongitud" msprop:Generator_ColumnPropNameInRow="Longitud" msprop:Generator_ColumnPropNameInTable="LongitudColumn" msprop:Generator_UserColumnName="Longitud" type="xs:double" minOccurs="0" />
+              <xs:element name="Elevation" msprop:Generator_ColumnVarNameInTable="columnElevation" msprop:Generator_ColumnPropNameInRow="Elevation" msprop:Generator_ColumnPropNameInTable="ElevationColumn" msprop:Generator_UserColumnName="Elevation" type="xs:double" minOccurs="0" />
+              <xs:element name="IdModelo" msprop:Generator_ColumnVarNameInTable="columnIdModelo" msprop:Generator_ColumnPropNameInRow="IdModelo" msprop:Generator_ColumnPropNameInTable="IdModeloColumn" msprop:Generator_UserColumnName="IdModelo" type="xs:int" minOccurs="0" />
+              <xs:element name="SchannelFrec" msprop:Generator_ColumnVarNameInTable="columnSchannelFrec" msprop:Generator_ColumnPropNameInRow="SchannelFrec" msprop:Generator_ColumnPropNameInTable="SchannelFrecColumn" msprop:Generator_UserColumnName="SchannelFrec" type="xs:int" minOccurs="0" />
+              <xs:element name="IpAddress" msprop:Generator_ColumnVarNameInTable="columnIpAddress" msprop:Generator_ColumnPropNameInRow="IpAddress" msprop:Generator_ColumnPropNameInTable="IpAddressColumn" msprop:Generator_UserColumnName="IpAddress" type="xs:string" minOccurs="0" />
+              <xs:element name="InstallationAngle" msprop:Generator_ColumnVarNameInTable="columnInstallationAngle" msprop:Generator_ColumnPropNameInRow="InstallationAngle" msprop:Generator_ColumnPropNameInTable="InstallationAngleColumn" msprop:Generator_UserColumnName="InstallationAngle" type="xs:double" minOccurs="0" />
+              <xs:element name="TXPower" msprop:Generator_ColumnVarNameInTable="columnTXPower" msprop:Generator_ColumnPropNameInRow="TXPower" msprop:Generator_ColumnPropNameInTable="TXPowerColumn" msprop:Generator_UserColumnName="TXPower" type="xs:int" minOccurs="0" />
+              <xs:element name="Radiation" msprop:Generator_ColumnVarNameInTable="columnRadiation" msprop:Generator_ColumnPropNameInRow="Radiation" msprop:Generator_ColumnPropNameInTable="RadiationColumn" msprop:Generator_UserColumnName="Radiation" type="xs:boolean" minOccurs="0" />
+              <xs:element name="Guid" msdata:DataType="System.Guid, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" msprop:Generator_ColumnVarNameInTable="columnGuid" msprop:Generator_ColumnPropNameInRow="Guid" msprop:Generator_ColumnPropNameInTable="GuidColumn" msprop:Generator_UserColumnName="Guid" type="xs:string" minOccurs="0" />
+              <xs:element name="Port" msprop:Generator_ColumnVarNameInTable="columnPort" msprop:Generator_ColumnPropNameInRow="Port" msprop:Generator_ColumnPropNameInTable="PortColumn" msprop:Generator_UserColumnName="Port" type="xs:int" minOccurs="0" />
+              <xs:element name="IdChannel" msprop:Generator_ColumnVarNameInTable="columnIdChannel" msprop:Generator_ColumnPropNameInRow="IdChannel" msprop:Generator_ColumnPropNameInTable="IdChannelColumn" msprop:Generator_UserColumnName="IdChannel" type="xs:int" minOccurs="0" />
+              <xs:element name="Frec" msprop:Generator_ColumnVarNameInTable="columnFrec" msprop:Generator_ColumnPropNameInRow="Frec" msprop:Generator_ColumnPropNameInTable="FrecColumn" msprop:Generator_UserColumnName="Frec" type="xs:double" minOccurs="0" />
+              <xs:element name="MClutter" msprop:Generator_ColumnVarNameInTable="columnMClutter" msprop:Generator_ColumnPropNameInRow="MClutter" msprop:Generator_ColumnPropNameInTable="MClutterColumn" msprop:Generator_UserColumnName="MClutter" type="xs:boolean" minOccurs="0" />
+              <xs:element name="NorthHeiding" msprop:Generator_ColumnVarNameInTable="columnNorthHeiding" msprop:Generator_ColumnPropNameInRow="NorthHeiding" msprop:Generator_ColumnPropNameInTable="NorthHeidingColumn" msprop:Generator_UserColumnName="NorthHeiding" type="xs:double" minOccurs="0" />
+              <xs:element name="Altitude" msprop:Generator_ColumnVarNameInTable="columnAltitude" msprop:Generator_ColumnPropNameInRow="Altitude" msprop:Generator_ColumnPropNameInTable="AltitudeColumn" msprop:Generator_UserColumnName="Altitude" type="xs:double" minOccurs="0" />
+              <xs:element name="IsSaveComplete" msprop:Generator_ColumnVarNameInTable="columnIsSaveComplete" msprop:Generator_ColumnPropNameInRow="IsSaveComplete" msprop:Generator_ColumnPropNameInTable="IsSaveCompleteColumn" msprop:Generator_UserColumnName="IsSaveComplete" type="xs:boolean" minOccurs="0" />
+              <xs:element name="IsSaveCompleteT" msprop:Generator_ColumnVarNameInTable="columnIsSaveCompleteT" msprop:Generator_ColumnPropNameInRow="IsSaveCompleteT" msprop:Generator_ColumnPropNameInTable="IsSaveCompleteTColumn" msprop:Generator_UserColumnName="IsSaveCompleteT" type="xs:boolean" minOccurs="0" />
+              <xs:element name="IsSaving" msprop:Generator_ColumnVarNameInTable="columnIsSaving" msprop:Generator_ColumnPropNameInRow="IsSaving" msprop:Generator_ColumnPropNameInTable="IsSavingColumn" msprop:Generator_UserColumnName="IsSaving" type="xs:boolean" minOccurs="0" />
+              <xs:element name="IsSavingT" msprop:Generator_ColumnVarNameInTable="columnIsSavingT" msprop:Generator_ColumnPropNameInRow="IsSavingT" msprop:Generator_ColumnPropNameInTable="IsSavingTColumn" msprop:Generator_UserColumnName="IsSavingT" type="xs:boolean" minOccurs="0" />
+              <xs:element name="SaveProgress" msprop:Generator_ColumnVarNameInTable="columnSaveProgress" msprop:Generator_ColumnPropNameInRow="SaveProgress" msprop:Generator_ColumnPropNameInTable="SaveProgressColumn" msprop:Generator_UserColumnName="SaveProgress" type="xs:double" minOccurs="0" />
+              <xs:element name="SaveProgressT" msprop:Generator_ColumnVarNameInTable="columnSaveProgressT" msprop:Generator_ColumnPropNameInRow="SaveProgressT" msprop:Generator_ColumnPropNameInTable="SaveProgressTColumn" msprop:Generator_UserColumnName="SaveProgressT" type="xs:double" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="TargetArea" msprop:Generator_TableClassName="TargetAreaDataTable" msprop:Generator_TableVarName="tableTargetArea" msprop:Generator_TablePropName="TargetArea" msprop:Generator_RowDeletingName="TargetAreaRowDeleting" msprop:Generator_RowChangingName="TargetAreaRowChanging" msprop:Generator_RowEvHandlerName="TargetAreaRowChangeEventHandler" msprop:Generator_RowDeletedName="TargetAreaRowDeleted" msprop:Generator_UserTableName="TargetArea" msprop:Generator_RowChangedName="TargetAreaRowChanged" msprop:Generator_RowEvArgName="TargetAreaRowChangeEvent" msprop:Generator_RowClassName="TargetAreaRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="LatitudP1" msprop:Generator_ColumnVarNameInTable="columnLatitudP1" msprop:Generator_ColumnPropNameInRow="LatitudP1" msprop:Generator_ColumnPropNameInTable="LatitudP1Column" msprop:Generator_UserColumnName="LatitudP1" type="xs:double" minOccurs="0" />
+              <xs:element name="LongitudP1" msprop:Generator_ColumnVarNameInTable="columnLongitudP1" msprop:Generator_ColumnPropNameInRow="LongitudP1" msprop:Generator_ColumnPropNameInTable="LongitudP1Column" msprop:Generator_UserColumnName="LongitudP1" type="xs:double" minOccurs="0" />
+              <xs:element name="LatitudP2" msprop:Generator_ColumnVarNameInTable="columnLatitudP2" msprop:Generator_ColumnPropNameInRow="LatitudP2" msprop:Generator_ColumnPropNameInTable="LatitudP2Column" msprop:Generator_UserColumnName="LatitudP2" type="xs:double" minOccurs="0" />
+              <xs:element name="LongitudP2" msprop:Generator_ColumnVarNameInTable="columnLongitudP2" msprop:Generator_ColumnPropNameInRow="LongitudP2" msprop:Generator_ColumnPropNameInTable="LongitudP2Column" msprop:Generator_UserColumnName="LongitudP2" type="xs:double" minOccurs="0" />
+              <xs:element name="NombreArea" msprop:Generator_ColumnVarNameInTable="columnNombreArea" msprop:Generator_ColumnPropNameInRow="NombreArea" msprop:Generator_ColumnPropNameInTable="NombreAreaColumn" msprop:Generator_UserColumnName="NombreArea" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Layers" msprop:Generator_TableClassName="LayersDataTable" msprop:Generator_TableVarName="tableLayers" msprop:Generator_RowChangedName="LayersRowChanged" msprop:Generator_TablePropName="Layers" msprop:Generator_RowDeletingName="LayersRowDeleting" msprop:Generator_RowChangingName="LayersRowChanging" msprop:Generator_RowEvHandlerName="LayersRowChangeEventHandler" msprop:Generator_RowDeletedName="LayersRowDeleted" msprop:Generator_RowClassName="LayersRow" msprop:Generator_UserTableName="Layers" msprop:Generator_RowEvArgName="LayersRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Id" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="1" msprop:Generator_ColumnVarNameInTable="columnId" msprop:Generator_ColumnPropNameInRow="Id" msprop:Generator_ColumnPropNameInTable="IdColumn" msprop:Generator_UserColumnName="Id" type="xs:int" minOccurs="0" />
+              <xs:element name="Name" msprop:Generator_ColumnVarNameInTable="columnName" msprop:Generator_ColumnPropNameInRow="Name" msprop:Generator_ColumnPropNameInTable="NameColumn" msprop:Generator_UserColumnName="Name" type="xs:string" minOccurs="0" />
+              <xs:element name="State" msprop:Generator_ColumnVarNameInTable="columnState" msprop:Generator_ColumnPropNameInRow="State" msprop:Generator_ColumnPropNameInTable="StateColumn" msprop:Generator_UserColumnName="State" type="xs:boolean" minOccurs="0" />
+              <xs:element name="Sigla" msprop:Generator_ColumnVarNameInTable="columnSigla" msprop:Generator_ColumnPropNameInRow="Sigla" msprop:Generator_ColumnPropNameInTable="SiglaColumn" msprop:Generator_UserColumnName="Sigla" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:RadarDeviceTable" />
+      <xs:field xpath="mstns:Id" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

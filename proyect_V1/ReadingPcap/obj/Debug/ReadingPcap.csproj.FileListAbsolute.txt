@@ -1,0 +1,4 @@
+C:\Users\jsant\OneDrive\Escritorio\Radar\Consola-main\proyect_V2\ReadingPcap\obj\Debug\ReadingPcap.csprojAssemblyReference.cache
+C:\Users\jsant\OneDrive\Escritorio\Radar\Consola-main\proyect_V2\ReadingPcap\obj\Debug\ReadingPcap.csproj.CoreCompileInputs.cache
+E:\radar PPR\proyect_V2\ReadingPcap\obj\Debug\ReadingPcap.csprojAssemblyReference.cache
+E:\radar PPR\proyect_V2\ReadingPcap\obj\Debug\ReadingPcap.csproj.CoreCompileInputs.cache

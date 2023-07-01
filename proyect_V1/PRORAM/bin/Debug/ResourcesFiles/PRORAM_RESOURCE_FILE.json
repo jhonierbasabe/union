@@ -1,0 +1,349 @@
+{
+  "PRORAM_RESOURCE_FILE": {
+    "VIEW": {
+      "RadarConfiguration": {
+        "Title": "Configuracion del dispositivo radar",
+        "Label1": "¿Qué modelo radar desea agregar? (*)",
+        "Label2": "Dirección IP(*)",
+        "Label3": "Altura del dispositivo (*)(m):",
+        "Label4": "Potencia de transmisión (*)(%):",
+        "Label5": "Angulo de instalación (*)(°):",
+        "Label6": "Angulo azimut (*)(°):",
+        "Label7": "OffsetXDistance (*)(m):",
+        "Label8": "OffsetYDistance (*)(m):",
+        "Label9": "Seleccione canal de frecuencia (*):",
+        "Label10": "Latitud (*):",
+        "Label11": "Longitud (*):",
+        "Label12": "Elevacion(*):",
+        "Label13": "Port (*)"
+
+      },
+      "TargetArea": {
+        "Title": "Área de vigilancia",
+        "Label1": "Nombre del área objetivo (*):",
+        "Label2": "Coordenadas punto superior izquierdo:",
+        "Label3": "Latitud (*):",
+        "Label4": "Longitud (*):",
+        "Label5": "Elevación (*):",
+        "Label6": "Coordenadas punto inferior derecho:",
+        "Label7": "Latitud (*):",
+        "Label8": "Longitud (*):",
+        "Label9": "Elevación (*):"
+      },
+      "PowerRadar": {
+        "Title": "Edicion de potencia",
+        "Label1": "Dispositivo radar: ",
+        "Label2": "Ajuste la potencia del dispositivo radar",
+        "Label3": "Potencia del dispositivo"
+      },
+      "ChannelFrec": {
+        "Title": "Editar canal de transmisión",
+        "Label1": "Dispositivo radar: ",
+        "Label2": "Frecuencia central: ",
+        "Label3": "Seleccione el canal de transmisión del dispositivo",
+        "Label4": "Canal de transmisión: "
+      },
+      "RightPanel": {
+        "Label1": "Detalle de blanco",
+        "Label2": "Id: ",
+        "Label3": "Detectado por el dispositivo: ",
+        "Label4": "Potencia reflejada: ",
+        "Label5": "Clasificación",
+        "Label6": "Velocidad: ",
+        "Label7": "Distancia del dispositivo radar: ",
+        "Label8": "Detalle del dispositivo radar: ",
+        "Label9": "Modelo: ",
+        "Label10": "Ip/HostName: ",
+        "Label11": "Potencia: ",
+        "Label12": "Canal de transmisión: ",
+        "Label13": "Detalle de instalación",
+        "Label14": "Altura del dispositivo: ",
+        "Label15": "Offset X distancia: ",
+        "Label16": "Offset Y distancia: ",
+        "Label17": "Ángulo de instalación: ",
+        "Label18": "Georreferenciación  del dispositivo",
+        "Label19": "Coordenadas del dispositivo",
+        "Label20": "Latitud: ",
+        "Label21": "Longitud: ",
+        "Label22": "Elevación: ",
+        "Label23": "Azimut: "
+      }
+    },
+
+    "ModelosRardar": {
+      "Modelo1": {
+        "Id": 1,
+        "Name": "ISYS-3106",
+        "ChannelFrec": [
+          {
+            "Channel": 0,
+            "Frec": 24051818181
+          },
+          {
+            "Channel": 1,
+            "Frec": 24057272727
+          },
+          {
+            "Channel": 2,
+            "Frec": 24062727272
+          },
+          {
+            "Channel": 3,
+            "Frec": 24068181818
+          },
+          {
+            "Channel": 4,
+            "Frec": 24073636363
+          },
+          {
+            "Channel": 5,
+            "Frec": 24079090909
+          },
+          {
+            "Channel": 6,
+            "Frec": 24084545454
+          },
+          {
+            "Channel": 7,
+            "Frec": 24090000000
+          },
+          {
+            "Channel": 8,
+            "Frec": 24095454545
+          },
+          {
+            "Channel": 9,
+            "Frec": 24100909090
+          },
+          {
+            "Channel": 10,
+            "Frec": 24106363636
+          },
+          {
+            "Channel": 11,
+            "Frec": 24111818181
+          },
+          {
+            "Channel": 12,
+            "Frec": 24117272727
+          },
+          {
+            "Channel": 13,
+            "Frec": 24122727272
+          },
+          {
+            "Channel": 14,
+            "Frec": 24128181818
+          },
+          {
+            "Channel": 15,
+            "Frec": 24133636363
+          },
+          {
+            "Channel": 16,
+            "Frec": 24139090909
+          },
+          {
+            "Channel": 17,
+            "Frec": 24144545454
+          },
+          {
+            "Channel": 18,
+            "Frec": 24150000000
+          },
+          {
+            "Channel": 19,
+            "Frec": 24155454545
+          },
+          {
+            "Channel": 20,
+            "Frec": 24160909090
+          },
+          {
+            "Channel": 21,
+            "Frec": 24166363636
+          },
+          {
+            "Channel": 22,
+            "Frec": 24171818181
+          }
+        ]
+      },
+      "Modelo2": {
+        "Id": 2,
+        "Name": "PRORAM - 1.1",
+        "ChannelFrec": [
+          {
+            "Channel": 1,
+            "Frec": 24.057272727
+          },
+          {
+            "Channel": 2,
+            "Frec": 24.062727272
+          }
+        ]
+      }
+    },
+    "ICD": {
+      "Mensajes": {
+        "Control": {
+          "C_EncenderApagarRadar": {
+            "IdMess": 33,
+            "Source": 251,
+            "Addressee": 0,
+            "SizeData": 1,
+            "Data": 1,
+            "EndMess": 255,
+            "SizeMess": 6
+          },
+          "R_EncenderApagarRadar": {
+            "IdMess": 49,
+            "Source": 251,
+            "Addressee": 0,
+            "SizeData": 1,
+            "Data": 1,
+            "EndMess": 255,
+            "SizeMess": 6
+          },
+          "CC_PotenciaRadar": {
+            "IdMess": 34,
+            "Source": 251,
+            "Addressee": 0,
+            "SizeData": 1,
+            "Data": 1,
+            "EndMess": 255,
+            "SizeMess": 6
+          },
+          "RC_PotenciaRadar": {
+            "IdMess": 50,
+            "Source": 255,
+            "Addressee": 0,
+            "SizeData": 1,
+            "Data": 1,
+            "EndMess": 255,
+            "SizeMess": 6
+          },
+          "CC_CanalFrecRadar": {
+            "IdMess": 35,
+            "Source": 255,
+            "Addressee": 0,
+            "SizeData": 1,
+            "Data": 1,
+            "EndMess": 255,
+            "SizeMess": 6
+          },
+          "RC_CanalFrecRadar": {
+            "IdMess": 51,
+            "Source": 255,
+            "Addressee": 0,
+            "SizeData": 1,
+            "Data": 1,
+            "EndMess": 255,
+            "SizeMess": 6
+          },
+          "C_EliminarTraza": {
+            "IdMess": 36,
+            "Source": 255,
+            "Addressee": 0,
+            "SizeData": 1,
+            "Data": 1,
+            "EndMess": 255,
+            "SizeMess": 6
+          },
+          "R_EliminarTraza": {
+            "IdMess": 52,
+            "Source": 255,
+            "Addressee": 0,
+            "SizeData": 1,
+            "Data": 1,
+            "EndMess": 255,
+            "SizeMess": 6
+          },
+          "CC_Hora": {
+            "IdMess": 37,
+            "Source": 255,
+            "Addressee": 0,
+            "SizeData": 4,
+            "Data": 1,
+            "EndMess": 255,
+            "SizeMess": 9
+          },
+          "RC_Hora": {
+            "IdMess": 53,
+            "Source": 255,
+            "Addressee": 0,
+            "SizeData": 4,
+            "Data": 1,
+            "EndMess": 255,
+            "SizeMess": 9
+          }
+        },
+        "Consulta": {
+          "C_IdRadar": {
+            "IdMess": 68,
+            "Source": 255,
+            "Addressee": 0,
+            "SizeData": 1,
+            "Data": 1,
+            "EndMess": 255,
+            "SizeMess": 6
+          },
+          "R_IdRadar": {
+            "IdMess": 84,
+            "Source": 255,
+            "Addressee": 0,
+            "SizeData": 1,
+            "Data": 1,
+            "EndMess": 255,
+            "SizeMess": 6
+          },
+          "C_GetStatus": {
+            "IdMess": 65,
+            "Source": 255,
+            "Addressee": 0,
+            "SizeData": 1,
+            "Data": 1,
+            "EndMess": 255,
+            "SizeMess": 6
+          },
+          "R_GetStatus": {
+            "IdMess": 81,
+            "Source": 255,
+            "Addressee": 0,
+            "SizeData": 1,
+            "Data": 1,
+            "EndMess": 255,
+            "SizeMess": 6
+          },
+          "C_GetSettingTime": {
+            "IdMess": 69,
+            "Source": 255,
+            "Addressee": 0,
+            "SizeData": 1,
+            "Data": 1,
+            "EndMess": 255,
+            "SizeMess": 6
+          },          
+          "R_GetSettingTime": {
+            "IdMess": 85,
+            "Source": 255,
+            "Addressee": 0,
+            "SizeData": 1,
+            "Data": 4,
+            "EndMess": 255,
+            "SizeMess": 9
+          }
+
+        },
+        "Reportes": {
+          "Rep_Plots": {
+            "IdMess": 129,
+            "Source": 0,
+            "Addressee": 251,
+            "EndMess": 255
+          }
+        }
+      }
+    }
+  }
+}

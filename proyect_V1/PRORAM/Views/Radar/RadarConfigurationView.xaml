@@ -1,0 +1,400 @@
+﻿<UserControl x:Class="PRORAM.Views.RadarConfigurationView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:prism="http://prismlibrary.com/"
+        xmlns:input="clr-namespace:System.Windows.Input;assembly=PresentationCore"                 
+        prism:ViewModelLocator.AutoWireViewModel="True"         
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PRORAM.Views"
+        xmlns:controls="http://schemas.microsoft.com/netfx/2009/xaml/presentation"
+        xmlns:views="clr-namespace:PRORAM.Views"    
+        mc:Ignorable="d"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        Background="Transparent"
+        xmlns:local2="clr-namespace:PRORAM"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Medium"
+        TextElement.FontSize="14"        
+        Height="auto" Width="auto">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <local2:MyConverter x:Key="MyConverter"/>
+            <Style x:Key="ShadowDepth" TargetType="{x:Type TextBox}">
+                <Setter Property="BorderBrush" Value="Wheat" />
+                <Setter Property="Foreground" Value="White" />
+                <Setter Property="Button.Effect">
+                    <Setter.Value>
+                        <DropShadowEffect Color="White" Direction="320" ShadowDepth="3" BlurRadius="5" Opacity="0.5" />
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <!--<Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource MaterialDesignTextBox}">
+                <Setter Property="Margin" Value="0 8 0 8" />
+            </Style>-->
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <i:Interaction.Triggers>
+
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding OnLoadScreenCommand}" />
+        </i:EventTrigger>
+
+        <prism:InteractionRequestTrigger SourceObject="{Binding CustomPopupRequest}">
+            <prism:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True">
+                <prism:PopupWindowAction.WindowStyle>
+                    <Style TargetType="Window">
+                        <Setter Property="SizeToContent" Value="WidthAndHeight"/>
+                        <Setter Property="ResizeMode" Value="NoResize"/>
+                        <Setter Property="WindowStyle" Value="None"/>
+                        <Setter Property="AllowsTransparency" Value="True"/>
+                        <Setter Property="Background" Value="Transparent"/>
+                    </Style>
+                </prism:PopupWindowAction.WindowStyle>
+                <prism:PopupWindowAction.WindowContent>
+                    <views:CustomPopupView />
+                </prism:PopupWindowAction.WindowContent>
+            </prism:PopupWindowAction>
+        </prism:InteractionRequestTrigger>
+
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding SetIdCommand}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    
+    <Border CornerRadius="10" BorderBrush="DimGray" BorderThickness="1" Background="{DynamicResource MaterialDesignPaper}">
+        <Grid >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <DockPanel Grid.Row="0" Grid.Column="0">
+                <Border MouseDown="Border_MouseDown">
+                    <materialDesign:ColorZone Mode="PrimaryDark"  Height="35" CornerRadius="5">
+                        <Label Content="Registrar dispositivo radar" Foreground="White" Margin="5,0,0,0"></Label>
+                    </materialDesign:ColorZone>
+                </Border>
+            </DockPanel>
+
+            <DockPanel Grid.Row="1" Grid.Column="0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <DockPanel Height="auto" Grid.Row="0">
+                        <Label Name="Label133"      Margin="5,5" Content="Nombre del radar (*):" VerticalAlignment="Center"/>
+                        <TextBox Name="NameRadar" Margin="5,5"                         
+                            Text="{Binding RadarConfigurationModel_.RadarName, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=true, ValidatesOnExceptions=true, UpdateSourceTrigger=LostFocus}"                                
+                            materialDesign:HintAssist.Hint="Ingrese el nombre del radar"
+                            Background="DimGray"                          
+                            BorderBrush="DimGray"
+                            BorderThickness="2"
+                            Width="355" >
+                            <TextBox.Effect>
+                                <DropShadowEffect ShadowDepth="2" Color="White" Opacity=".4" RenderingBias="Performance"></DropShadowEffect>
+                            </TextBox.Effect>
+                        </TextBox>
+                    </DockPanel>
+                    <DockPanel Grid.Row="1">
+                        <Label Name="Label1" Margin="5,5" VerticalAlignment="Center"/>
+                        <ComboBox Name="Seleccione" Background="DimGray" ItemsSource="{Binding RadarConfigurationModel_.Modelos}"
+                          materialDesign:HintAssist.Hint="Seleccione el tipo de dispositivo"
+                              SelectedItem="{Binding RadarConfigurationModel_.SModelo , Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=true, ValidatesOnExceptions=true, UpdateSourceTrigger=LostFocus}"  
+                        DisplayMemberPath="Name" VerticalAlignment="Center" Margin="5,5" Width="355"    >
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="DropDownClosed">
+                                    <i:InvokeCommandAction Command="{Binding SelectionChangedCommand}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </ComboBox>
+                    </DockPanel>
+                    <DockPanel Grid.Row="2">
+
+                        <Label Name="Label2" Target="{Binding ElementName=IpAddress}" VerticalAlignment="Bottom" Margin="5,5" Width="210"/>
+                        <TextBox Name="IpAddress" Margin="5,5"    
+                               materialDesign:HintAssist.Hint="Ingrese la ip"
+                            Text="{Binding RadarConfigurationModel_.IpAddress, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=true, ValidatesOnExceptions=true, UpdateSourceTrigger=LostFocus}"                                
+                            Background="DimGray"                          
+                            BorderBrush="DimGray"
+                            BorderThickness="2"
+                            Width="201">
+                            <TextBox.Effect>
+                                <DropShadowEffect ShadowDepth="2" Color="White" Opacity=".4" RenderingBias="Performance"></DropShadowEffect>
+                            </TextBox.Effect>
+                        </TextBox>
+
+                        <!-- <Label Name="Label13" Target="{Binding ElementName=Port}" VerticalAlignment="Bottom" Margin="10"/>
+                    <TextBox
+                    Text="{Binding RadarConfigurationModel_.Port, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=true, ValidatesOnExceptions=true, UpdateSourceTrigger=LostFocus}"                                
+                    Name="Port" Margin="10" Width="100"
+                    Background="DimGray"                          
+                    BorderBrush="DimGray"
+                    BorderThickness="2">
+                        <TextBox.Effect>
+                            <DropShadowEffect ShadowDepth="2" Color="White" Opacity=".4" RenderingBias="Performance"></DropShadowEffect>
+                        </TextBox.Effect>
+                    </TextBox>-->
+
+                        <Button Margin="20,5,10,0"
+                    Style="{StaticResource MaterialDesignRaisedButton}"
+                    VerticalAlignment="Bottom"
+                    AutomationProperties.AutomationId="ItemsSelectButton" Command="{Binding SubmitRadarCommand }" Content="Validar" />
+                    </DockPanel>
+                </Grid>
+            </DockPanel>
+            <Grid Grid.Row="2" Grid.Column="0">
+                <Grid >
+                    <controls:Expander  BorderBrush="DimGray"     BorderThickness="2"       
+                                        Margin="5,5,5,5" 
+                                        Height="auto"                                        
+                                        Header="Configuración" 
+                                        Foreground="White" 
+                                        FontSize="12"
+                                        Background="DodgerBlue"                 
+                                        IsExpanded="{Binding RadarConfigurationModel_.Expander, Mode=TwoWay}" >
+                        <materialDesign:ColorZone Mode="Dark">
+                            <Grid >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <ContentControl Grid.Row="0">
+                                    <Grid Margin="5">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="auto"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <DockPanel Grid.Column="0" Grid.Row="0" Margin="5,5,5,1" HorizontalAlignment="Stretch" >
+                                            <Label Name="Label3"  Target="{Binding ElementName=Altitude}" />
+                                        </DockPanel>
+                                        <DockPanel  Grid.Column="0" Grid.Row="1" Margin="5" HorizontalAlignment="Stretch">
+                                            <!--Text="{Binding RadarConfigurationModel_.Altitude, Mode=TwoWay , NotifyOnValidationError=true, ValidatesOnExceptions=true, UpdateSourceTrigger=LostFocus}"-->
+                                            <TextBox   Name="Altitude"  TabIndex="1"    
+                                                     materialDesign:HintAssist.Hint="Ingrese la altura (m)"                                             
+                                             Background="DimGray"  
+                                             BorderBrush="DimGray"
+                                             BorderThickness="2"
+                                             Margin="3">
+                                                <TextBox.Effect>
+                                                    <DropShadowEffect ShadowDepth="2" Color="White" Opacity=".4" RenderingBias="Performance"></DropShadowEffect>
+                                                </TextBox.Effect>
+                                                <Binding Path="RadarConfigurationModel_.Altitude" UpdateSourceTrigger="LostFocus" NotifyOnValidationError="True" Mode="TwoWay"
+                                             ValidatesOnExceptions="True" Converter="{StaticResource MyConverter}">
+
+                                                </Binding>
+                                            </TextBox>
+                                        </DockPanel>
+                                        <DockPanel Grid.Column="1" Grid.Row="0" Margin="5,5,5,1">
+                                            <Label Name="Label4" 
+                                           Target="{Binding ElementName=TXPower}" />
+                                        </DockPanel>
+                                        <DockPanel Grid.Column="1" Grid.Row="1" Margin="5">
+                                            <TextBox Name="TXPower"   TabIndex="2"                       
+                                                   materialDesign:HintAssist.Hint="Ingrese la potencia"                                            
+                                             Background="DimGray"  
+                                             BorderBrush="DimGray"
+                                             BorderThickness="2"
+                                             Margin="3"    >
+                                                <TextBox.Effect>
+                                                    <DropShadowEffect ShadowDepth="2" Color="White" Opacity=".4" 
+                                                                      RenderingBias="Performance"></DropShadowEffect>
+                                                </TextBox.Effect>
+                                                <Binding Path="RadarConfigurationModel_.TXPower" UpdateSourceTrigger="LostFocus"
+                                                         NotifyOnValidationError="True" Mode="TwoWay"
+                                             ValidatesOnExceptions="True" Converter="{StaticResource MyConverter}">
+
+                                                </Binding>
+                                            </TextBox>
+                                        </DockPanel>
+                                    </Grid>
+                                </ContentControl>
+                                <ContentControl Grid.Row="1">
+                                    <Grid Margin="5">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="auto"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="1*"/>
+                                            <ColumnDefinition Width="1*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <DockPanel Grid.Column="0"  Grid.Row="0" Margin="5">
+                                            <Label Name="Label5"  Target="{Binding ElementName=InstallationAngle}" />
+                                        </DockPanel>
+                                        <DockPanel Grid.Column="0" Grid.Row="1" Margin="5,5,5,1">
+                                            <!--Text="{Binding RadarConfigurationModel_.InstallationAngle, Mode=TwoWay , NotifyOnValidationError=true, ValidatesOnExceptions=true, UpdateSourceTrigger=LostFocus}"-->
+                                            <TextBox Name="InstallationAngle"  TabIndex="3"                                   
+                                                   materialDesign:HintAssist.Hint="Ingrese el angulo de instalación (°)"                                            
+                                             Background="DimGray"  
+                                             BorderBrush="DimGray"
+                                             BorderThickness="2"
+                                             Margin="3" >
+                                                <TextBox.Effect>
+                                                    <DropShadowEffect ShadowDepth="2" Color="White" Opacity=".4" RenderingBias="Performance"></DropShadowEffect>
+                                                </TextBox.Effect>
+                                                <Binding Path="RadarConfigurationModel_.InstallationAngle" UpdateSourceTrigger="LostFocus" NotifyOnValidationError="True" Mode="TwoWay"
+                                             ValidatesOnExceptions="True" Converter="{StaticResource MyConverter}">
+
+                                                </Binding>
+                                            </TextBox>
+                                        </DockPanel>
+                                        <DockPanel Grid.Column="1"  Grid.Row="0" Margin="5,5,5,1">
+                                            <Label Content="Angulo con respecto al norte (*): " />
+                                        </DockPanel>
+                                        <DockPanel Grid.Column="1" Grid.Row="1" Margin="5,5,5,1">
+                                            <!--Text="{Binding RadarConfigurationModel_.NorthHeiding, Mode=TwoWay , NotifyOnValidationError=true, ValidatesOnExceptions=true, UpdateSourceTrigger=LostFocus}"-->
+                                            <TextBox  TabIndex="8" materialDesign:HintAssist.Hint="Ingrese el angulo con respecto al norte (*)(°)"                                                 
+                                                      Background="DimGray"  
+                                                      BorderBrush="DimGray"
+                                                      BorderThickness="2"
+                                                      Margin="3"  >
+                                                <TextBox.Effect>
+                                                    <DropShadowEffect ShadowDepth="2" Color="White" Opacity=".4" RenderingBias="Performance"></DropShadowEffect>
+                                                </TextBox.Effect>
+                                                <Binding Path="RadarConfigurationModel_.NorthHeiding" UpdateSourceTrigger="LostFocus" NotifyOnValidationError="True" Mode="TwoWay"
+                                                         ValidatesOnExceptions="True" Converter="{StaticResource MyConverter}">
+                                                </Binding>
+                                            </TextBox>
+                                        </DockPanel>
+                                    </Grid>
+                                </ContentControl>
+                                <ContentControl Grid.Row="2">
+                                    <Grid Margin="5">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="auto"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="1*"/>
+                                            <ColumnDefinition Width="1*"/>
+                                        </Grid.ColumnDefinitions>
+                                        
+                                    </Grid>
+                                </ContentControl>
+                                <ContentControl Grid.Row="3">
+                                    <Grid Margin="5">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="auto"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="1*"/>
+                                            <ColumnDefinition Width="1*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <DockPanel Grid.Column="0" Grid.Row="0" Margin="5,5,5,1">
+                                            <Label Name="Label9"  Target="{Binding ElementName=ChannelFrec}"/>
+                                        </DockPanel>
+                                        <DockPanel Grid.Column="0" Grid.Row="1" Margin="5">
+                                            <ComboBox Name="ChannelFrec" TabIndex="7"
+                                                    materialDesign:HintAssist.Hint="Seleccione el canal de transmión"
+                                            IsEnabled="{Binding ModeloSelected}"
+                                            Background="DimGray"
+                                            Width="auto"
+                                                   
+                                            ItemsSource="{Binding RadarConfigurationModel_.ChannelFrec}"
+                                            SelectedItem="{Binding RadarConfigurationModel_.SchannelFrec, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=true, ValidatesOnExceptions=true, UpdateSourceTrigger=LostFocus}"  
+                                            DisplayMemberPath="DisplayName"                                                                                  
+                                            HorizontalAlignment="Stretch">
+                                            </ComboBox>
+                                        </DockPanel>
+                                       
+                                    </Grid>
+                                </ContentControl>
+                                <ContentControl Grid.Row="4">
+                                    <Grid Margin="5">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="auto" />
+                                            <RowDefinition Height="auto" />
+                                            <RowDefinition Height="*" />
+                                        </Grid.RowDefinitions>
+
+                                        <Separator Grid.Row="0" Margin="3"/>
+                                        <DockPanel Grid.Row="1">
+                                            <TextBlock Margin="4,0,-91,0">
+                                            <Label Content="Coordenadas del dispositivo radar" Width="282" Foreground="White"></Label>
+                                            </TextBlock>
+                                        </DockPanel>
+
+                                        <Grid Grid.Row="2">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="1*"/>
+                                                <ColumnDefinition Width="1*"/>
+
+                                            </Grid.ColumnDefinitions>
+                                            <DockPanel Grid.Row="2" Grid.Column="0">
+                                                <Label Name="Label10" Target="{Binding ElementName=Latitud}" />
+                                                <!--Text="{Binding RadarConfigurationModel_.Latitud, Mode=TwoWay , NotifyOnValidationError=true, ValidatesOnExceptions=true, UpdateSourceTrigger=LostFocus}"-->
+                                                <TextBox Name="Latitud"    TabIndex="9"        
+                                                   materialDesign:HintAssist.Hint="Ingrese la latitud"                                                 
+                                                 Background="DimGray"  
+                                                 BorderBrush="DimGray"
+                                                 BorderThickness="2"
+                                                 Foreground="White"
+                                                 Margin="10,0,10,20" >
+                                                    <TextBox.Effect>
+                                                        <DropShadowEffect ShadowDepth="2" Color="White" Opacity=".4" RenderingBias="Performance"></DropShadowEffect>
+                                                    </TextBox.Effect>
+                                                    <Binding Path="RadarConfigurationModel_.Latitud" UpdateSourceTrigger="LostFocus" NotifyOnValidationError="True" Mode="TwoWay"
+                                             ValidatesOnExceptions="True" Converter="{StaticResource MyConverter}">
+
+                                                    </Binding>
+                                                </TextBox>
+                                            </DockPanel>
+
+                                            <DockPanel Grid.Row="2" Grid.Column="1">
+                                                <Label Name="Label11"  Target="{Binding ElementName=Longitud}" />
+                                                <!--Text="{Binding RadarConfigurationModel_.Longitud, Mode=TwoWay , NotifyOnValidationError=true, ValidatesOnExceptions=true, UpdateSourceTrigger=PropertyChanged}"-->
+                                                <TextBox Name="Longitud"     TabIndex="10"   
+                                                   materialDesign:HintAssist.Hint="Ingrese la longitud"                                                 
+                                                 Background="DimGray"  
+                                                 BorderBrush="DimGray"
+                                                 Foreground="White"
+                                                 BorderThickness="2"
+                                                  Margin="10,0,10,20"  >
+                                                    <TextBox.Effect>
+                                                        <DropShadowEffect ShadowDepth="2" Color="White" Opacity=".4" RenderingBias="Performance"></DropShadowEffect>
+                                                    </TextBox.Effect>
+                                                    <Binding Path="RadarConfigurationModel_.Longitud" UpdateSourceTrigger="LostFocus" NotifyOnValidationError="True" Mode="TwoWay"
+                                                            ValidatesOnExceptions="True" Converter="{StaticResource MyConverter}">
+
+                                                    </Binding>
+                                                </TextBox>
+                                            </DockPanel>
+
+                                        </Grid>
+                                    </Grid>
+                                </ContentControl>
+                            </Grid>
+                        </materialDesign:ColorZone>
+                    </controls:Expander>
+                </Grid>
+            </Grid>
+            <ContentControl Grid.Row="3" Grid.Column="0">
+                <DockPanel HorizontalAlignment="Right">
+                    <Button Margin="5" Background="LightGray" Foreground="Black" AutomationProperties.AutomationId="ItemsCancelButton" Command="{Binding CancelCommand}" >Cancelar</Button>
+                    <Button Content="Aceptar"  HorizontalAlignment="Right" Command="{Binding SubmitCommand}" Margin="5">
+                    </Button>
+                </DockPanel>
+            </ContentControl>
+        </Grid>
+    </Border>
+</UserControl>
