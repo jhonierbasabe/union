@@ -39,6 +39,8 @@ namespace PRORAM.Models
         private bool _mClutter;
         private double northHeiding;
         private int _port;
+        private bool _Check;
+        private int _Orden;
         #endregion
 
         /// <summary>
@@ -57,7 +59,7 @@ namespace PRORAM.Models
             get { return northHeiding; }
             set { SetProperty(ref northHeiding, value); }
         }
-
+       
         /// <summary>
         /// Propiedad bool MClutter, define mapa clutter
         /// </summary>
@@ -67,6 +69,16 @@ namespace PRORAM.Models
             set { SetProperty(ref _mClutter, value); }
         }
 
+        public bool Check
+        {
+            get { return _Check; }
+            set { SetProperty(ref _Check, value); }
+        }
+        public int Orden
+        {
+            get { return _Orden; }
+            set { SetProperty(ref _Orden, value); }
+        }
         /// <summary>
         /// Propiedad Id int, identificador unico del radar
         /// </summary>
@@ -237,6 +249,7 @@ namespace PRORAM.Models
         {
             get { return $"Lat: { Latitud }, Lon: { Longitud } "; }
             set { SetProperty(ref _Coordinates, value); }
+            
         }
 
         /// <summary>

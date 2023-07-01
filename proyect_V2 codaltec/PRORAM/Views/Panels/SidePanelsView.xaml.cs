@@ -23,5 +23,15 @@ namespace PRORAM.Views
         {
             InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void agregar_radar(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

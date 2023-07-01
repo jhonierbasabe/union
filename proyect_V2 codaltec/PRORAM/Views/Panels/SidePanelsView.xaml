@@ -279,14 +279,11 @@
                                 <RowDefinition Height="auto"/>
                             </Grid.RowDefinitions>
 
-                            <DockPanel Grid.Row="0" Grid.ColumnSpan="3">
-                                <!--<ToggleButton
-                                  Template="{StaticResource  ComboBoxToggleButton}"
-                                  ToolTip="MaterialDesignActionToggleButton">
-                                    
-                                </ToggleButton>-->
-                                <Button Margin="0,0,10,0" HorizontalAlignment="Right" Command="{Binding RadarconfigurationNotificationCommand}"
-                                VerticalAlignment="Center" Width="24" Height="24" Style="{StaticResource MaterialDesignFloatingActionAccentButton}" Background="Transparent" BorderBrush="Transparent">
+                            <DockPanel Grid.Row="0" Grid.ColumnSpan="5">
+
+
+                                <Button Margin="0,0,10,0" HorizontalAlignment="Right" Command="{Binding AgregarRadar}"
+                                VerticalAlignment="Top" Width="24" Height="24" Style="{StaticResource MaterialDesignFloatingActionAccentButton}" Background="Transparent" BorderBrush="Transparent">
                                     <Viewbox Width="24" Height="24">
                                         <Canvas Width="24" Height="24">
                                             <Path Data="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" Fill="Green" />
@@ -294,6 +291,8 @@
                                     </Viewbox>
                                 </Button>
                             </DockPanel>
+
+                       
 
                             <Separator Grid.Row="1" Grid.ColumnSpan="3" Margin="0,2,0,2"/>
                             <ContentControl Grid.Row="2" Grid.ColumnSpan="3">

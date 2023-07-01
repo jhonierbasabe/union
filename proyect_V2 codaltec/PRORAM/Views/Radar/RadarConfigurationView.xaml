@@ -374,7 +374,7 @@
                                                         <DropShadowEffect ShadowDepth="2" Color="White" Opacity=".4" RenderingBias="Performance"></DropShadowEffect>
                                                     </TextBox.Effect>
                                                     <Binding Path="RadarConfigurationModel_.Longitud" UpdateSourceTrigger="LostFocus" NotifyOnValidationError="True" Mode="TwoWay"
-                                             ValidatesOnExceptions="True" Converter="{StaticResource MyConverter}">
+                                                            ValidatesOnExceptions="True" Converter="{StaticResource MyConverter}">
 
                                                     </Binding>
                                                 </TextBox>

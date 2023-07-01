@@ -260,7 +260,7 @@
                         Command="{Binding CancelInteractionCommand }" >Cancelar</Button>
                     <Button
                         Style="{StaticResource MaterialDesignRaisedButton}"
-                        Margin="10" Command="{Binding SubmitCommand }">Aceptar</Button>
+                        Margin="10" Command="{Binding SubmitCommand }" Click="Button_Click">Aceptar</Button>
                 </DockPanel>
             </ContentControl>
         </Grid>

@@ -85,6 +85,7 @@ namespace PRORAM.DSconnection
                 Frec: obj.SChannelFrec.Frecuency,
                 MClutter: obj.MClutter,
                 NorthHeiding: obj.NorthHeiding,
+                Check: obj.Check,
                 Altitude: obj.Altitude, 
                 IsSaveComplete: obj.IsSaveComplete, 
                 IsSaveCompleteT: obj.IsSaveCompleteT,
@@ -95,6 +96,17 @@ namespace PRORAM.DSconnection
                );
 
         }
+
+        public static void ModifyCheckRadarDeviceRow(RadarDevicesModel obj)
+        {
+            var radar = DS.RadarDeviceTable.Where(r => r.Id == obj.Id).FirstOrDefault();
+
+            if(radar != null)
+            {
+                radar.Check = obj.Check;
+            }
+        }
+
         /// <summary>
         /// Metodo GetDevicesList, retorna la lista con los dispositivos radar agregados
         /// </summary>
@@ -122,6 +134,7 @@ namespace PRORAM.DSconnection
             int idChannel;
             double northHeiding;
             int altitude;
+            bool check;
             DataRow[] rows = radarTable.Select();
             ObservableCollection<RadarDevicesModel> device = new ObservableCollection<RadarDevicesModel>();
             for (int i = 0; i < rows.Length; i++)
@@ -155,6 +168,7 @@ namespace PRORAM.DSconnection
                 double saveProgress = Convert.ToDouble(rows[i]["SaveProgress"]);
                 double saveProgressT = Convert.ToDouble(rows[i]["SaveProgressT"]);
 
+                check = Convert.ToBoolean(rows[i]["Check"]);
                 Channels channel = new Channels()
                 {
 
@@ -191,7 +205,8 @@ namespace PRORAM.DSconnection
                         IsSaving = isSaving,
                         IsSavingT = isSavingt,
                         SaveProgress = saveProgress,
-                        SaveProgressT = saveProgressT
+                        SaveProgressT = saveProgressT,
+                        Check = check
                     });
             }
             return device;

@@ -208,7 +208,7 @@ namespace LibraryPRORAM
                 //    Disarm_Is3();
                 //}
 
-                Thread.Sleep(500);
+                Thread.Sleep(100);
 
                 var msmGenerator = new MessagesGenerator(1);
                 var msmTournOff = msmGenerator.GenerateMessageEncender(0, 85);
@@ -226,7 +226,7 @@ namespace LibraryPRORAM
                     step = false;
                 }
 
-                Thread.Sleep(500);
+                Thread.Sleep(200);
                 if (this._serviceTcp.IsConnected == true && step == true)
                 {
                     Console.WriteLine("mensaje de get id");
@@ -244,7 +244,7 @@ namespace LibraryPRORAM
                     step = false;
                 }
 
-                Thread.Sleep(500);
+                Thread.Sleep(200);
                 if (result[0] == ListMessages.headerMessages["R_IdRadar"] && step == true)
                 {                   
                     Console.WriteLine("R_IdRadar header = " + result[0]);                    
@@ -262,7 +262,7 @@ namespace LibraryPRORAM
                 }
 
 
-                Thread.Sleep(500);
+                Thread.Sleep(100);
                 if (result[0] == ListMessages.headerMessages["RC_Hora"] && step == true)
                 {
                     Console.WriteLine("R_GetStatus header = " + result[0]);
@@ -281,7 +281,7 @@ namespace LibraryPRORAM
                     step = false;
                 }
 
-                Thread.Sleep(500);
+                Thread.Sleep(100);
                 if (result[0] == ListMessages.headerMessages["RC_PotenciaRadar"] && step == true)
                 {
                     Console.WriteLine("RC_PotenciaRadar header = " + result[0]);
@@ -297,7 +297,7 @@ namespace LibraryPRORAM
                     step = false;
                 }
 
-                Thread.Sleep(500);
+                Thread.Sleep(100);
                 if (result[0] == ListMessages.headerMessages["RC_CanalFrecRadar"] && step == true)
                 {
 

@@ -390,7 +390,9 @@ namespace PRORAM {
             private global::System.Data.DataColumn columnMClutter;
             
             private global::System.Data.DataColumn columnNorthHeiding;
-            
+
+            private global::System.Data.DataColumn columnCheck;
+
             private global::System.Data.DataColumn columnAltitude;
             
             private global::System.Data.DataColumn columnIsSaveComplete;
@@ -605,7 +607,16 @@ namespace PRORAM {
                     return this.columnNorthHeiding;
                 }
             }
-            
+
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn CheckColumn {
+                get
+                {
+                    return this.columnCheck;
+                }
+            }
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public global::System.Data.DataColumn AltitudeColumn {
@@ -719,7 +730,8 @@ namespace PRORAM {
                         int IdChannel, 
                         double Frec, 
                         bool MClutter, 
-                        double NorthHeiding, 
+                        double NorthHeiding,
+                        bool Check,
                         double Altitude, 
                         bool IsSaveComplete, 
                         bool IsSaveCompleteT, 
@@ -750,6 +762,7 @@ namespace PRORAM {
                         Frec,
                         MClutter,
                         NorthHeiding,
+                        Check,
                         Altitude,
                         IsSaveComplete,
                         IsSaveCompleteT,
@@ -807,6 +820,7 @@ namespace PRORAM {
                 this.columnFrec = base.Columns["Frec"];
                 this.columnMClutter = base.Columns["MClutter"];
                 this.columnNorthHeiding = base.Columns["NorthHeiding"];
+                this.columnCheck = base.Columns["Check"];
                 this.columnAltitude = base.Columns["Altitude"];
                 this.columnIsSaveComplete = base.Columns["IsSaveComplete"];
                 this.columnIsSaveCompleteT = base.Columns["IsSaveCompleteT"];
@@ -861,6 +875,8 @@ namespace PRORAM {
                 base.Columns.Add(this.columnMClutter);
                 this.columnNorthHeiding = new global::System.Data.DataColumn("NorthHeiding", typeof(double), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnNorthHeiding);
+                this.columnCheck = new global::System.Data.DataColumn("Check", typeof(bool), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCheck);
                 this.columnAltitude = new global::System.Data.DataColumn("Altitude", typeof(double), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnAltitude);
                 this.columnIsSaveComplete = new global::System.Data.DataColumn("IsSaveComplete", typeof(bool), null, global::System.Data.MappingType.Element);
@@ -1945,7 +1961,28 @@ namespace PRORAM {
                     this[this.tableRadarDeviceTable.NorthHeidingColumn] = value;
                 }
             }
-            
+
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Check
+            {
+                get
+                {
+                    try
+                    {
+                        return ((bool)(this[this.tableRadarDeviceTable.CheckColumn]));
+                    }
+                    catch (global::System.InvalidCastException e)
+                    {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Check\' in table \'RadarDeviceTable\' is DBNull.", e);
+                    }
+                }
+                set
+                {
+                    this[this.tableRadarDeviceTable.CheckColumn] = value;
+                }
+            }
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public double Altitude {
@@ -2291,14 +2328,28 @@ namespace PRORAM {
             public bool IsNorthHeidingNull() {
                 return this.IsNull(this.tableRadarDeviceTable.NorthHeidingColumn);
             }
-            
+
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsCheckNull()
+            {
+                return this.IsNull(this.tableRadarDeviceTable.CheckColumn);
+            }
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void SetNorthHeidingNull() {
                 this[this.tableRadarDeviceTable.NorthHeidingColumn] = global::System.Convert.DBNull;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetCheckNull()
+            {
+                this[this.tableRadarDeviceTable.CheckColumn] = global::System.Convert.DBNull;
+            }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool IsAltitudeNull() {
                 return this.IsNull(this.tableRadarDeviceTable.AltitudeColumn);

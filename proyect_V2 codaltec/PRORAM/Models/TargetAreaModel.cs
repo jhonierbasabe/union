@@ -13,10 +13,10 @@ namespace PRORAM.Models
     {
         #region Private
         private string _NombreArea;
-        private double? _LatitudP1;
-        private double? _LongitudP1;
-        private double? _LatitudP2;
-        private double? _LongitudP2;
+        public double? _LatitudP1;
+        public double? _LongitudP1;
+        public double? _LatitudP2;
+        public double? _LongitudP2;
         private string _logsEvent;
         #endregion
 

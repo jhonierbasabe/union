@@ -1,5 +1,7 @@
-﻿using System;
+﻿using PRORAM.ViewModels;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,6 +30,28 @@ namespace PRORAM.Views
             Window parent = this.Parent as Window;
             parent.DragMove();
 
+        }
+
+        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+
+        }
+  
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            var vm = (RadarDevicesViewModel)this.DataContext;
+            //vm.RadarDevicesMode2_ = new ObservableCollection<Models.RadarDevicesModel>();
         }
     }
 }

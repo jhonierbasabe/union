@@ -283,24 +283,13 @@ namespace PRORAM.ServicesTcp
 
                 foreach (var plt in plots)
                 {
-                    try
-                    {
-                        if (plt != null)
-                        {
-                            var timeStamp = plt.TimeStamp.AddSeconds(5);
-                            var now = DateTime.Now;
+                    var timeStamp = plt.TimeStamp.AddSeconds(5);
+                    var now = DateTime.Now;
 
-                            if (timeStamp.CompareTo(DateTime.Now) < 0)
-                            {
-                                PlotsFromRadar.Remove(plt);
-                                ActionsPlot?.Invoke(plt, "OnDeletePlot", Device);
-                            }
-                        }
-                    }
-                    catch(Exception ex)
+                    if (timeStamp.CompareTo(DateTime.Now) < 0)
                     {
-                        System.Diagnostics.StackTrace trace = new System.Diagnostics.StackTrace(ex,true);
-                        Console.WriteLine("plt nulo archivo "+ trace.GetFrame(0).GetFileName() + " linea " + trace.GetFrame(0).GetFileLineNumber() );
+                        PlotsFromRadar.Remove(plt);
+                        ActionsPlot?.Invoke(plt, "OnDeletePlot", Device);                       
                     }
                 }
             }
@@ -379,7 +368,7 @@ namespace PRORAM.ServicesTcp
                         RepPlots(data, time, endFlag);
                     }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                    if (ResultTrans[0] == ListMessages.headerMessages["Rep_Track"] && _isRunning == true)
+                    if (ResultTrans[0] == ListMessages.headerMessages["Rep_Tracks"] && _isRunning == true)
                     {
                         byte[] data = ResultTrans;
                         int sizeData = data[3];
@@ -682,7 +671,7 @@ namespace PRORAM.ServicesTcp
         private void RepPlots(byte[] buffer, byte[] timeStamp, int endflag)
         {
             byte[] plots = ArraySub.SubArray(buffer, 4, endflag - 8);
-            Console.WriteLine("Reporte de plots, total de plots {0}", plots.Length);
+            //Console.WriteLine("Reporte de plots, total de plots {0}", plots.Length);
             int idRadar = buffer[1];
             var dateTimeVar = Utils.ConvertByteToTime(timeStamp);
             if (plots.Length % 6 == 0)
@@ -711,10 +700,6 @@ namespace PRORAM.ServicesTcp
                     }, "OnAddPlot", Device);                  
                   
                 }
-            }
-            else
-            {
-                Console.WriteLine("ServiceTcp tamaño de datos incorrecto");
             }
             ResultTrans = new byte[256];
         }
@@ -808,17 +793,9 @@ namespace PRORAM.ServicesTcp
         /// <returns>retorna una porcion del array byte</returns>
         public static T[] SubArray<T>(this T[] data, int index, int length)
         {
-            try
-            {
-                T[] result = new T[length];
-                Array.Copy(data, index, result, 0, length);
-                return result;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Error ServiceTcp linea 804"+ex.Message);
-            }
-            return null;
+            T[] result = new T[length];
+            Array.Copy(data, index, result, 0, length);
+            return result;
         }
     }
     /// <summary>

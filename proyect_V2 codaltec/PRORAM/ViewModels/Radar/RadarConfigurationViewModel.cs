@@ -129,6 +129,10 @@ namespace PRORAM.ViewModels
             RadarConfigurationModel_.PropertyChanged += CheckSpanader;
         }
 
+        public RadarConfigurationViewModel()
+        {
+        }
+
 
         /// <summary>
         /// Metodo CheckSpanader, revisa si las campos de entrada de la vista son los correctos para expandir el panel
@@ -264,6 +268,8 @@ namespace PRORAM.ViewModels
         /// </summary>
         private void SubmitInsRadar()
         {
+            
+            
             RadarConfigurationModel_.ValidateProperties();
             Errors = FlattenErrors();
             var _isWithinArea = IsWithinArea();
@@ -283,6 +289,7 @@ namespace PRORAM.ViewModels
                 _tituloError = "";
                 _mensaje = "";
             }
+
             if (!RadarConfigurationModel_.HasErrors && _isWithinArea == true)
             {
                 CustomPopupRequest.Raise(new Notification { Title = "Notificación", Content = new { Text = "Dispositivo radar agregado satisfactoriamente", Show = true, ShowAlert = false } }, r => Tittle = "PRORAM Consola de monitoreo");
@@ -294,6 +301,9 @@ namespace PRORAM.ViewModels
                 RadarConfigurationModel_ = null;
                 FinishInteraction?.Invoke();
             }
+
+
+
 
         }
 

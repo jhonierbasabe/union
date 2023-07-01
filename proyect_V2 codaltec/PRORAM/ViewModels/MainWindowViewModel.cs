@@ -28,19 +28,19 @@ namespace PRORAM.ViewModels
         private TargetAreaModel _targetAreaModel = new TargetAreaModel();
         private GeoLayerModel _geoLayerModel = new GeoLayerModel();
         private IEventAggregator _ea;
-        private RadarDevicesModel _RadarDevicesModel;
+        public RadarDevicesModel _RadarDevicesModel;
         private string _mensaje;
         private string _titulo;
         private bool _saveDialog;
         private byte[] _messageReceived;
         private string _username = "aa";
-
+        public bool EstadorMapa = false;
         #endregion
 
 
         #region Propiedades
+        public string load = "";
 
- 
         /// <summary>
         /// Propiedad Message, array de byte que contiene le mensaje que se enviara al raadar
         /// </summary>
@@ -199,7 +199,7 @@ namespace PRORAM.ViewModels
         /// </summary>
         private void DialogLoad()
         {
-            string load = "";
+         ////// carga la variable   string load = "";
             Microsoft.Win32.OpenFileDialog openFileDialog = new Microsoft.Win32.OpenFileDialog();
             if (openFileDialog.ShowDialog() == true)
             {
@@ -333,12 +333,11 @@ namespace PRORAM.ViewModels
         {
             _titulo = "Mensaje de notificación ";
             _mensaje = "Necesita definir un área objetivo para poder agregar un dispositivo radar ";
-
             if (GeoLayerModel_.DefinedMap == true)
             {
+                
                 var p1 = new Location() { Latitude = TargetAreaMod.LatitudP1.Value, Longitude = TargetAreaMod.LongitudP1.Value };
                 var p2 = new Location() { Latitude = TargetAreaMod.LatitudP2.Value, Longitude = TargetAreaMod.LongitudP2.Value };
-
 
                 RadarDevicesNotificationRequest.Raise(new RadarDevicesNotification { Title = "Dispositivos radar", Point1 = p1, Point2 = p2 }, r =>
                {
@@ -355,6 +354,7 @@ namespace PRORAM.ViewModels
             else
             {
                 RaiseCustomPopup();
+                
             }
             _titulo = string.Empty;
             _mensaje = string.Empty;
