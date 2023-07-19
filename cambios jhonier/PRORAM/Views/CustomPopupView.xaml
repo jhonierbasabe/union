@@ -1,0 +1,53 @@
+﻿<UserControl x:Class="PRORAM.Views.CustomPopupView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"             
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PRORAM.Views"      
+        mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Background="Transparent"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Medium"
+        TextElement.FontSize="14"
+             Width="auto"
+             Height="auto"
+        >
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+    </UserControl.Resources>
+    <Border BorderBrush="DimGray" BorderThickness="1" CornerRadius="5" Background="{DynamicResource MaterialDesignPaper}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <ContentControl Grid.Row="0">
+                <Border MouseDown="Border_MouseDown">
+                    <materialDesign:ColorZone Mode="PrimaryDark"  Height="35" CornerRadius="5">
+                    </materialDesign:ColorZone>
+                </Border>
+            </ContentControl>
+            <StackPanel Grid.Row="1">
+                <TextBlock TextWrapping="Wrap" Text="{Binding Path=Content.Text}" Margin="10" TextAlignment="Center" />
+            </StackPanel>
+            <ContentControl Grid.Row="2" Margin="5" Visibility="{Binding Path=Content.Show, Converter={StaticResource BoolToVisibilityConverter}}">
+                <Border Background="LightGreen" CornerRadius="40" Width="34" Height="34">
+                    <materialDesign:PackIcon Kind="CheckCircleOutline" Height="40" Width="40" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Border>
+            </ContentControl>
+            <ContentControl Grid.Row="2" Margin="5" Visibility="{Binding Path=Content.ShowAlert,  Converter={StaticResource BoolToVisibilityConverter}}">
+                <Border Background="Orange" CornerRadius="40" Width="40" Height="40" Padding="0,0,0,5">
+                    <materialDesign:PackIcon Kind="AlertOutline" Height="33" Width="33" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                </Border>
+            </ContentControl>
+            <ContentControl Grid.Row="3">
+                <DockPanel HorizontalAlignment="Right">
+                    <Button Margin="10,10,30,10" Click="Button_Click">Aceptar</Button>
+                </DockPanel>
+            </ContentControl>
+        </Grid>
+    </Border>
+</UserControl>

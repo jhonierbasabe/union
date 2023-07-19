@@ -1,0 +1,959 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="PRORAM.App" Collapsed="true">
+    <Position X="16" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAASAAAAAAIAAAAAAAAAAAAAAEAAAAAAAAAAA=</HashCode>
+      <FileName>App.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PRORAM.MessageSentEvent" Collapsed="true">
+    <Position X="21.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MessageSentEvent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PRORAM.MessageSentEvent&lt;T&gt;" Collapsed="true">
+    <Position X="23" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MessageSentEvent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PRORAM.MsmSentEvent" Collapsed="true">
+    <Position X="32" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MessageSentEvent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PRORAM.SendEventDataSet" Collapsed="true">
+    <Position X="19.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MessageSentEvent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PRORAM.EventLayers" Collapsed="true">
+    <Position X="24.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MessageSentEvent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PRORAM.EventPanel" Collapsed="true">
+    <Position X="26.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MessageSentEvent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PRORAM.EventTargets" Collapsed="true">
+    <Position X="30" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MessageSentEvent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PRORAM.EventTools" Collapsed="true">
+    <Position X="31.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MessageSentEvent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PRORAM.EventDrawPlots" Collapsed="true">
+    <Position X="23" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MessageSentEvent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PRORAM.ModulesPRORAMModule" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="31.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAECAAAAAAAAAA=</HashCode>
+      <FileName>ModulePRORAMModule.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PRORAM.MyConverter" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="16" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MyConverter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PRORAM.PRORAMDATASET" Collapsed="true">
+    <Position X="33.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAwAAACZABAgBQAAAAAgCwBgMAAAAAAEAJBA=</HashCode>
+      <FileName>PRORAMDATASET.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PRORAM.DataValidation.BindableValidator" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="21.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAApAIQAAKAAAAAAAiAGAAACAQIAAAAABIAA=</HashCode>
+      <FileName>DataValidation\BindableValidator.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PRORAM.DataValidation.ErrorsContainer&lt;T&gt;" Collapsed="true">
+    <Position X="19.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAgQAAABBAAAAAAAAAEAAAAIAAAAgAAAgAA=</HashCode>
+      <FileName>DataValidation\ErrorContainer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PRORAM.DataValidation.ValidatableBindableBase" Collapsed="true">
+    <Position X="6" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAgQAAABEAAAAAAAAAEAAACIQAAAAAABIAA=</HashCode>
+      <FileName>DataValidation\ValidatableBindableBase.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="PRORAM.DSconnection.DSConnection" Collapsed="true">
+    <Position X="17.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IBBAAAIAAAAARAAAAAgIAAAAAIAAAAAAwAAAAACAAAA=</HashCode>
+      <FileName>DSconnection\DSConnection.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PRORAM.Models.GeoLayerModel">
+    <Position X="36" Y="5.5" Width="2.25" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAACBAAAgAAACCAABAAAAEACAAAAAAAEAgQAgAIAQA=</HashCode>
+      <FileName>Models\GeoLayerModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PRORAM.Models.RadarConfigurationModel">
+    <Position X="45" Y="5.5" Width="3.25" />
+    <Members>
+      <Method Name="CreateGuid" Hidden="true" />
+      <Method Name="RadarConfigurationModel" Hidden="true" />
+    </Members>
+    <Compartments>
+      <Compartment Name="Private" Collapsed="true" />
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>hJAGSAACIEAAAAgIBICkggAAGlAFBQCAAAsAAAAEGAA=</HashCode>
+      <FileName>Models\Radar\RadarConfigurationModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PRORAM.Models.Channels">
+    <Position X="2.75" Y="2" Width="1.5" />
+    <Members>
+      <Field Name="_DisplayName" Hidden="true" />
+      <Field Name="_frecuency" Hidden="true" />
+      <Field Name="_id" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAACEAAAAAAAAAAAACBAAAAAAAAAAAAAAAAAAAQAgAA=</HashCode>
+      <FileName>Models\Radar\RadarConfigurationModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PRORAM.Models.Modelo">
+    <Position X="5" Y="2" Width="1.5" />
+    <Members>
+      <Field Name="_Id" Hidden="true" />
+      <Field Name="_Name" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAIAQAAAAAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>Models\Radar\RadarConfigurationModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PRORAM.Models.RadarDevicesModel" BaseTypeListCollapsed="true">
+    <Position X="41.5" Y="5.5" Width="3" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>oJACKACyIEACBQgIEIDCgkAAOFCJAQIAAQMAAAAAGGQ=</HashCode>
+      <FileName>Models\Radar\RadarDevicesModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PRORAM.Models.SelectedItem" Collapsed="true">
+    <Position X="17.75" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAQAAAAA=</HashCode>
+      <FileName>Models\Radar\RadarDevicesModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PRORAM.Models.TargetAreaModel">
+    <Position X="38.5" Y="5.5" Width="2.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAAAIAAAAABwAGFAAAAAAAAAAAAAAACQ=</HashCode>
+      <FileName>Models\TargetAreaModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PRORAM.Models.Layers.LayersModel" Collapsed="true">
+    <Position X="34.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACIAAAAAAAAAAAAABACAQAAAgAAAAAAAAABAAAAIA=</HashCode>
+      <FileName>Models\Layers\LayersModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PRORAM.Models.Shared.EventConsole" Collapsed="true">
+    <Position X="21.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>Models\Shared\EventConsole.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PRORAM.Models.Shared.RadarActions" Collapsed="true">
+    <Position X="16" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQAAAAAAAAAAIAAAAAAAAAAQIAAAAAAAAAAAQ=</HashCode>
+      <FileName>Models\Shared\IdRadar.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PRORAM.Models.Shared.LoadStageModel" Collapsed="true">
+    <Position X="28.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAEAAAAAAAAAQAAAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>Models\Shared\LoadStageModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PRORAM.Models.Shared.MessageConnect" Collapsed="true">
+    <Position X="19.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Shared\MessageConnect.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PRORAM.Models.Shared.EventsDataSet" Collapsed="true">
+    <Position X="28.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Shared\MessageConnect.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PRORAM.Models.Shared.DetailPanel" Collapsed="true">
+    <Position X="16" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAEAAggAgAAAAACAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>Models\Shared\MessageConnect.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PRORAM.Models.Shared.TargetEvents" Collapsed="true">
+    <Position X="19.5" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>Models\Shared\MessageConnect.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PRORAM.Models.Shared.ToolsSelect" Collapsed="true">
+    <Position X="26.5" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Shared\MessageConnect.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PRORAM.Models.Shared.BandTargets" Collapsed="true">
+    <Position X="19.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Shared\MessageConnect.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PRORAM.Models.Shared.ActionPlots" Collapsed="true">
+    <Position X="14.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAAAEAAAAAAAAAAAAAQAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Shared\MessageConnect.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PRORAM.Models.Shared.SurveillanceAreaModel" Collapsed="true">
+    <Position X="30" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAEAwAAAAAAAAIAAAAAAAAGCAAAAAAEAAAAAAAAAA=</HashCode>
+      <FileName>Models\Shared\SurveillanceAreaModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PRORAM.Models.Shared.TransResult" Collapsed="true">
+    <Position X="30" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAAAAAAAQAAAAAAAAAAAAABAAAQAQ=</HashCode>
+      <FileName>Models\Shared\TransResult.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PRORAM.Models.TPC.MessagesGenerator" Collapsed="true">
+    <Position X="24.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BABAEAAAAgAAgAAAAAAAEIAAAAQBEAAAQQAAIAABAAA=</HashCode>
+      <FileName>Models\TPC\MessagesModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PRORAM.Models.TPC.Utils" Collapsed="true">
+    <Position X="31.75" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\TPC\MessagesModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PRORAM.Models.TPC.ListMessages" Collapsed="true">
+    <Position X="26.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Models\TPC\MessagesModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PRORAM.Notifications.ChannelFrecNotification" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="21.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAAAAgCAAAAAAAAAAAAAAAAQAAAAAAAAAAA=</HashCode>
+      <FileName>Notifications\ChannelFrecNotification.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PRORAM.Notifications.PopupConfirmationnotification" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="19.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAA=</HashCode>
+      <FileName>Notifications\PopupConfirmationnotification.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PRORAM.Notifications.PowerRadarNotification" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="26.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAAEAAAAIAAAAAAAAAAAA=</HashCode>
+      <FileName>Notifications\PowerRadarNotification.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PRORAM.Notifications.RadarConfigurationNotification" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="10.25" Y="6" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAhAAAAAAAAAAAAAAAAAAAAAABAAAAAAA=</HashCode>
+      <FileName>Notifications\RadarConfigurationNotification.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PRORAM.Notifications.RadarDevicesNotification" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="24.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAAAgAAAAAAAAAAAAAAAAAAAAAQAAAAAAAA=</HashCode>
+      <FileName>Notifications\RadarDevicesNotification.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PRORAM.Notifications.TargetAreaNotification" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="14.25" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Notifications\TargetAreaNotification.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PRORAM.Properties.Resources" Collapsed="true">
+    <Position X="23" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAABEAAAAQAAAAAAAAAAAAAAAIA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PRORAM.Properties.Settings" Collapsed="true">
+    <Position X="23" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAQAAAAIAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PRORAM.ResourcesFiles.TextResources" Collapsed="true">
+    <Position X="24.75" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAA=</HashCode>
+      <FileName>ResourcesFiles\TextResources.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PRORAM.ResourcesFiles.RadarConfiguration" Collapsed="true">
+    <Position X="17.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAAEAAAAAAAAAAAADwAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ResourcesFiles\TextResources.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PRORAM.ResourcesFiles.TargetArea" Collapsed="true">
+    <Position X="31.75" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ResourcesFiles\TextResources.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PRORAM.ResourcesFiles.PowerRadar" Collapsed="true">
+    <Position X="24.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ResourcesFiles\TextResources.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PRORAM.ResourcesFiles.ChannelFrec" Collapsed="true">
+    <Position X="16" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ResourcesFiles\TextResources.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PRORAM.ResourcesFiles.RightPanel" Collapsed="true">
+    <Position X="30" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAAAAAAAAAAAAAADD/AAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ResourcesFiles\TextResources.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PRORAM.ResourcesFiles.VIEW" Collapsed="true">
+    <Position X="14.25" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABACAAAAAAAAAAAAAAAACAAYAAAAAAAAA=</HashCode>
+      <FileName>ResourcesFiles\TextResources.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PRORAM.ResourcesFiles.ChannelFrec2" Collapsed="true">
+    <Position X="17.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>ResourcesFiles\TextResources.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PRORAM.ResourcesFiles.Modelo1" Collapsed="true">
+    <Position X="26.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAQAAAAAAACAAAAAAAAAAAA=</HashCode>
+      <FileName>ResourcesFiles\TextResources.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PRORAM.ResourcesFiles.ChannelFrec3" Collapsed="true">
+    <Position X="19.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>ResourcesFiles\TextResources.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PRORAM.ResourcesFiles.Modelo2" Collapsed="true">
+    <Position X="28.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAQAAAAAAACAAAAAAAAAAAA=</HashCode>
+      <FileName>ResourcesFiles\TextResources.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PRORAM.ResourcesFiles.ModelosRardar" Collapsed="true">
+    <Position X="30" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAkAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ResourcesFiles\TextResources.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PRORAM.ResourcesFiles.CEncenderApagarRadar" Collapsed="true">
+    <Position X="30" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EABAAAAAAgAAEAAAAAAAAAAAAAQIABAAAAAAAAAAAAA=</HashCode>
+      <FileName>ResourcesFiles\TextResources.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PRORAM.ResourcesFiles.REncenderApagarRadar" Collapsed="true">
+    <Position X="17.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EABAAAAAAgAAEAAAAAAAAAAAAAQIABAAAAAAAAAAAAA=</HashCode>
+      <FileName>ResourcesFiles\TextResources.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PRORAM.ResourcesFiles.CCPotenciaRadar" Collapsed="true">
+    <Position X="26.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EABAAAAAAgAAEAAAAAAAAAAAAAQIABAAAAAAAAAAAAA=</HashCode>
+      <FileName>ResourcesFiles\TextResources.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PRORAM.ResourcesFiles.RCPotenciaRadar" Collapsed="true">
+    <Position X="14.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EABAAAAAAgAAEAAAAAAAAAAAAAQIABAAAAAAAAAAAAA=</HashCode>
+      <FileName>ResourcesFiles\TextResources.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PRORAM.ResourcesFiles.CCCanalFrecRadar" Collapsed="true">
+    <Position X="23" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EABAAAAAAgAAEAAAAAAAAAAAAAQIABAAAAAAAAAAAAA=</HashCode>
+      <FileName>ResourcesFiles\TextResources.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PRORAM.ResourcesFiles.RCCanalFrecRadar" Collapsed="true">
+    <Position X="30" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EABAAAAAAgAAEAAAAAAAAAAAAAQIABAAAAAAAAAAAAA=</HashCode>
+      <FileName>ResourcesFiles\TextResources.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PRORAM.ResourcesFiles.CEliminarTraza" Collapsed="true">
+    <Position X="28.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EABAAAAAAgAAEAAAAAAAAAAAAAQIABAAAAAAAAAAAAA=</HashCode>
+      <FileName>ResourcesFiles\TextResources.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PRORAM.ResourcesFiles.REliminarTraza" Collapsed="true">
+    <Position X="16" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EABAAAAAAgAAEAAAAAAAAAAAAAQIABAAAAAAAAAAAAA=</HashCode>
+      <FileName>ResourcesFiles\TextResources.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PRORAM.ResourcesFiles.CCHora" Collapsed="true">
+    <Position X="24.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EABAAAAAAgAAEAAAAAAAAAAAAAQIABAAAAAAAAAAAAA=</HashCode>
+      <FileName>ResourcesFiles\TextResources.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PRORAM.ResourcesFiles.RCHora" Collapsed="true">
+    <Position X="31.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EABAAAAAAgAAEAAAAAAAAAAAAAQIABAAAAAAAAAAAAA=</HashCode>
+      <FileName>ResourcesFiles\TextResources.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PRORAM.ResourcesFiles.Control" Collapsed="true">
+    <Position X="31.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAGAAAAgAFAAAAAAgABAAEIAAAAAAAAAAAAAAgAAA=</HashCode>
+      <FileName>ResourcesFiles\TextResources.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PRORAM.ResourcesFiles.CIdRadar" Collapsed="true">
+    <Position X="26.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EABAAAAAAgAAEAAAAAAAAAAAAAQIABAAAAAAAAAAAAA=</HashCode>
+      <FileName>ResourcesFiles\TextResources.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PRORAM.ResourcesFiles.RIdRadar" Collapsed="true">
+    <Position X="28.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EABAAAAAAgAAEAAAAAAAAAAAAAQIABAAAAAAAAAAAAA=</HashCode>
+      <FileName>ResourcesFiles\TextResources.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PRORAM.ResourcesFiles.CGetStatus" Collapsed="true">
+    <Position X="14.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EABAAAAAAgAAEAAAAAAAAAAAAAQIABAAAAAAAAAAAAA=</HashCode>
+      <FileName>ResourcesFiles\TextResources.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PRORAM.ResourcesFiles.RGetStatus" Collapsed="true">
+    <Position X="26.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EABAAAAAAgAAEAAAAAAAAAAAAAQIABAAAAAAAAAAAAA=</HashCode>
+      <FileName>ResourcesFiles\TextResources.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PRORAM.ResourcesFiles.CGetSettingTime" Collapsed="true">
+    <Position X="31.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EABAAAAAAgAAEAAAAAAAAAAAAAQIABAAAAAAAAAAAAA=</HashCode>
+      <FileName>ResourcesFiles\TextResources.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PRORAM.ResourcesFiles.RGetSettingTime" Collapsed="true">
+    <Position X="24.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EABAAAAAAgAAEAAAAAAAAAAAAAQIABAAAAAAAAAAAAA=</HashCode>
+      <FileName>ResourcesFiles\TextResources.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PRORAM.ResourcesFiles.Consulta" Collapsed="true">
+    <Position X="30" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAQAAgABACAA=</HashCode>
+      <FileName>ResourcesFiles\TextResources.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PRORAM.ResourcesFiles.RepPlots" Collapsed="true">
+    <Position X="21.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EABAAAAAAgAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ResourcesFiles\TextResources.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PRORAM.ResourcesFiles.Reportes" Collapsed="true">
+    <Position X="19.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ResourcesFiles\TextResources.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PRORAM.ResourcesFiles.Mensajes" Collapsed="true">
+    <Position X="17.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAAAAAAAACAAAAAAAAAAAAABAAAAAAAAAA=</HashCode>
+      <FileName>ResourcesFiles\TextResources.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PRORAM.ResourcesFiles.ICD" Collapsed="true">
+    <Position X="19.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAA=</HashCode>
+      <FileName>ResourcesFiles\TextResources.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PRORAM.ResourcesFiles.PRORAMRESOURCEFILE" Collapsed="true">
+    <Position X="14.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAEAAAEAAAAAAAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>ResourcesFiles\TextResources.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PRORAM.ResourcesFiles.RootObject" Collapsed="true">
+    <Position X="16" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ResourcesFiles\TextResources.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PRORAM.ServicesTcp.StateObject" Collapsed="true">
+    <Position X="28.25" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAACCAEAAAAAAAAAAAAAAABAAAAAAAA=</HashCode>
+      <FileName>ServicesTcp\ServicesTcp.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PRORAM.ServicesTcp.ServiceTcp" Collapsed="true">
+    <Position X="21.25" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEmEcEAAQQAgHBAMAESgABBACigAJQgIAARIAgDgE=</HashCode>
+      <FileName>ServicesTcp\ServicesTcp.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PRORAM.ServicesTcp.ArraySub" Collapsed="true">
+    <Position X="17.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ServicesTcp\ServicesTcp.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PRORAM.ServicesTcp.Plots" Collapsed="true">
+    <Position X="17.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAADAAAAACAAEAQAAAAAAAAAAAAABAAAAAAAACAA=</HashCode>
+      <FileName>ServicesTcp\ServicesTcp.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PRORAM.ServicesTcp.Tracks" Collapsed="true">
+    <Position X="28.25" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAADAYAAAAAAAAAAAwAAAAAAEAAAAAQAAAAAECBA=</HashCode>
+      <FileName>ServicesTcp\ServicesTcp.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PRORAM.ViewModels.GeoLayerViewModel" Collapsed="true">
+    <Position X="43.5" Y="2.5" Width="2.5" />
+    <Compartments>
+      <Compartment Name="Private" Collapsed="true" />
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAcWkoIAQALwCFEQIpQggBAAQKBAAMSICkj1gAAJAVE=</HashCode>
+      <FileName>ViewModels\GeoLayerViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PRORAM.ViewModels.LayersViewModel" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="33.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAQAAEQABAQAEAAAAAAAAAQQABQAAAiACAAAAAAAA=</HashCode>
+      <FileName>ViewModels\Layers\LayersViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PRORAM.ViewModels.MainWindowViewModel" Collapsed="true">
+    <Position X="39.75" Y="2.5" Width="3" />
+    <Compartments>
+      <Compartment Name="Private" Collapsed="true" />
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>ATEAIIaCAIBCEUAIELA4AAAEACkAIFHAGAYQJQAlEhA=</HashCode>
+      <FileName>ViewModels\MainWindowViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PRORAM.ViewModels.LogsViewModel" Collapsed="true">
+    <Position X="31.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABIAQAAAAAACBAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\Panels\LogsView.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PRORAM.ViewModels.RightPanelViewModel">
+    <Position X="74.75" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEEAAAAAEBBAwAAAAAAgAAEBAAAAAACAAAEgBABJAI=</HashCode>
+      <FileName>ViewModels\Panels\RightPanelViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PRORAM.ViewModels.SidePanelsViewModel" Collapsed="true">
+    <Position X="30.75" Y="13.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAgAJBBAQAAEAAAoEAAgAAAAAAAAAQAABAAAIA=</HashCode>
+      <FileName>ViewModels\Panels\SidePanelsViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PRORAM.ViewModels.TargetPanelViewModel" Collapsed="true">
+    <Position X="34.25" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAABAAQAIQAQAAAAAQAAEAAAgAAAQgAAAAAA=</HashCode>
+      <FileName>ViewModels\Panels\TargetPanelViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PRORAM.ViewModels.PopupConfirmationViewModel" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="23" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>YAAAEAAAAoMAAAABAAAAAAAAAAAAQAAAgAAAAQAAAAA=</HashCode>
+      <FileName>ViewModels\PopupConfirmationViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PRORAM.ViewModels.ChannelFrecViewModel" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="24.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>YEAAEAAAQAEAAgAAACAABAAAAAAAwBAAgAAAAQAAkAA=</HashCode>
+      <FileName>ViewModels\Radar\ChannelFrecViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PRORAM.ViewModels.ConfigurationViewModel" Collapsed="true">
+    <Position X="29.5" Y="10.5" Width="2.5" />
+    <Members>
+      <Field Name="_channel" Hidden="true" />
+      <Field Name="_Errors" Hidden="true" />
+      <Field Name="_mensaje" Hidden="true" />
+      <Field Name="_notification" Hidden="true" />
+      <Field Name="_radarConfigurationMod" Hidden="true" />
+      <Field Name="_tituloError" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>IEAAMAAAAAEAAQIEAAAQAgAAAAEAQCCAkAAAAQIAFAg=</HashCode>
+      <FileName>ViewModels\Radar\ConfigurationViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="PRORAM.ViewModels.PowerRadarViewModel" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="27.5" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>YAAAEAAIAAMAAgAEAAAAAAAAAEAAwAAAgAAAAQAAAAA=</HashCode>
+      <FileName>ViewModels\Radar\PowerRadarViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PRORAM.ViewModels.RadarConfigurationViewModel" Collapsed="true">
+    <Position X="54.75" Y="2.5" Width="3.25" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>YAAgMAAAAAFAKQIECgAQAggAFIUAQCCggCAgQBAQEAg=</HashCode>
+      <FileName>ViewModels\Radar\RadarConfigurationViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="PRORAM.ViewModels.RadarDevicesViewModel" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="50.5" Y="2.5" Width="3.25" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>YQAAIQAiYBhBEAMAAAABYEoAAIsCwgDCkIRkpRCAXgg=</HashCode>
+      <FileName>ViewModels\Radar\RadarDevicesViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PRORAM.ViewModels.TargetAreaViewModel" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="46.5" Y="2.5" Width="3.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>YAAAEABAAIEAAUAEAAAAAAAAABEAQCCAgAAAAQAAEAE=</HashCode>
+      <FileName>ViewModels\TargetAreaViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PRORAM.Views.CustomPopupView" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="14.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAAAAAAFAAAAAQAAAgAAAAAAAAAA=</HashCode>
+      <FileName>Views\CustomPopupView.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PRORAM.Views.GeoLayerView" BaseTypeListCollapsed="true">
+    <Position X="52.75" Y="5.75" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEAAACAAAAAAAAAAAAAgAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\GeoLayerView.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PRORAM.Views.LayersView" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="36.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\Layers\LayersView.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PRORAM.Views.MainWindowView" BaseTypeListCollapsed="true">
+    <Position X="49.25" Y="5.75" Width="3.25" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAAQBAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\MainWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PRORAM.Views.LogsView" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="30" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\Panels\LogsView.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PRORAM.Views.RightPanelView" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="30" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Views\Panels\RightPanelView.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PRORAM.Views.SidePanelsView" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="36.75" Y="13" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\Panels\SidePanelsView.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PRORAM.Views.TargetPanelView" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="33.25" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\Panels\TargetPanelView.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PRORAM.Views.PopupConfirmationView" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="21.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\PopupConfirmationView.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PRORAM.Views.ChannelFrecView" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="23" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Views\Radar\ChannelFrecView.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PRORAM.Views.ConfigurationView" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="28.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Views\Radar\ConfigurationView.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PRORAM.Views.PowerRadarView" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="34.25" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Views\Radar\PowerRadarView.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PRORAM.Views.RadarConfigurationView" BaseTypeListCollapsed="true">
+    <Position X="60.5" Y="5.75" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Views\Radar\RadarConfigurationView.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PRORAM.Views.RadarDevicesView" BaseTypeListCollapsed="true">
+    <Position X="58.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\Radar\RadarDevicesView.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PRORAM.Views.TargetAreaView" BaseTypeListCollapsed="true">
+    <Position X="55.75" Y="5.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Views\TargetAreaView.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Interface Name="PRORAM.Notifications.IChannelFrecNotification" Collapsed="true">
+    <Position X="14.25" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAAAAgCAAAAAAAAAAAAAAAAQAAAAAAAAAAA=</HashCode>
+      <FileName>Notifications\IChannelFrecNotification.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="PRORAM.Notifications.IPopupConfirmationnotification" Collapsed="true">
+    <Position X="16" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAA=</HashCode>
+      <FileName>Notifications\IPopupConfirmationnotification.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="PRORAM.Notifications.IPowerRadarNotification" Collapsed="true">
+    <Position X="17.75" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAAEAAAAIAAAAAAAAAAAA=</HashCode>
+      <FileName>Notifications\IPowerRadarNotification.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="PRORAM.Notifications.IRadarConfigurationNotification" Collapsed="true">
+    <Position X="19.5" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAhAAAAAAAAAAAAAAAAAAAAAABAAAAAAA=</HashCode>
+      <FileName>Notifications\IRadarConfigurationNotification.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="PRORAM.Notifications.IRadarDevicesNotification" Collapsed="true">
+    <Position X="21.25" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAQAAAAAAAA=</HashCode>
+      <FileName>Notifications\IRadarDevicesNotification.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="PRORAM.Notifications.ITargetAreaNotification" Collapsed="true">
+    <Position X="23" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Notifications\ITargetAreaNotification.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

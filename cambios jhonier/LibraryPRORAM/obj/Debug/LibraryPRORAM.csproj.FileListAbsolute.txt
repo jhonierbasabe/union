@@ -1,0 +1,15 @@
+E:\radar PPR\proyect_V2\LibraryPRORAM\bin\Debug\LibraryPRORAM.dll
+E:\radar PPR\proyect_V2\LibraryPRORAM\bin\Debug\LibraryPRORAM.pdb
+E:\radar PPR\proyect_V2\LibraryPRORAM\bin\Debug\CommonServiceLocator.dll
+E:\radar PPR\proyect_V2\LibraryPRORAM\bin\Debug\Prism.dll
+E:\radar PPR\proyect_V2\LibraryPRORAM\bin\Debug\Prism.Wpf.dll
+E:\radar PPR\proyect_V2\LibraryPRORAM\bin\Debug\System.Windows.Interactivity.dll
+E:\radar PPR\proyect_V2\LibraryPRORAM\bin\Debug\Prism.pdb
+E:\radar PPR\proyect_V2\LibraryPRORAM\bin\Debug\Prism.xml
+E:\radar PPR\proyect_V2\LibraryPRORAM\bin\Debug\Prism.Wpf.pdb
+E:\radar PPR\proyect_V2\LibraryPRORAM\bin\Debug\Prism.Wpf.xml
+E:\radar PPR\proyect_V2\LibraryPRORAM\obj\Debug\LibraryPRORAM.csprojAssemblyReference.cache
+E:\radar PPR\proyect_V2\LibraryPRORAM\obj\Debug\LibraryPRORAM.csproj.CoreCompileInputs.cache
+E:\radar PPR\proyect_V2\LibraryPRORAM\obj\Debug\LibraryPRORAM.csproj.CopyComplete
+E:\radar PPR\proyect_V2\LibraryPRORAM\obj\Debug\LibraryPRORAM.dll
+E:\radar PPR\proyect_V2\LibraryPRORAM\obj\Debug\LibraryPRORAM.pdb
