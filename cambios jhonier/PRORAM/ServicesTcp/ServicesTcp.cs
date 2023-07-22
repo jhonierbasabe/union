@@ -51,7 +51,7 @@ namespace PRORAM.ServicesTcp
         private Task _connectionTask;
         private ObservableCollection<Tracks> _tracksFromRadar;
         private IPAddress _ipAddress;
-        private static Socket client;
+        private Socket client;
         private int _Port;
 
         #endregion

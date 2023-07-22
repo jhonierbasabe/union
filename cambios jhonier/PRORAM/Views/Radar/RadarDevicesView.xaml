@@ -16,7 +16,8 @@
         TextElement.FontWeight="Medium"
         TextElement.FontSize="14"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        xmlns:smtx="clr-namespace:ShowMeTheXAML;assembly=ShowMeTheXAML" Height="767.333" Loaded="UserControl_Loaded" >
+        xmlns:smtx="clr-namespace:ShowMeTheXAML;assembly=ShowMeTheXAML" 
+        Height="767.333" Loaded="UserControl_Loaded" >
 
     <UserControl.Resources>
         <ResourceDictionary>
@@ -159,7 +160,7 @@
                 </Style.Triggers>
             </Style>
         </Border.Style>
-        <Grid RenderTransformOrigin="0.5,0.569" Height="753" VerticalAlignment="Top" Margin="0,0,0,-1" >
+        <Grid RenderTransformOrigin="0.5,0.569" Height="739" VerticalAlignment="Top" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
@@ -199,7 +200,7 @@
                         <DataGridTextColumn Width="auto" Header="Id" Binding="{Binding Path=Id}" IsReadOnly="True" />
                         <DataGridTextColumn Width="auto" Header="Nombre" Binding="{Binding Path=RadarName}" IsReadOnly="True" />
                         <DataGridTemplateColumn Width="auto" Header="Modo 2">
-                            
+
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <CheckBox IsChecked="{Binding  Check, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
@@ -216,7 +217,7 @@
                                         <StackPanel.Resources>
                                             <Style TargetType="Button" x:Key="ButtonStyle"  BasedOn="{StaticResource MaterialDesignRaisedButton}">
                                                 <Setter Property="Background" Value="DimGray"/>
-                                                
+
                                                 <Style.Triggers>
                                                     <DataTrigger Binding="{Binding Path=Check}" Value="True">
                                                         <Setter Property="IsEnabled" Value="False" />
@@ -260,7 +261,7 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
- <!--                      ############################################################################        -->
+                        <!--                      ############################################################################        -->
                         <DataGridTemplateColumn Width="auto" Header="Radiando" >
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
@@ -336,37 +337,41 @@
                 </Border>
             </ContentControl>
 
-            <ContentControl Grid.Row="4" Visibility="{Binding ContentControlVisibility}" Margin="0,0,95,-19">
-                <DataGrid Margin="10,10,100,73" ItemsSource="{Binding RadarDevicesMode2_, Mode=TwoWay}"  
+            <ContentControl Grid.Row="4" Visibility="{Binding ContentControlVisibility}" Margin="0,0,100,50">
+                
+                    <DataGrid Margin="10,10,150,30" ItemsSource="{Binding RadarDevicesMode2_, Mode=TwoWay}"  
                       SelectedItem="{Binding SRadarDevicesModel}"
                       Background="DimGray"                       
                       AlternatingRowBackground="Gray" 
                       CanUserAddRows="False"
                       AutoGenerateColumns="False"                       
                       ColumnWidth="Auto" SelectionChanged="DataGrid_SelectionChanged" Width="496">
+                        
+                        <DataGrid.Columns >
 
-                    <DataGrid.Columns >
-                        <DataGridTextColumn Width="100" Header="Id" Binding="{Binding Path=Id}" IsReadOnly="True" />
-                        <DataGridTextColumn Width="150" Header="Nombre" Binding="{Binding Path=RadarName}" IsReadOnly="True" />
-                        <DataGridTemplateColumn Width="200" Header="Orden">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBox Name ="OrdenEjecucion" Margin="1"  Width="150" Height="25" Background="LightGray" HorizontalAlignment="Left" 
-                                             TextAlignment="Center" Foreground="Black" Text="{Binding Path=Orden,  Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=true, ValidatesOnExceptions=true, UpdateSourceTrigger=LostFocus}">
+                            <DataGridTextColumn Width="100" Header="Id" Binding="{Binding Path=Id}" IsReadOnly="True" />
+                            <DataGridTextColumn Width="150" Header="Nombre" Binding="{Binding Path=RadarName}" IsReadOnly="True" />
+                            <DataGridTemplateColumn Width="200" Header="Orden">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Name ="OrdenEjecucion" Margin="1"  Width="150" Height="25" Background="LightGray" HorizontalAlignment="Left" 
+                                                 TextAlignment="Center" Foreground="Black" Text="{Binding Path=Orden,  Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=true, ValidatesOnExceptions=true, UpdateSourceTrigger=LostFocus}">
 
-                                        <i:Interaction.Triggers>
-                                            <i:EventTrigger EventName="TextChanged">
-                                                <i:InvokeCommandAction Command="{Binding TextChangedCommand}"/>
-                                            </i:EventTrigger>
-                                        </i:Interaction.Triggers>
-                                    </TextBox>
+                                            <i:Interaction.Triggers>
+                                                <i:EventTrigger EventName="TextChanged">
+                                                    <i:InvokeCommandAction Command="{Binding TextChangedCommand}"/>
+                                                </i:EventTrigger>
+                                            </i:Interaction.Triggers>
+                                        </TextBox>
 
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                    </DataGrid.Columns>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                            
 
-                </DataGrid>
+                    </DataGrid>
+                
             </ContentControl>
 
             <ContentControl Grid.Row="5" Visibility="{Binding ContentControlVisibility}" Margin="0,0,189,0" >
@@ -375,30 +380,29 @@
                         <Label Content="Tiempo de operacion entre radar" Foreground="White" Margin="5" HorizontalAlignment="Left" ></Label>
                         <TextBox  Name ="TiempoEjecucion" Margin="5,10,5,11" Width="50" Background="LightGray" HorizontalAlignment="Left" 
                                   materialDesign:HintAssist.Hint="time" BorderBrush="DimGray" BorderThickness="2" 
-                                   TextAlignment="Center" Foreground="Black" Text="{Binding TiempoEjecucion, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
-                           >
-                        </TextBox>
+                                  TextAlignment="Center" Foreground="Black" Text="{Binding TiempoEjecucion, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
+                                  PreviewTextInput="TextBox_PreviewTextInput" />
                         <Label Content="ms" Foreground="White" Margin="5" HorizontalAlignment="Left" ></Label>
                         <Button Margin="10" HorizontalAlignment="Right" Content="Activar modo 2" Command="{Binding RadarconfigurationModo_2}" Click="Button_Click" Height="30" Width="132"/>
                     </StackPanel>
                 </Border>
             </ContentControl>
 
-            <ContentControl Grid.Row="6" Margin="0,0,0,0">
-                <StackPanel Grid.Row="4"  VerticalAlignment="Bottom" Height="48" Margin="10,0,114,-40">
-                    <StackPanel.Style>
-                        <Style TargetType="{x:Type StackPanel}">
-                            <Setter Property="Margin" Value="10,290,114,10" />
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding ContentControlVisibility}" Value="Collapsed">
-                                    <Setter Property="Margin" Value="10,5,114,10" />
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </StackPanel.Style>
-                    <Button Command="{Binding CancelCommand}" Content="Cerrar" Foreground="Black" Background="LightGray" Margin="406,10,83,10" Click="Button_Click_1" Height="25" RenderTransformOrigin="-0.404,0.426" />
-                </StackPanel>
-            </ContentControl>
+
+            <StackPanel Grid.Row="4"  VerticalAlignment="Bottom" Height="48" Margin="10,0,161,-40">
+                <StackPanel.Style>
+                    <Style TargetType="{x:Type StackPanel}">
+                        <Setter Property="Margin" Value="10,290,114,10" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ContentControlVisibility}" Value="Collapsed">
+                                <Setter Property="Margin" Value="10,5,114,10" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </StackPanel.Style>
+                <Button Command="{Binding CancelCommand}" Content="Cerrar" Foreground="Black" Background="LightGray" Margin="406,10,83,10" Click="Button_Click_1" Height="25" RenderTransformOrigin="-0.404,0.426" />
+            </StackPanel>
+
         </Grid>
     </Border>
 </UserControl>

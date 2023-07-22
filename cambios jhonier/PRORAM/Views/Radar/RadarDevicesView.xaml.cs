@@ -32,6 +32,14 @@ namespace PRORAM.Views
 
         }
 
+        private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            if (!int.TryParse(e.Text, out _))
+            {
+                e.Handled = true;
+            }
+        }
+
         private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 

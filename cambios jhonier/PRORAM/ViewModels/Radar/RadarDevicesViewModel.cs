@@ -50,6 +50,7 @@ namespace PRORAM.ViewModels
         private int recoridor;
         private int radares;
         private int contador_radiacion = 0;
+        private int contador = 0;
         private string RadarDesconectado;
         private bool conect = false;
 
@@ -742,22 +743,22 @@ namespace PRORAM.ViewModels
                     }
                 }
             }
-            
             conect = !conect;
             conectar_radar();
         }
-        
 
-       public void conectar_radar()
+
+        public void conectar_radar()
         {
+            
             var listaOrdenada = RadarDevicesMode2_.OrderBy(radarDevice => radarDevice.Orden).ToList();
             if (contador_radiacion < RadarDevicesMode2_.Count)
             {
-                
+                Console.WriteLine(contador_radiacion);
                 var radar = RadarDevicesModel_.Where(r => r.Id == listaOrdenada[contador_radiacion].Id).FirstOrDefault();
                 if (radar != null)
                 {
-                    SRadarDevicesModel = radar;        
+                    SRadarDevicesModel = radar;
                     if (conect == true)
                     {
                         SRadarDevicesModel.IsSaving = true;
@@ -769,15 +770,7 @@ namespace PRORAM.ViewModels
                             SRadarDevicesModel.IsSaveComplete = false;
                             SRadarDevicesModel.SaveProgress = 0;
                             UpdateDevices(SRadarDevicesModel);
-                            contador_radiacion++;
-                            if (contador_radiacion >= RadarDevicesMode2_.Count)
-                            {
-                                contador_radiacion = 0;
-                            }
-                            if (conect)
-                            {
-                                conectar_radar();
-                            }
+
                         }
                         if (_transResult == true && _stateTrans == "Success")
                         {
@@ -792,47 +785,94 @@ namespace PRORAM.ViewModels
                                 SetIdRadar(_buffer[4]);
                                 Console.WriteLine("El id de radar es " + _buffer[4]);
                                 UpdateDevices(SRadarDevicesModel);
-                                Radiation();
-                                var started = DateTime.Now;
+                                /// iradiar
+                                /// 
+                                if (SRadarDevicesModel.StateConnection == true)
+                                {
+                                    var started = DateTime.Now;
+
+                                    SRadarDevicesModel.IsSavingT = true;
+
+                                    var messagesGenerator = new MessagesGenerator(1);
+                                    var messageToSend = messagesGenerator.GenerateMessageEncender(1, SRadarDevicesModel.IdRadar);
+
+                                    ComunicationToGeoLayer(messageToSend, SRadarDevicesModel.GuidRadar, "TurnOnRadiation");
+                                }
+                                if (_transResult == false)
+                                {
+                                    SRadarDevicesModel.Radiation = false;
+                                    SRadarDevicesModel.IsSaveCompleteT = false;
+                                    UpdateDevices(SRadarDevicesModel);
+                                }
+                                if (_transResult == true && _action == "RadiationDone")
+                                {
+                                    SRadarDevicesModel.Radiation = true;
+                                    SRadarDevicesModel.IsSaveCompleteT = true;
+                                    UpdateDevices(SRadarDevicesModel);
+                                }
+
+                                SRadarDevicesModel.IsSavingT = false;
+                                SRadarDevicesModel.SaveProgressT = 0;
+                                UpdateDevices(SRadarDevicesModel);
+                                double tiempo = (double.Parse(TiempoEjecucion))*1000;
                                 new DispatcherTimer(
-                                    TimeSpan.FromMilliseconds(5000),
+                                    TimeSpan.FromMilliseconds(tiempo),
                                     DispatcherPriority.Normal,
                                     new EventHandler((o, e) =>
                                     {
-                                        
-                                        if (contador_radiacion < RadarDevicesMode2_.Count)
+                                        // dejar de irradiar 
+                                        Console.WriteLine("dejar de irradiar");
+                                        if (conect == true)
                                         {
+                                            SRadarDevicesModel.IsSaveCompleteT = false;
+                                            SRadarDevicesModel.SaveProgressT = 0;
+                                            SRadarDevicesModel.Radiation = false;
+
+                                            var messagesGenerator = new MessagesGenerator(1);
+                                            var messageToSend = messagesGenerator.GenerateMessageEncender(0, SRadarDevicesModel.IdRadar);
+                                            ComunicationToGeoLayer(messageToSend, SRadarDevicesModel.GuidRadar, "TurnOffRadiation");
+                                            UpdateDevices(SRadarDevicesModel);
+
+                                            Console.WriteLine("desconectar");
                                             if (SRadarDevicesModel.IsSaveComplete == true)
                                             {
-                                                Radiation();
                                                 SRadarDevicesModel.IsSaveComplete = false;
                                                 SRadarDevicesModel.StateConnection = false;
                                                 SRadarDevicesModel.IsSaveCompleteT = false;
                                                 SRadarDevicesModel.Radiation = false;
                                                 SRadarDevicesModel.SaveProgressT = 0;
                                                 SRadarDevicesModel.SaveProgress = 0;
-                                                var messagesGenerator = new MessagesGenerator(1);
-                                                var messageToSend = messagesGenerator.GenerateMessageEncender(0, 0);
-                                                ComunicationToGeoLayer(messageToSend, SRadarDevicesModel.GuidRadar, "Disconnected");
+                                                var MessagesGenerator = new MessagesGenerator(1);
+                                                var MessageToSend = MessagesGenerator.GenerateMessageEncender(0, 0);
+                                                ComunicationToGeoLayer(MessageToSend, SRadarDevicesModel.GuidRadar, "Disconnected");
                                                 UpdateDevices(SRadarDevicesModel);
-
+                                                    
                                             }
-                                            Console.WriteLine(contador_radiacion);
                                             contador_radiacion++;
                                             if (contador_radiacion >= RadarDevicesMode2_.Count)
                                             {
                                                 contador_radiacion = 0;
+                                                Console.WriteLine("ciclo");
+                                                    
                                             }
-                                            if (conect)
-                                            {
-                                                conectar_radar();
-                                            }
+                                            ((DispatcherTimer)o).Stop();
                                             
+                                            conectar_radar();
+                                            
+
+
                                         }
 
                                         else
                                         {
+
                                             ((DispatcherTimer)o).Stop();
+                                            Console.WriteLine("cerro ciclo");
+                                            SRadarDevicesModel.IsSaveComplete = true;
+                                            Radiation();
+                                            SRadarDevicesModel.IsSaveComplete = true;
+                                            GetIdRadar();
+
 
 
                                         }
@@ -847,29 +887,36 @@ namespace PRORAM.ViewModels
                                 UpdateDevices(SRadarDevicesModel);
 
                             }
-                            
+
                         }
 
                         SRadarDevicesModel.IsSaving = false;
                         UpdateDevices(SRadarDevicesModel);
-                        
+
                         /*if (_transResult == false)
                         {
                             CustomPopupRequest2.Raise(new Notification { Title = "Notificación", Content = new { Text = _messsageError + SRadarDevicesModel.RadarName, Show = true, ShowAlert = true } }, r => Tittle = "PRORAM Consola de monitoreo");
                         }*/
 
                     }
+                    else
+                    {
+                        return;
+
+                    }
+                        
 
                 }
 
 
 
-                
+
 
             }
-        }
-            
 
+
+            
+        }
 
         /// <summary>
         /// Metodo ComunicationToGeoLayer, genera un evento que sera controlado en la vista GeoLayerViewModel
