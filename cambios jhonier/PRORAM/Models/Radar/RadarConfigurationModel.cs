@@ -9,6 +9,7 @@ using System.Collections.ObjectModel;
 using PRORAM.ResourcesFiles;
 using System.ComponentModel.DataAnnotations;
 using Prism.Events;
+using System.Windows.Media;
 
 namespace PRORAM.Models
 {
@@ -21,6 +22,7 @@ namespace PRORAM.Models
         private int _Modelo;
         private Modelo _SModelo;
         private string _ipAddress;
+        //private double? => >El ? indica que esa variable puede tomar un valor nulo
         private double? _Altitude;
         private int? _TXPower;
         private double? _installationAngle;
@@ -29,22 +31,59 @@ namespace PRORAM.Models
         private double? _Longitud;
         private double? _Elevation;
         private Channels _SChannelFrec;
+        private Objetivo _SChannelObject;
         private bool _radiation;
         private int _Id;
         private Guid _guid;
         private int _index;
+        //Agrege este linea
+        private int _indexO;
         private double? _northHeiding;
         private string _radarName;
         private bool _expander;
         private int _port;
+        private SolidColorBrush _IdTextColor;
         private ObservableCollection<Channels> _ChannelFrec;
+        private ObservableCollection<Objetivo> _ChannelObject;
 
+
+        //Asignar el color a id del radar
+
+        public SolidColorBrush IdTextColor
+        {
+            get { return _IdTextColor; }
+            set { SetProperty(ref _IdTextColor, value); }
+        }
+
+        //Agrege 
+        public int IndexChannelO
+        {
+            get { return _indexO; }
+            set { SetProperty(ref _indexO, value); }
+        }
+
+        public ObservableCollection<Objetivo> ChannelObject
+        {
+            get { return _ChannelObject; }
+            set { SetProperty(ref _ChannelObject, value); }
+        }
+
+
+
+        [Required]
+        [Display(Name = "Canal de tipo de objetivo")]
+        public Objetivo SchannelObject
+        {
+            get { return _SChannelObject; }
+            set { SetProperty(ref _SChannelObject, value); }
+        }
 
 
         #endregion
         /// <summary>
         /// Propiedad Port int, puerto del dispositivo radar
         /// </summary>
+
         public int Port
         {
             get { return _port; }
@@ -89,6 +128,9 @@ namespace PRORAM.Models
             get { return _index; }
             set { SetProperty(ref _index, value); }
         }
+
+
+        //Fin
 
         /// <summary>
         /// Propiedad Guid, indentificador unico
@@ -137,6 +179,9 @@ namespace PRORAM.Models
             get { return _SChannelFrec; }
             set { SetProperty(ref _SChannelFrec, value); }
         }
+
+
+
         /// <summary>
         /// Propiedad ChannelFrec, collección de canales
         /// </summary>
@@ -155,7 +200,9 @@ namespace PRORAM.Models
                 new Modelo()
                 {
                     Id=TextResources.GetJsonContent().PRORAM_RESOURCE_FILE.ModelosRardar.Modelo2.Id,
-                    Name = TextResources.GetJsonContent().PRORAM_RESOURCE_FILE.ModelosRardar.Modelo2.Name
+                    Name = TextResources.GetJsonContent().PRORAM_RESOURCE_FILE.ModelosRardar.Modelo2.Name,
+                    //TypeObject = TextResources.GetJsonContent().PRORAM_RESOURCE_FILE.ModelosRardar.Modelo2.TypeObject
+
                 },
         };
 
@@ -205,6 +252,7 @@ namespace PRORAM.Models
         /// </summary>
         [Required]
         [Display(Name = "Ángulo de instalación")]
+        [Range(-30.0, 30.0, ErrorMessage = "Ingrese un valor válido de {0}, entre {1}  y {2} ")]
         public double? InstallationAngle
         {
             get { return _installationAngle; }
@@ -226,7 +274,7 @@ namespace PRORAM.Models
         /// </summary>
         [Required]
         [Display(Name = "Altitud")]
-        [Range(1, 6, ErrorMessage = "Ingrese un valor válido de {0}, entre {1}  y {2} ")]
+        [Range(1, 15, ErrorMessage = "Ingrese un valor válido de {0}, entre {1}  y {2} ")]
         public double? Altitude
         {
             get { return _Altitude; }
@@ -267,6 +315,44 @@ namespace PRORAM.Models
             Guid = Guid.NewGuid();
         }
     }
+
+
+    public class Objetivo : ValidatableBindableBase
+    {
+        #region Private
+        private int _value;
+        private string _object;
+        private string _DisplayNameO;
+
+        #endregion
+        /// <summary>
+        /// Propiedad DisplayName
+        /// </summary>
+
+        public string DisplayNameO
+        {
+            get { return _DisplayNameO; }
+            set { SetProperty(ref _DisplayNameO, value); }
+        }
+
+        public int Value
+        {
+            get { return _value; }
+            set { SetProperty(ref _value, value); }
+        }
+        /// <summary>
+        /// Propiedd Frecuency
+        /// </summary>
+        public string Object
+        {
+            get { return _object; }
+            set { SetProperty(ref _object, value); }
+        }
+
+      
+    }
+
+
     /// <summary>
     /// Clase channels, contiene la estructura para los canales de frecuencia
     /// </summary>
@@ -276,6 +362,7 @@ namespace PRORAM.Models
         private int _id;
         private double _frecuency;
         private string _DisplayName;
+
         #endregion
         /// <summary>
         /// Propiedad DisplayName
@@ -301,6 +388,7 @@ namespace PRORAM.Models
             get { return _frecuency; }
             set { SetProperty(ref _frecuency, value); }
         }
+
     }
     /// <summary>
     /// Clase con la estructura de la lista de modelos
@@ -309,6 +397,7 @@ namespace PRORAM.Models
     {
         private int _Id;
         private string _Name;
+        
         /// <summary>
         /// Propiedad nombre del modelo
         /// </summary>

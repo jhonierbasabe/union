@@ -38,8 +38,15 @@ namespace PRORAM
             double val = 0.0;
             try
             {
-                val = double.Parse(value.ToString());
-                return value.ToString();
+                string text = value.ToString().Replace(',', '.');
+                if (double.TryParse(text, System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture, out val))
+                {
+                    return val;
+                }
+                else
+                {
+                    return null;
+                }
             }
             catch (Exception e)
             {

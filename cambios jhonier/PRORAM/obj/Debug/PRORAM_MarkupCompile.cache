@@ -4,17 +4,17 @@
 exe
 C#
 .cs
-E:\radar PPR\version 2\proyect_V1\PRORAM\obj\Debug\
+C:\Users\jsant\OneDrive\Escritorio\Radar2\radar ppr\proyect_V2\PRORAM\obj\Debug\
 PRORAM
 none
 false
 DEBUG;TRACE
-E:\radar PPR\version 2\proyect_V1\PRORAM\App.xaml
-15-810764695
+C:\Users\jsant\OneDrive\Escritorio\Radar2\radar ppr\proyect_V2\PRORAM\App.xaml
+16-2020635718
 
-68-1373819279
-43-237443778
-Views\CustomPopupView.xaml;Views\GeoLayerView.xaml;Views\Layers\LayersView.xaml;Views\MainWindow.xaml;Views\Panels\LogsView.xaml;Views\Panels\RightPanelView.xaml;Views\Panels\TargetPanelView.xaml;Views\PopupConfirmationView.xaml;Views\Radar\ChannelFrecView.xaml;Views\Radar\ConfigurationView.xaml;Views\Radar\PowerRadarView.xaml;Views\Radar\RadarConfigurationView.xaml;Views\Radar\RadarDevicesView.xaml;Views\Panels\SidePanelsView.xaml;Views\TargetAreaView.xaml;
+73-1850858658
+43433748983
+Views\CustomPopupView.xaml;Views\GeoLayerView.xaml;Views\Layers\LayersView.xaml;Views\MainWindow.xaml;Views\Panels\LogsView.xaml;Views\Panels\RightPanelView.xaml;Views\Panels\TargetPanelView.xaml;Views\PopupConfirmationView.xaml;Views\Radar\ChannelFrecView.xaml;Views\Radar\ConfigurationView.xaml;Views\Radar\ConsultParametersView.xaml;Views\Radar\PowerRadarView.xaml;Views\Radar\RadarConfigurationView.xaml;Views\Radar\RadarDevicesView.xaml;Views\Panels\SidePanelsView.xaml;Views\TargetAreaView.xaml;
 
 False
 

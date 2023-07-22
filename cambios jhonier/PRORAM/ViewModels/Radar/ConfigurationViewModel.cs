@@ -12,6 +12,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static PRORAM.Models.RadarConfigurationModel;
 
 namespace PRORAM.ViewModels
 {
@@ -29,6 +30,7 @@ namespace PRORAM.ViewModels
         private string _tituloError;
         private string _mensaje;
         private ObservableCollection<Channels> _channel;
+        private ObservableCollection<Objetivo> _objetivo;
         #endregion
 
         /// <summary>
@@ -39,6 +41,16 @@ namespace PRORAM.ViewModels
             get { return _channel; }
             set { SetProperty(ref _channel, value); }
         }
+
+
+        //Agrege
+        public ObservableCollection<Objetivo> Objetivo
+        {
+            get { return _objetivo; }
+            set { SetProperty(ref _objetivo, value); }
+        }
+
+        //Fin
         /// <summary>
         /// Propiedad RadarConfigurationModel, modelo de radar configuración para la vista
         /// </summary>
@@ -90,6 +102,7 @@ namespace PRORAM.ViewModels
         public ConfigurationViewModel()
         {
             Channels = new ObservableCollection<Channels>();
+            Objetivo = new ObservableCollection<Objetivo>();
             RadarConfigurationMod = new RadarConfigurationModel();
             RadarConfigurationMod.ErrorsChanged += (s, e) => Errors = FlattenErrors();
             CustomPopupRequest = new InteractionRequest<INotification>();
@@ -106,12 +119,16 @@ namespace PRORAM.ViewModels
         private void OnLoadScreen()
         {
             Channels = new ObservableCollection<Channels>();
+            Objetivo = new ObservableCollection<Objetivo>();
             RadarConfigurationMod = _notification.RadarConfigurationModelI_;
             RadarConfigurationMod.Elevation = 0;
             RadarConfigurationMod.TXPower = _notification.RadarConfigurationModelI_.TXPower.Value;
             RadarConfigurationMod.SchannelFrec = _notification.RadarConfigurationModelI_.SchannelFrec;
+            RadarConfigurationMod.SchannelObject = _notification.RadarConfigurationModelI_.SchannelObject;
             RadarConfigurationMod.ChannelFrec = new ObservableCollection<Channels>();
+            RadarConfigurationMod.ChannelObject = new ObservableCollection<Objetivo>();
             var modelos = TextResources.GetJsonContent().PRORAM_RESOURCE_FILE.ModelosRardar;
+
             foreach (var i in modelos.Modelo2.ChannelFrec)
             {
                 RadarConfigurationMod.ChannelFrec.Add(new Channels
@@ -121,10 +138,25 @@ namespace PRORAM.ViewModels
                     DisplayName = i.Channel + " - " + i.Frec + " GHz"
                 });
             }
-            var chan = RadarConfigurationMod.ChannelFrec.Where(x => x.Frecuency == RadarConfigurationMod.SchannelFrec.Frecuency).FirstOrDefault();
 
+            //Agrege
+            foreach (var i in modelos.Modelo2.ChannelObject)
+            {
+                RadarConfigurationMod.ChannelObject.Add(new Objetivo
+                {
+                    Value = i.value,
+                    Object = i.objecto,
+                    DisplayNameO = i.value + " - " + i.objecto
+                });
+            }
+
+            //Fin
+
+            var chan = RadarConfigurationMod.ChannelFrec.Where(x => x.Frecuency == RadarConfigurationMod.SchannelFrec.Frecuency).FirstOrDefault();
+            var chano = RadarConfigurationMod.ChannelObject.Where(x => x.Object == RadarConfigurationMod.SchannelObject.Object).FirstOrDefault();
 
             RadarConfigurationMod.SchannelFrec = chan;
+            RadarConfigurationMod.SchannelObject = chano;
         }
         /// <summary>
         /// Metodo CancelInteraction, cancel los cambios en la vista y la cierra
@@ -166,11 +198,16 @@ namespace PRORAM.ViewModels
         {
             RadarConfigurationMod.ValidateProperties();
             Errors = FlattenErrors();
+            var Altitude = Errors.Where(p => p.Property.Contains("Altitude"));
+            var TXPower = Errors.Where(p => p.Property.Contains("TXPower"));
+            var InstallationAngle = Errors.Where(p => p.Property.Contains("InstallationAngle"));
+            var NorthHeiding = Errors.Where(p => p.Property.Contains("NorthHeiding"));
+            var ChannelFrec = Errors.Where(p => p.Property.Contains("SchannelFrec"));
+            var Latitud = Errors.Where(p => p.Property.Contains("Latitud"));
+            var Longitud = Errors.Where(p => p.Property.Contains("Longitud"));
             if (!RadarConfigurationMod.HasErrors)
             {
-                _tituloError = "Notificación";
-                _mensaje = "Se ha configurado los parámetros del radar de forma exitosa";
-                RaiseCustomPopup();
+                CustomPopupRequest.Raise(new Notification { Title = "Notificación", Content = new { Text = "Se ha configurado los parámetros del radar de forma exitosa", Show = true, ShowAlert = false } }, r => Tittle = "PRORAM Consola de monitoreo");
                 _tituloError = "";
                 _mensaje = "";
 
@@ -183,7 +220,42 @@ namespace PRORAM.ViewModels
             else
             {
                 _tituloError = "Alerta";
-                _mensaje = "Debe diligenciar todos los campos";
+
+                if (Altitude.Count() != 0)
+                {
+                    _mensaje = "Ingrese un valor valido de altitud, entre 1 y 15";
+                }
+
+                else if (TXPower.Count() != 0)
+                {
+                    _mensaje = "Ingrese un valor valido de potencia de transmision, entre 0 y 100";
+                }
+
+                else if (InstallationAngle.Count() != 0)
+                {
+                    _mensaje = "Ingrese un valor valido de angulo de instalacion, entre -30 y 30";
+                }
+
+                else if (NorthHeiding.Count() != 0)
+                {
+                    _mensaje = "Ingrese un valor valido de NorthHeiding, entre 0 y 360";
+                }
+
+                else if (ChannelFrec.Count() != 0)
+                {
+                    _mensaje = "El campo canal de frecuencia es obligatorio";
+                }
+
+                else if (Latitud.Count() != 0)
+                {
+                    _mensaje = "Ingrese un valor valido de Latitud, entre -180 y 180  ";
+                }
+
+                else if (Longitud.Count() != 0)
+                {
+                    _mensaje = "Ingrese un valor valido de longitud, entre -90 y 90 ";
+                }
+
                 RaiseCustomPopup();
                 _tituloError = "";
                 _mensaje = "";

@@ -145,11 +145,18 @@ namespace PRORAM.ResourcesFiles
         public double Frec { get; set; }
     }
 
+    public class TypeObject
+    {
+        public int value { get; set; }
+        public string objecto { get; set; }
+    }
+
     public class Modelo2
     {
         public int Id { get; set; }
         public string Name { get; set; }
         public List<ChannelFrec3> ChannelFrec { get; set; }
+        public List<TypeObject> ChannelObject { get; set; }
     }
 
     public class ModelosRardar
@@ -223,6 +230,29 @@ namespace PRORAM.ResourcesFiles
         public int EndMess { get; set; }
         public int SizeMess { get; set; }
     }
+    
+    public class CCCanalObjectRadar
+    {
+        public int IdMess { get; set; }
+        public int Source { get; set; }
+        public int Addressee { get; set; }
+        public int SizeData { get; set; }
+        public int Data { get; set; }
+        public int EndMess { get; set; }
+        public int SizeMess { get; set; }
+    }
+
+    public class RCCanalObjectRadar
+    {
+        public int IdMess { get; set; }
+        public int Source { get; set; }
+        public int Addressee { get; set; }
+        public int SizeData { get; set; }
+        public int Data { get; set; }
+        public int EndMess { get; set; }
+        public int SizeMess { get; set; }
+    }
+
 
     public class CEliminarTraza
     {
@@ -276,6 +306,8 @@ namespace PRORAM.ResourcesFiles
         public RCPotenciaRadar RC_PotenciaRadar { get; set; }
         public CCCanalFrecRadar CC_CanalFrecRadar { get; set; }
         public RCCanalFrecRadar RC_CanalFrecRadar { get; set; }
+        public CCCanalFrecRadar CC_CanalObjectRadar { get; set; }
+        public RCCanalFrecRadar RC_CanalObjectRadar { get; set; }
         public CEliminarTraza C_EliminarTraza { get; set; }
         public REliminarTraza R_EliminarTraza { get; set; }
         public CCHora CC_Hora { get; set; }
@@ -348,6 +380,28 @@ namespace PRORAM.ResourcesFiles
         public int SizeMess { get; set; }
     }
 
+    public class CGetParametersObject
+    {
+        public int IdMess { get; set; }
+        public int Source { get; set; }
+        public int Addressee { get; set; }
+        public int SizeData { get; set; }
+        public int Data { get; set; }
+        public int EndMess { get; set; }
+        public int SizeMess { get; set; }
+    }
+
+    public class RGetGetParametersObject
+    {
+        public int IdMess { get; set; }
+        public int Source { get; set; }
+        public int Addressee { get; set; }
+        public int SizeData { get; set; }
+        public int Data { get; set; }
+        public int EndMess { get; set; }
+        public int SizeMess { get; set; }
+    }
+
     public class Consulta
     {
         public CIdRadar C_IdRadar { get; set; }
@@ -356,6 +410,8 @@ namespace PRORAM.ResourcesFiles
         public RGetStatus R_GetStatus { get; set; }
         public CGetSettingTime C_GetSettingTime { get; set; }
         public RGetSettingTime R_GetSettingTime { get; set; }
+        public CGetParametersObject C_GetParametersRadar { get; set; }
+        public RGetGetParametersObject R_GetParametersRadar { get; set; }
     }
 
     public class RepPlots

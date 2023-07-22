@@ -370,7 +370,11 @@ namespace PRORAM {
             private global::System.Data.DataColumn columnIdModelo;
             
             private global::System.Data.DataColumn columnSchannelFrec;
-            
+
+           //Agregue esto
+            private global::System.Data.DataColumn columnSchannelobject;
+           //Fin
+
             private global::System.Data.DataColumn columnIpAddress;
             
             private global::System.Data.DataColumn columnInstallationAngle;
@@ -384,15 +388,21 @@ namespace PRORAM {
             private global::System.Data.DataColumn columnPort;
             
             private global::System.Data.DataColumn columnIdChannel;
-            
+
+            //Agregue esto
+            private global::System.Data.DataColumn columnIdChannelO;
+            //Fin
+
             private global::System.Data.DataColumn columnFrec;
-            
+
+            //Agregue esto
+            private global::System.Data.DataColumn columnObject;
+            //FIn
+
             private global::System.Data.DataColumn columnMClutter;
             
             private global::System.Data.DataColumn columnNorthHeiding;
-
-            private global::System.Data.DataColumn columnCheck;
-
+            
             private global::System.Data.DataColumn columnAltitude;
             
             private global::System.Data.DataColumn columnIsSaveComplete;
@@ -528,6 +538,18 @@ namespace PRORAM {
                 }
             }
             
+            //Agregue esto
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn SchannelobjectColumn
+            {
+                get
+                {
+                    return this.columnSchannelobject;
+                }
+            }
+            //Fin
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public global::System.Data.DataColumn IpAddressColumn {
@@ -583,7 +605,18 @@ namespace PRORAM {
                     return this.columnIdChannel;
                 }
             }
-            
+
+            //Agregue esto
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn IdChannelOColumn
+            {
+                get
+                {
+                    return this.columnIdChannelO;
+                }
+            }
+            //Fin
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public global::System.Data.DataColumn FrecColumn {
@@ -591,7 +624,20 @@ namespace PRORAM {
                     return this.columnFrec;
                 }
             }
-            
+
+            //Agregue esto
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn ObjectColumn
+            {
+                get
+                {
+                    return this.columnObject;
+                }
+            }
+
+            //Fin
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public global::System.Data.DataColumn MClutterColumn {
@@ -607,16 +653,7 @@ namespace PRORAM {
                     return this.columnNorthHeiding;
                 }
             }
-
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn CheckColumn {
-                get
-                {
-                    return this.columnCheck;
-                }
-            }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public global::System.Data.DataColumn AltitudeColumn {
@@ -720,7 +757,10 @@ namespace PRORAM {
                         double Longitud, 
                         double Elevation, 
                         int IdModelo, 
-                        int SchannelFrec, 
+                        int SchannelFrec,
+                        //Agregue esto
+                        int Schannelobject,
+                        //Fin
                         string IpAddress, 
                         double InstallationAngle, 
                         int TXPower, 
@@ -728,10 +768,15 @@ namespace PRORAM {
                         System.Guid Guid, 
                         int Port, 
                         int IdChannel, 
-                        double Frec, 
+                        //Agregue esto
+                        int IdChannelO,
+                        //Fin
+                        double Frec,
+                        //Agregue esto
+                        string Object,
+                        //Fin
                         bool MClutter, 
-                        double NorthHeiding,
-                        bool Check,
+                        double NorthHeiding, 
                         double Altitude, 
                         bool IsSaveComplete, 
                         bool IsSaveCompleteT, 
@@ -752,6 +797,7 @@ namespace PRORAM {
                         Elevation,
                         IdModelo,
                         SchannelFrec,
+                        Schannelobject,
                         IpAddress,
                         InstallationAngle,
                         TXPower,
@@ -759,10 +805,15 @@ namespace PRORAM {
                         Guid,
                         Port,
                         IdChannel,
+                        //Agregue esto
+                        IdChannelO,
+                        //Fin
                         Frec,
+                        //Agregue esto
+                        Object,
+                        //Fin
                         MClutter,
                         NorthHeiding,
-                        Check,
                         Altitude,
                         IsSaveComplete,
                         IsSaveCompleteT,
@@ -809,7 +860,10 @@ namespace PRORAM {
                 this.columnLongitud = base.Columns["Longitud"];
                 this.columnElevation = base.Columns["Elevation"];
                 this.columnIdModelo = base.Columns["IdModelo"];
-                this.columnSchannelFrec = base.Columns["SchannelFrec"];
+                this.columnSchannelFrec = base.Columns["SchannelFrec"]; 
+                //Agregue esto
+                this.columnSchannelobject = base.Columns["Schannelobject"];
+                //Fin
                 this.columnIpAddress = base.Columns["IpAddress"];
                 this.columnInstallationAngle = base.Columns["InstallationAngle"];
                 this.columnTXPower = base.Columns["TXPower"];
@@ -817,10 +871,15 @@ namespace PRORAM {
                 this.columnGuid = base.Columns["Guid"];
                 this.columnPort = base.Columns["Port"];
                 this.columnIdChannel = base.Columns["IdChannel"];
+                //Agregue esto
+                this.columnIdChannelO = base.Columns["IdChannelO"];
+                //Fin
                 this.columnFrec = base.Columns["Frec"];
+                //Agregue esto
+                this.columnObject = base.Columns["Object"];
+                //Fin
                 this.columnMClutter = base.Columns["MClutter"];
                 this.columnNorthHeiding = base.Columns["NorthHeiding"];
-                this.columnCheck = base.Columns["Check"];
                 this.columnAltitude = base.Columns["Altitude"];
                 this.columnIsSaveComplete = base.Columns["IsSaveComplete"];
                 this.columnIsSaveCompleteT = base.Columns["IsSaveCompleteT"];
@@ -855,6 +914,10 @@ namespace PRORAM {
                 base.Columns.Add(this.columnIdModelo);
                 this.columnSchannelFrec = new global::System.Data.DataColumn("SchannelFrec", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnSchannelFrec);
+                //Agrege esto
+                this.columnSchannelobject = new global::System.Data.DataColumn("Schannelobject", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSchannelobject);
+                //Fin
                 this.columnIpAddress = new global::System.Data.DataColumn("IpAddress", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnIpAddress);
                 this.columnInstallationAngle = new global::System.Data.DataColumn("InstallationAngle", typeof(double), null, global::System.Data.MappingType.Element);
@@ -869,14 +932,20 @@ namespace PRORAM {
                 base.Columns.Add(this.columnPort);
                 this.columnIdChannel = new global::System.Data.DataColumn("IdChannel", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnIdChannel);
+                //Agregue esto
+                this.columnIdChannelO = new global::System.Data.DataColumn("IdChannelO", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnIdChannelO);
+                //Fin
                 this.columnFrec = new global::System.Data.DataColumn("Frec", typeof(double), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnFrec);
+                //Agregue esto
+                this.columnObject = new global::System.Data.DataColumn("Object", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnObject);
+                //Fin
                 this.columnMClutter = new global::System.Data.DataColumn("MClutter", typeof(bool), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnMClutter);
                 this.columnNorthHeiding = new global::System.Data.DataColumn("NorthHeiding", typeof(double), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnNorthHeiding);
-                this.columnCheck = new global::System.Data.DataColumn("Check", typeof(bool), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnCheck);
                 this.columnAltitude = new global::System.Data.DataColumn("Altitude", typeof(double), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnAltitude);
                 this.columnIsSaveComplete = new global::System.Data.DataColumn("IsSaveComplete", typeof(bool), null, global::System.Data.MappingType.Element);
@@ -1801,7 +1870,32 @@ namespace PRORAM {
                     this[this.tableRadarDeviceTable.SchannelFrecColumn] = value;
                 }
             }
-            
+
+
+            //Agrege esto
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public int Schannelobject
+            {
+                get
+                {
+                    try
+                    {
+                        return ((int)(this[this.tableRadarDeviceTable.SchannelobjectColumn]));
+                    }
+                    catch (global::System.InvalidCastException e)
+                    {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Schannelobject\' in table \'RadarDeviceTable\' is DBNull.", e);
+                    }
+                }
+                set
+                {
+                    this[this.tableRadarDeviceTable.SchannelobjectColumn] = value;
+                }
+            }
+
+            //Fin
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public string IpAddress {
@@ -1913,7 +2007,30 @@ namespace PRORAM {
                     this[this.tableRadarDeviceTable.IdChannelColumn] = value;
                 }
             }
-            
+
+
+            //Agregue esto
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public int IdChannelO
+            {
+                get
+                {
+                    try
+                    {
+                        return ((int)(this[this.tableRadarDeviceTable.IdChannelOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e)
+                    {
+                        throw new global::System.Data.StrongTypingException("The value for column \'IdChannelO\' in table \'RadarDeviceTable\' is DBNull.", e);
+                    }
+                }
+                set
+                {
+                    this[this.tableRadarDeviceTable.IdChannelOColumn] = value;
+                }
+            }
+            //Fin
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public double Frec {
@@ -1929,7 +2046,30 @@ namespace PRORAM {
                     this[this.tableRadarDeviceTable.FrecColumn] = value;
                 }
             }
-            
+
+            //Agregue esto
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public double Object
+            {
+                get
+                {
+                    try
+                    {
+                        return ((double)(this[this.tableRadarDeviceTable.ObjectColumn]));
+                    }
+                    catch (global::System.InvalidCastException e)
+                    {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Object\' in table \'RadarDeviceTable\' is DBNull.", e);
+                    }
+                }
+                set
+                {
+                    this[this.tableRadarDeviceTable.ObjectColumn] = value;
+                }
+            }
+            //Fin
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool MClutter {
@@ -1961,28 +2101,7 @@ namespace PRORAM {
                     this[this.tableRadarDeviceTable.NorthHeidingColumn] = value;
                 }
             }
-
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Check
-            {
-                get
-                {
-                    try
-                    {
-                        return ((bool)(this[this.tableRadarDeviceTable.CheckColumn]));
-                    }
-                    catch (global::System.InvalidCastException e)
-                    {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Check\' in table \'RadarDeviceTable\' is DBNull.", e);
-                    }
-                }
-                set
-                {
-                    this[this.tableRadarDeviceTable.CheckColumn] = value;
-                }
-            }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public double Altitude {
@@ -2214,7 +2333,24 @@ namespace PRORAM {
             public void SetSchannelFrecNull() {
                 this[this.tableRadarDeviceTable.SchannelFrecColumn] = global::System.Convert.DBNull;
             }
+
             
+            //Agregue esto
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsSchannelobjectNull()
+            {
+                return this.IsNull(this.tableRadarDeviceTable.SchannelobjectColumn);
+            }
+
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetSchannelobjectNull()
+            {
+                this[this.tableRadarDeviceTable.SchannelobjectColumn] = global::System.Convert.DBNull;
+            }
+            //Fin
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool IsIpAddressNull() {
@@ -2298,7 +2434,22 @@ namespace PRORAM {
             public void SetIdChannelNull() {
                 this[this.tableRadarDeviceTable.IdChannelColumn] = global::System.Convert.DBNull;
             }
-            
+
+            //Agregue esto
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsIdChannelONull()
+            {
+                return this.IsNull(this.tableRadarDeviceTable.IdChannelOColumn);
+            }
+
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetIdChannelONull()
+            {
+                this[this.tableRadarDeviceTable.IdChannelOColumn] = global::System.Convert.DBNull;
+            }
+            //Fin
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool IsFrecNull() {
@@ -2310,7 +2461,23 @@ namespace PRORAM {
             public void SetFrecNull() {
                 this[this.tableRadarDeviceTable.FrecColumn] = global::System.Convert.DBNull;
             }
-            
+
+            //Agregue esto
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsObjectNull()
+            {
+                return this.IsNull(this.tableRadarDeviceTable.ObjectColumn);
+            }
+
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetObjectNull()
+            {
+                this[this.tableRadarDeviceTable.ObjectColumn] = global::System.Convert.DBNull;
+            }
+            //Fin
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool IsMClutterNull() {
@@ -2328,28 +2495,14 @@ namespace PRORAM {
             public bool IsNorthHeidingNull() {
                 return this.IsNull(this.tableRadarDeviceTable.NorthHeidingColumn);
             }
-
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IsCheckNull()
-            {
-                return this.IsNull(this.tableRadarDeviceTable.CheckColumn);
-            }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void SetNorthHeidingNull() {
                 this[this.tableRadarDeviceTable.NorthHeidingColumn] = global::System.Convert.DBNull;
             }
-
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetCheckNull()
-            {
-                this[this.tableRadarDeviceTable.CheckColumn] = global::System.Convert.DBNull;
-            }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool IsAltitudeNull() {
                 return this.IsNull(this.tableRadarDeviceTable.AltitudeColumn);

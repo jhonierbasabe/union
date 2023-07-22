@@ -3,12 +3,17 @@ using System.ComponentModel;
 using Prism.Mvvm;
 using Prism.Commands;
 using System;
+using static PRORAM.Models.RadarConfigurationModel;
+using System.Windows.Media;
 
 namespace PRORAM.Models
 {
     /// <summary>
     /// Clase RadarDevicesModel, con la estructura del dispositivo radar 
     /// </summary>
+    /// 
+
+        
     public class RadarDevicesModel : BindableBase, INotifyPropertyChanged
     {
         #region private
@@ -34,18 +39,19 @@ namespace PRORAM.Models
         private bool _isSavingT;
         private bool _isSaveCompleteT;
         private double _saveProgressT;
+        private Objetivo _SchannelObject;
+        private SolidColorBrush _IdTextColor;
 
         private int _id;
         private bool _mClutter;
         private double northHeiding;
         private int _port;
-        private bool _Check;
-        private int _Orden;
         #endregion
 
         /// <summary>
         /// Propiedad Port int, Puerto de enlace del dispositivo radar
         /// </summary>
+        /// SetProperty(ref _port, value) Actualiza el valor de _port y comunica si hay un cambio en la variable
         public int Port
         {
             get { return _port; }
@@ -59,7 +65,13 @@ namespace PRORAM.Models
             get { return northHeiding; }
             set { SetProperty(ref northHeiding, value); }
         }
-       
+
+        public SolidColorBrush IdTextColor
+        {
+            get { return _IdTextColor; }
+            set { SetProperty(ref _IdTextColor, value); }
+        }
+
         /// <summary>
         /// Propiedad bool MClutter, define mapa clutter
         /// </summary>
@@ -69,16 +81,6 @@ namespace PRORAM.Models
             set { SetProperty(ref _mClutter, value); }
         }
 
-        public bool Check
-        {
-            get { return _Check; }
-            set { SetProperty(ref _Check, value); }
-        }
-        public int Orden
-        {
-            get { return _Orden; }
-            set { SetProperty(ref _Orden, value); }
-        }
         /// <summary>
         /// Propiedad Id int, identificador unico del radar
         /// </summary>
@@ -158,6 +160,7 @@ namespace PRORAM.Models
         /// <summary>
         /// Propiedad IpAddress, contendra la ip o HostName del dispositivo
         /// </summary>
+        /// [Required] indica que este parametro es obligatorio
         [Required]
         public string IpAddress
         {
@@ -199,6 +202,12 @@ namespace PRORAM.Models
         {
             get { return _SChannelFrec; }
             set { SetProperty(ref _SChannelFrec, value); }
+        }
+        
+        public Objetivo SChannelObject
+        {
+            get { return _SchannelObject; }
+            set { SetProperty(ref _SchannelObject, value); }
         }
 
         /// <summary>
@@ -249,7 +258,6 @@ namespace PRORAM.Models
         {
             get { return $"Lat: { Latitud }, Lon: { Longitud } "; }
             set { SetProperty(ref _Coordinates, value); }
-            
         }
 
         /// <summary>

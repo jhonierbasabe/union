@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:prism="http://prismlibrary.com/"   
         xmlns:local="clr-namespace:PRORAM"
+        xmlns:views="clr-namespace:PRORAM.Views"
         mc:Ignorable="d"
         prism:ViewModelLocator.AutoWireViewModel="True"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
@@ -30,11 +31,29 @@
             </Style>
         </ResourceDictionary>
     </UserControl.Resources>
-
+    
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding OnLoadScreenCommand}" />
         </i:EventTrigger>
+        <prism:InteractionRequestTrigger SourceObject="{Binding CustomPopupRequest}">
+            <prism:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True">
+                <prism:PopupWindowAction.WindowStyle>
+                    <Style TargetType="Window">
+                        <Setter Property="SizeToContent" Value="WidthAndHeight"/>
+                        <Setter Property="ResizeMode" Value="NoResize"/>
+                        <Setter Property="WindowStyle" Value="None"/>
+                        <Setter Property="AllowsTransparency" Value="True"/>
+                        <Setter Property="Background" Value="Transparent"/>
+                    </Style>
+                </prism:PopupWindowAction.WindowStyle>
+                <prism:PopupWindowAction.WindowContent>
+                    <views:CustomPopupView />
+                </prism:PopupWindowAction.WindowContent>
+            </prism:PopupWindowAction>
+        </prism:InteractionRequestTrigger>
+
+
     </i:Interaction.Triggers>
     <Border BorderBrush="DimGray" BorderThickness="1" CornerRadius="5" Background="{DynamicResource MaterialDesignPaper}">
 
@@ -140,7 +159,7 @@
                             <Label Content="Angulo con respecto al norte: "  />
                             <!--Text="{Binding RadarConfigurationMod.NorthHeiding, Mode=TwoWay,
                                             NotifyOnValidationError=true, ValidatesOnExceptions=true, UpdateSourceTrigger=PropertyChanged}"-->
-                            <TextBox  TabIndex="8"                                                                                                                   
+                            <TextBox  TabIndex="4"                                                                                                                   
                                       materialDesign:HintAssist.Hint="Ingrese el angulo con respecto al norte: "                                     
                                       Background="DimGray"  
                                       BorderBrush="DimGray"
@@ -175,8 +194,8 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <StackPanel Grid.Column="0" Margin="10,0,10,0">
-                            <Label Name="Label9"  Target="{Binding ElementName=ChannelFrec}" />
-                            <ComboBox Name="ChannelFrec" TabIndex="7"
+                            <Label Name="Label9"  Target="{Binding ElementName=ChannelFrec}" /> 
+                            <ComboBox Name="ChannelFrec" TabIndex="5"
                                                     materialDesign:HintAssist.Hint="Seleccione el canal de transmión"
                                             IsEnabled="{Binding ModeloSelected}"
                                             Background="DimGray"
@@ -185,9 +204,28 @@
                                             ItemsSource="{Binding RadarConfigurationMod.ChannelFrec}"
                                             SelectedItem="{Binding RadarConfigurationMod.SchannelFrec, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=true, ValidatesOnExceptions=true, UpdateSourceTrigger=LostFocus}"  
                                             DisplayMemberPath="DisplayName"                                                                                  
-                                            HorizontalAlignment="Stretch">
+                                            HorizontalAlignment="Stretch" >
                             </ComboBox>
                         </StackPanel>
+
+
+                        <!--Agregar tipo de objetivo-->
+                        <StackPanel Grid.Column="1" Margin="10,0,10,0">
+                            <Label Content="Tipo de objetivo "  />
+                            <ComboBox Name="ChannelObject" TabIndex="6"
+                                                    materialDesign:HintAssist.Hint="Seleccione el tipo de objetivo"
+                                            IsEnabled="{Binding ModeloSelected}"
+                                            Background="DimGray"
+                                            Width="auto"
+                                                   
+                                            ItemsSource="{Binding RadarConfigurationMod.ChannelObject}" 
+                                            SelectedItem="{Binding RadarConfigurationMod.SchannelObject, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=true, ValidatesOnExceptions=true, UpdateSourceTrigger=LostFocus}"  
+                                            DisplayMemberPath="DisplayNameO"                                                                                  
+                                            HorizontalAlignment="Stretch" >
+                            </ComboBox>
+                        </StackPanel>
+
+                        <!--Agregar tipo de objetivo-->
 
                     </Grid>
                 </ContentControl>
@@ -214,7 +252,7 @@
                             <StackPanel Grid.Row="2" Grid.Column="0">
                                 <Label Name="Label10" Target="{Binding ElementName=Latitud}" />
                                 <!--Text="{Binding RadarConfigurationMod.Latitud, Mode=TwoWay , NotifyOnValidationError=true, ValidatesOnExceptions=true, UpdateSourceTrigger=LostFocus}"-->
-                                <TextBox Name="Latitud"    TabIndex="9"        
+                                <TextBox Name="Latitud"    TabIndex="7"        
                                                    materialDesign:HintAssist.Hint="Ingrese la latitud"                                                
                                                  Background="DimGray"  
                                                  BorderBrush="DimGray"
@@ -232,7 +270,7 @@
                             <StackPanel Grid.Row="2" Grid.Column="1">
                                 <Label Name="Label11"  Target="{Binding ElementName=Longitud}" />
                                 <!--Text="{Binding RadarConfigurationMod.Longitud, Mode=TwoWay , NotifyOnValidationError=true, ValidatesOnExceptions=true, UpdateSourceTrigger=LostFocus}"-->
-                                <TextBox Name="Longitud"     TabIndex="10"   
+                                <TextBox Name="Longitud"     TabIndex="8"   
                                                    materialDesign:HintAssist.Hint="Ingrese la longitud"                                                
                                                  Background="DimGray"  
                                                  BorderBrush="DimGray"
@@ -260,7 +298,7 @@
                         Command="{Binding CancelInteractionCommand }" >Cancelar</Button>
                     <Button
                         Style="{StaticResource MaterialDesignRaisedButton}"
-                        Margin="10" Command="{Binding SubmitCommand }" Click="Button_Click">Aceptar</Button>
+                        Margin="10" Command="{Binding SubmitCommand }" Click="Button_Click" >Aceptar</Button>
                 </DockPanel>
             </ContentControl>
         </Grid>

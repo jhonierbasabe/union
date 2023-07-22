@@ -280,6 +280,59 @@ namespace PRORAM.Models.TPC
             Message[position] = EndMessage;
             return Message;
         }
+
+        public byte[] GenerateMessageTXChannelObject(byte data, byte idRadar)
+        {
+            var sizeMessage = TextResources.GetJsonContent().PRORAM_RESOURCE_FILE.ICD.Mensajes.Consulta.C_GetParametersRadar.SizeMess;
+            Message = new byte[(byte)sizeMessage];
+            this.IdMessage = (byte)TextResources.GetJsonContent().PRORAM_RESOURCE_FILE.ICD.Mensajes.Control.CC_CanalObjectRadar.IdMess;
+            this.Addressee = idRadar;
+            Information[1] = data;
+            Header[0] = this.IdMessage;
+            Header[1] = this.Source;
+            Header[2] = this.Addressee;
+
+            var position = 0;
+            for (int i = 0; i < Header.Length; i++)
+            {
+                Message[i] = Header[i];
+                position += 1;
+            }
+            for (int i = 0; i < Information.Length; i++)
+            {
+                Message[position] = Information[i];
+                position += 1;
+            }
+            Message[position] = EndMessage;
+            return Message;
+        }
+
+        public byte[] GetParametersObject(byte idRadar)
+        {
+            var sizeMessage = TextResources.GetJsonContent().PRORAM_RESOURCE_FILE.ICD.Mensajes.Consulta.C_GetParametersRadar.SizeMess;
+            Message = new byte[(byte)sizeMessage];
+            this.IdMessage = (byte)TextResources.GetJsonContent().PRORAM_RESOURCE_FILE.ICD.Mensajes.Consulta.C_GetParametersRadar.IdMess;
+            this.Addressee = idRadar;
+            Information[0] = 1;
+            Information[1] = 0;
+            Header[0] = this.IdMessage;
+            Header[1] = this.Source;
+            Header[2] = this.Addressee;
+
+            var position = 0;
+            for (int i = 0; i < Header.Length; i++)
+            {
+                Message[i] = Header[i];
+                position += 1;
+            }
+            for (int i = 0; i < Information.Length; i++)
+            {
+                Message[position] = Information[i];
+                position += 1;
+            }
+            Message[position] = EndMessage;
+            return Message;
+        }
     }
     /// <summary>
     /// Clase Utils, contiene rutinas generales que pueden ser utilizadas en toda la aplicacion
@@ -337,12 +390,16 @@ namespace PRORAM.Models.TPC
             {"RC_PotenciaRadar",50 },
             {"CC_CanalFrecRadar",35 },
             {"RC_CanalFrecRadar",51 },
+            {"CC_CanalObjectRadar",39 },
+            {"RC_CanalObjectRadar",55 },
             {"C_EliminarTraza",36 },
             {"R_EliminarTraza",52 },
             {"CC_Hora",37 },
             {"RC_Hora",53 },
             {"C_IdRadar",68 },
             {"R_IdRadar",84 } ,
+            {"C_GetParametersRadar",70 },
+            {"R_GetParametersRadar",86 } ,
             {"Rep_Plots",129 },
             {"Rep_Track",130 }, 
             {"C_GetStatus",65 },

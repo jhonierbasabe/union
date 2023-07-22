@@ -44,7 +44,7 @@ namespace PRORAM.Models.Shared
     {
         public string Action { get; set; }
         public string Target { get; set; }
-        public Plots Track { get; set; }
+        public Tracks Track { get; set; }
     }
     /// <summary>
     /// Clase ToolsSelect, modelo para los eventos de las herramientas de la vista de la consola

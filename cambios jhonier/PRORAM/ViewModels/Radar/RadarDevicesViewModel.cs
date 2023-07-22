@@ -13,13 +13,9 @@ using System.Windows.Threading;
 using Microsoft.Maps.MapControl.WPF;
 using System.Reflection;
 using System.Linq;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Input;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using System.Threading;
+using System.Windows.Media;
 
+//Archivo a completar con todo y es RadarV2
 namespace PRORAM.ViewModels
 {
     /// <summary>
@@ -29,14 +25,11 @@ namespace PRORAM.ViewModels
     {
         #region private
         IEventAggregator _ea;
-        public ObservableCollection<RadarDevicesModel> _RadarDevicesModel;
-        private ObservableCollection<RadarDevicesModel> _RadarDevicesModel2;
-        public ObservableCollection<string> ComboBoxOptions;
+        private ObservableCollection<RadarDevicesModel> _RadarDevicesModel;
         private RadarConfigurationModel _RadarConfigurationModel;
         private string _tittle;
         private bool _resultOk;
         private bool _transResult;
-        private bool _transResult2;
         private string _stateTrans;
         private string _messsageError;
         private string _action;
@@ -44,18 +37,21 @@ namespace PRORAM.ViewModels
         private IRadarDevicesNotification _notification;
         private bool _respond;
         private RadarDevicesModel _SRadarDevicesModel;
-        private string Timeejecution;
-        private string _mensaje;
-        private string _titulo;
-        private int recoridor;
-        private int radares;
-        private int contador_radiacion = 0;
-        private int contador = 0;
-        private string RadarDesconectado;
-        private bool conect = false;
-
+        private int _IdRadarConsult;
         #endregion
 
+
+
+        public int IdRadarConsult
+        {
+            get { return _IdRadarConsult; }
+            set
+            {
+                _IdRadarConsult = value;
+
+                //OnPropertyChanged(nameof(_IdRadarConsult));
+            }
+        }
         /// <summary>
         /// Propiedad Tittle, titulo
         /// </summary>
@@ -64,6 +60,7 @@ namespace PRORAM.ViewModels
             get { return _tittle; }
             set { _tittle = value; }
         }
+
         /// <summary>
         /// Propiedad SRadarDevicesModel, contiene informacion del radar seleccionado
         /// </summary>
@@ -92,32 +89,29 @@ namespace PRORAM.ViewModels
             set { SetProperty(ref _RadarDevicesModel, value); }
         }
 
-        public ObservableCollection<RadarDevicesModel> RadarDevicesMode2_
-        {
-            get { return _RadarDevicesModel2; }
-            set { SetProperty(ref _RadarDevicesModel2, value); }
-        }
 
-        
+
         /// <summary>
         /// Constructor RadarDevicesViewModel
         /// </summary>
-        /// <param name="ea">captura los eventos provenientes de la vista</param>
-        public RadarDevicesViewModel(IEventAggregator ea, object ea2, object ea1)
+        /// <param name0"ea">captura los eventos provenientes de la vista</param>
+        public RadarDevicesViewModel(IEventAggregator ea)
         {
             _ea = ea;
             _buffer = new byte[1];
             _buffer[0] = 0;
             _ea.GetEvent<MessageSentEvent<TransResult>>().Subscribe(CheckTrans);
+            _ea.GetEvent<MessageSentEvent<string>>().Subscribe(MostrarValores);
             _ea.GetEvent<MsmSentEvent>().Subscribe(MonitoringConnection);
+            
 
             _resultOk = false;
             _transResult = false;
-            _transResult2 = false;
 
             RadarDevicesModel_ = DSconnection.DSConnection.GetDevicesList();
             SRadarDevicesModel = new RadarDevicesModel() { };
-            RadarDevicesMode2_ = new ObservableCollection<RadarDevicesModel>();
+
+
             foreach (var device in RadarDevicesModel_)
             {
                 device.Elevation = 0;
@@ -129,19 +123,22 @@ namespace PRORAM.ViewModels
 
             TXPowerRequest = new InteractionRequest<IPowerRadarNotification>();
             TXPowerCommand = new DelegateCommand(RaiseTXPower);
-
             RadarConfigurationNotificationRequest = new InteractionRequest<IRadarConfigurationNotification>();
+            ParametersConsult = new InteractionRequest<IConsultParametersNotification>();
+
+
             RadarconfigurationNotificationCommand = new DelegateCommand(RaiseRadarConfigurationInteraction);
-            RadarconfigurationModo_2 = new DelegateCommand(RadarModo_2);
-            //TextChangedCommand = new DelegateCommand(ObtenerordenRadar);
+            //Nueva
+            RadarCosultCommand = new DelegateCommand(ConsultParametersRadar);
 
             RadiationCommand = new DelegateCommand(Radiation);
 
             GetIdRadarCommand = new DelegateCommand(GetIdRadar);
-            GetIdRadarCheckboxCommand = new DelegateCommand(GetIdRadarCheckbox);
 
             CancelCommand = new DelegateCommand(Cancel);
-            
+
+            Pushdevice = new DelegateCommand(PushDevice);
+
             CustomPopupRequest2 = new InteractionRequest<INotification>();
             CustomPopupRequest = new InteractionRequest<INotification>();
             CustomPopupCommand = new DelegateCommand(RaiseCustomPopup);
@@ -179,6 +176,9 @@ namespace PRORAM.ViewModels
             }
 
         }
+
+
+
         /// <summary>
         /// Metodo RaiseConfigurationChange, controla la interacción con la vista de edición de configuracion radar
         /// </summary>
@@ -199,6 +199,8 @@ namespace PRORAM.ViewModels
                     InstallationAngle = SRadarDevicesModel.InstallationAngle,
                     IpAddress = SRadarDevicesModel.IpAddress,
                     IndexChannel = SRadarDevicesModel.SChannelFrec.Id,
+                    //AgreguE
+                    IndexChannelO = SRadarDevicesModel.SChannelObject.Value,
                     Latitud = SRadarDevicesModel.Latitud,
                     Longitud = SRadarDevicesModel.Longitud,
                     Modelo = SRadarDevicesModel.IdModelo,
@@ -206,7 +208,11 @@ namespace PRORAM.ViewModels
                     RadarName = SRadarDevicesModel.RadarName,
                     TXPower = SRadarDevicesModel.TXPower,
                     SModelo = new Modelo { Id = 1, Name = "ISYS-3106" },
-                    SchannelFrec = SRadarDevicesModel.SChannelFrec
+                    SchannelFrec = SRadarDevicesModel.SChannelFrec,
+                    SchannelObject = SRadarDevicesModel.SChannelObject
+                    //Agregue esta linea
+                    
+
                 }
             }, r =>
             {
@@ -219,11 +225,14 @@ namespace PRORAM.ViewModels
                     RadarDevicesModel_[element].Longitud = r.RadarConfigurationModelI_.Longitud.Value;
                     RadarDevicesModel_[element].Elevation = r.RadarConfigurationModelI_.Elevation.Value;
                     RadarDevicesModel_[element].NorthHeiding = r.RadarConfigurationModelI_.NorthHeiding.Value;
+                    RadarDevicesModel_[element].SChannelObject = r.RadarConfigurationModelI_.SchannelObject;
+                    RadarDevicesModel_[element].SChannelFrec = r.RadarConfigurationModelI_.SchannelFrec;
+                    RadarDevicesModel_[element].InstallationAngle = Convert.ToInt32(r.RadarConfigurationModelI_.InstallationAngle);
 
 
                     UpdateDevices(RadarDevicesModel_[element]);
                     _ea.GetEvent<MessageSentEvent<object>>().Publish(new MessageConnect { GuidRadar = RadarDevicesModel_[element].GuidRadar, Actions = "UpdateConfiguration" });
-
+                    _ea.GetEvent<MsmSentEvent>().Publish(new RadarActions { Action = "UpdateConfiguration", GuidRadar = RadarDevicesModel_[element].GuidRadar, RadarDevice = SRadarDevicesModel });
                 }
             });
         }
@@ -284,11 +293,6 @@ namespace PRORAM.ViewModels
         /// </summary>
         private void Cancel()
         {
-            foreach (var item in _RadarDevicesModel)
-            {
-                DSconnection.DSConnection.ModifyCheckRadarDeviceRow(item);
-            }
-
             _notification.Confirmed = false;
             FinishInteraction?.Invoke();
         }
@@ -320,7 +324,9 @@ namespace PRORAM.ViewModels
 
 
         #region Delegados
-       
+
+
+        public InteractionRequest<IRadarConfigurationNotification> VentanaConsult { get; set; }
 
         public InteractionRequest<IPopupConfirmationnotification> ConfirmationRequest { get; set; }
         public DelegateCommand ConfirmationCommand { get; set; }
@@ -338,22 +344,27 @@ namespace PRORAM.ViewModels
         /// Propiedad RadarConfigurationNotificationRequest
         /// </summary>
         public InteractionRequest<IRadarConfigurationNotification> RadarConfigurationNotificationRequest { get; set; }
+
+        //Linea Nueva
+        public InteractionRequest<INotification> OpenPopupRequest { get; set; }
+
+
         /// <summary>
         /// Delegado RadarconfigurationNotificationCommand
         /// </summary>
         public DelegateCommand RadarconfigurationNotificationCommand { get; private set; }
-        public DelegateCommand RadarconfigurationModo_2 { get; private set; }
-        
-        //public DelegateCommand TextChangedCommand { get; private set; }
-
+        public DelegateCommand PulsaConsultar { get; private set; }
+        //Nuevo
+        public InteractionRequest<IConsultParametersNotification> ParametersConsult { get; set; }
         public InteractionRequest<IPowerRadarNotification> TXPowerRequest { get; set; }
         public InteractionRequest<INotification> CustomPopupRequest2 { get; set; }
-        
         public InteractionRequest<IChannelFrecNotification> RaiseChannelFrecRequest { get; set; }
 
         public DelegateCommand RaiseChannelFrecCommand { get; set; }
 
         public DelegateCommand TXPowerCommand { get; set; }
+
+        public DelegateCommand RadarCosultCommand { get; private set; }
 
         public DelegateCommand CustomPopupCommand { get; }
 
@@ -367,16 +378,18 @@ namespace PRORAM.ViewModels
 
         public DelegateCommand CancelCommand { get; set; }
 
+        public DelegateCommand Pushdevice { get; private set; }
+        
         public Action FinishInteraction { get; set; }
 
         public DelegateCommand GetIdRadarCommand { get; set; }
-        public DelegateCommand GetIdRadarCheckboxCommand { get; set; }
-        public InteractionRequest<IRadarConfigurationNotification> ConfigurationChangeNotificationRequest { get; set; }
-        public DelegateCommand ConfigurationChangeCommand { get; set; }
+
+        //Linea nueva
         
 
+        public InteractionRequest<IRadarConfigurationNotification> ConfigurationChangeNotificationRequest { get; set; }
+        public DelegateCommand ConfigurationChangeCommand { get; set; }
         public INotification Notification
-
         {
             get { return _notification; }
             set { SetProperty(ref _notification, (IRadarDevicesNotification)value); }
@@ -390,13 +403,37 @@ namespace PRORAM.ViewModels
         /// <summary>
         /// Metodo ConsultDevices, actualiza la propiedad RadarDevicesModel_ con los dispositivos actuales 
         /// </summary>
+        
+        //Cuando se abre la vista dispositivo radar se le asignan el color a cada radar
         private void ConsultDevices()
         {
             RadarDevicesModel_ = DSconnection.DSConnection.GetDevicesList();
 
+            foreach (RadarDevicesModel radarDevice in RadarDevicesModel_)
+            {
+                radarDevice.IdTextColor = GetColorById(Convert.ToInt32(radarDevice.Id));
+            }
         }
 
-      
+
+        public static SolidColorBrush GetColorById(int i)
+        {
+            switch (i)
+            {
+                case 1: return Brushes.DeepSkyBlue;
+                case 2: return Brushes.DarkOrange;
+                case 3: return Brushes.Gold;
+                case 4: return Brushes.LightCoral;
+                case 5: return Brushes.LimeGreen;
+                case 7: return Brushes.Orchid;
+                case 8: return Brushes.Plum;
+                case 9: return Brushes.RoyalBlue;
+                case 10: return Brushes.Tomato;
+
+                default: return Brushes.Beige;
+            }
+
+        }
 
 
         /// <summary>
@@ -480,53 +517,6 @@ namespace PRORAM.ViewModels
             }
         }
 
-        private Visibility _contentControlVisibility;
-        public Visibility ContentControlVisibility
-        {
-            get { return _contentControlVisibility; }
-            set { SetProperty(ref _contentControlVisibility, value); }
-        } 
-        private void GetIdRadarCheckbox()
-        {
-            RadarDevicesModel radarToUpdate = RadarDevicesModel_.Where<RadarDevicesModel>(r => r.Id == SRadarDevicesModel.Id).FirstOrDefault();
-            if (radarToUpdate != null)
-            {
-                radarToUpdate.Check = SRadarDevicesModel.Check;
-            }
-
-            if (SRadarDevicesModel.Check == true)
-            {
-                RadarDevicesModel radarToAdd = RadarDevicesMode2_.Where<RadarDevicesModel>(r => r.Id == SRadarDevicesModel.Id).FirstOrDefault();
-                if (radarToAdd == null)
-                {
-                    RadarDevicesMode2_.Add(SRadarDevicesModel);
-
-                }
-            }
-            else
-            {
-                RadarDevicesModel radarToRemove = RadarDevicesMode2_.Where<RadarDevicesModel>(r => r.Id == SRadarDevicesModel.Id).FirstOrDefault();
-                if (radarToRemove != null)
-                {
-                    RadarDevicesMode2_.Remove(radarToRemove);
-                }
-            }
-            ContentControlVisibility = RadarDevicesMode2_.Count > 0 ? Visibility.Visible : Visibility.Collapsed;
-            ComboBoxOptions = new ObservableCollection<string>(RadarDevicesMode2_.Select(r => r.RadarName));
-            
-        }
-
-
-
-        public string TiempoEjecucion
-        {
-            get { return Timeejecution; }
-            set
-            {
-                Timeejecution = value;
-                
-            }
-        }
         /// <summary>
         /// Metodo GetIdRadar: controla la animacion del boton y el envio del comando get id radar
         /// </summary>
@@ -540,16 +530,23 @@ namespace PRORAM.ViewModels
                 SRadarDevicesModel.Radiation = false;
                 SRadarDevicesModel.SaveProgressT = 0;
                 SRadarDevicesModel.SaveProgress = 0;
+
+
                 var messagesGenerator = new MessagesGenerator(1);
                 var messageToSend = messagesGenerator.GenerateMessageEncender(0, 0);
                 ComunicationToGeoLayer(messageToSend, SRadarDevicesModel.GuidRadar, "Disconnected");
                 UpdateDevices(SRadarDevicesModel);
                 return;
             }
+
             if (SRadarDevicesModel.SaveProgress != 0) return;
-            SRadarDevicesModel.IsSaving = true;
-            ComunicationToGeoLayer();
+
             var started = DateTime.Now;
+
+            SRadarDevicesModel.IsSaving = true;
+
+            ComunicationToGeoLayer();
+
             new DispatcherTimer(
                 TimeSpan.FromMilliseconds(50),
                 DispatcherPriority.Normal,
@@ -608,9 +605,13 @@ namespace PRORAM.ViewModels
                     }
 
                 }), Dispatcher.CurrentDispatcher);
-
-
         }
+
+     
+
+
+
+
 
         /// <summary>
         /// Metodo UpdateDevices, metodo que dispara el evento de actualizar el estado de un radar
@@ -663,7 +664,6 @@ namespace PRORAM.ViewModels
             _messsageError = result.Error;
             _action = result.Action;
             _resultOk = true;
-            
 
         }
 
@@ -674,10 +674,48 @@ namespace PRORAM.ViewModels
             CustomPopupRequest.Raise(new Notification { Title = titulo, Content = mensaje }, r => Tittle = "PRORAM Consola de monitoreo");
         }
 
+
+        private void ConsultParametersRadar()
+        {
+            if ((IdRadarConsult <= RadarDevicesModel_.Count) && (IdRadarConsult > 0))
+            {
+                if (RadarDevicesModel_[IdRadarConsult - 1].StateConnection == true)
+                {
+                    ParametersRadar(IdRadarConsult - 1);                 
+                }
+
+                else
+                {
+                    ParametersRadar(IdRadarConsult - 1);
+                    CustomPopupRequest2.Raise(new Notification { Title = "Notificación", Content = new { Text = "Encienda el dispositivo antes de consultar", Show = true, ShowAlert = true } }, r => Tittle = "PRORAM Consola de monitoreo");
+                    return;
+                }
+
+            }
+            else
+            {
+                CustomPopupRequest2.Raise(new Notification { Title = "Notificación", Content = new { Text = "La id no corresponde a ningun radar creado", Show = true, ShowAlert = true } }, r => Tittle = "PRORAM Consola de monitoreo");
+                return;
+            }
+        }
+
+        private void MostrarValores(string obj)
+        {
+            string[] substrings = obj.Split(';');
+            string Temperatura_alimentacionS = substrings[0].Trim(); 
+            string Temperatura_procesadorS = substrings[1].Trim();
+            string Temperatura_antenaS = substrings[2].Trim();
+            float Temperatura_alimentacion = float.Parse(Temperatura_alimentacionS);
+            float Temperatura_procesador = float.Parse(Temperatura_procesadorS);
+            float Temperatura_antena = float.Parse(Temperatura_antenaS);
+
+            ParametersConsult.Raise(new ConsultParametersNotification { Title = "Consultar Parametros", TemperaturaAlimentacion = Temperatura_alimentacion, TemperaturaProcesador = Temperatura_procesador, TemperaturaAntena = Temperatura_antena }, r => Tittle = "PRORAM Consola de monitoreo");
+        }
+
         /// <summary>
         /// Metodo RadarconfigurationNotificationCommand, controla el llamado de la vista modal RadarConfiguration
         /// </summary>
-        public void RaiseRadarConfigurationInteraction()
+        private void RaiseRadarConfigurationInteraction()
         {
             var count = RadarDevicesModel_.Count;
             var idRadar = count + 1;
@@ -698,225 +736,22 @@ namespace PRORAM.ViewModels
             }
         }
 
-        private void RadarModo_2()
+
+
+        private void FuncionConsu()
         {
-            
-            if (Timeejecution == null)
-            {
-                CustomPopupRequest2.Raise(new Notification { Title = "Notificación", Content = new { Text = "Se debe ingregar el tiempo de operacion entre radares", Show = true, ShowAlert = true } }, r => Tittle = "PRORAM Consola de monitoreo");
-                return;
-            }
-            foreach (var radarDevice in RadarDevicesMode2_)
-            {
-                if (radarDevice.Orden == 0)
-                {
-                    CustomPopupRequest2.Raise(new Notification { Title = "Notificación", Content = new { Text = "Se debe ingregar un orden para el radar" + radarDevice.RadarName, Show = true, ShowAlert = true } }, r => Tittle = "PRORAM Consola de monitoreo");
-                    return;
-                }
-                if (radarDevice.Orden > RadarDevicesModel_.Count)
-                {
-                    CustomPopupRequest2.Raise(new Notification { Title = "Notificación", Content = new { Text = "El radar " + radarDevice.RadarName + " tiene un valor de orden superior a la cantidad de radares agregados", Show = true, ShowAlert = true } }, r => Tittle = "PRORAM Consola de monitoreo");
-                    return;
-                }
-                if (radarDevice.Orden < 0)
-                {
-                    CustomPopupRequest2.Raise(new Notification { Title = "Notificación", Content = new { Text = "El radar " + radarDevice.RadarName + " tiene un valor de orden inferior a la cantidad minima de radares agregados", Show = true, ShowAlert = true } }, r => Tittle = "PRORAM Consola de monitoreo");
-                    return;
-                }
+            // Crear una notificación para la ventana emergente
+            var titulo = "Notificación";
+            var mensaje = "Encienda el dispositivo antes de encender la radiación";
+            OpenPopupRequest.Raise(new Notification { Title = titulo, Content = mensaje }, r => Tittle = "PRORAM Consola de monitoreo");
+            //var notification = new Notification { Title = "Título de la ventana emergente", Content = "Contenido de la ventana emergente" };
 
-            }
-
-            foreach (var radarDevice in RadarDevicesMode2_)
-            {
-                recoridor = radarDevice.Orden;
-                radares = 0;
-                foreach (var radarDevice_2 in RadarDevicesMode2_)
-                {
-                    if (recoridor == radarDevice_2.Orden)
-                    {
-                        radares++;
-                    }
-                    if (radares > 1)
-                    {
-                        CustomPopupRequest2.Raise(new Notification { Title = "Notificación", Content = new { Text = "El radar" + radarDevice.RadarName + " tiene el mismo orden que el radar " + radarDevice_2.RadarName, Show = true, ShowAlert = true } }, r => Tittle = "PRORAM Consola de monitoreo");
-                        return;
-                    }
-                }
-            }
-            conect = !conect;
-            conectar_radar();
+            // Activar la solicitud de apertura de la ventana emergente
+            //OpenPopupRequest.Raise(notification);
         }
 
 
-        public void conectar_radar()
-        {
-            
-            var listaOrdenada = RadarDevicesMode2_.OrderBy(radarDevice => radarDevice.Orden).ToList();
-            if (contador_radiacion < RadarDevicesMode2_.Count)
-            {
-                Console.WriteLine(contador_radiacion);
-                var radar = RadarDevicesModel_.Where(r => r.Id == listaOrdenada[contador_radiacion].Id).FirstOrDefault();
-                if (radar != null)
-                {
-                    SRadarDevicesModel = radar;
-                    if (conect == true)
-                    {
-                        SRadarDevicesModel.IsSaving = true;
-                        ComunicationToGeoLayer();
-                        if (_transResult == false)
-                        {
-                            SRadarDevicesModel.StateConnection = false;
-                            SRadarDevicesModel.Radiation = false;
-                            SRadarDevicesModel.IsSaveComplete = false;
-                            SRadarDevicesModel.SaveProgress = 0;
-                            UpdateDevices(SRadarDevicesModel);
 
-                        }
-                        if (_transResult == true && _stateTrans == "Success")
-                        {
-                            var header = Convert.ToInt32(ListMessages.headerMessages["R_IdRadar"]);
-                            var buffer = Convert.ToInt32(_buffer[0]);
-
-                            if (_buffer[4] != 0 && header == buffer)
-                            {
-                                SRadarDevicesModel.StateConnection = true;
-                                SRadarDevicesModel.IsSaveComplete = true;
-                                SRadarDevicesModel.IdRadar = _buffer[4];
-                                SetIdRadar(_buffer[4]);
-                                Console.WriteLine("El id de radar es " + _buffer[4]);
-                                UpdateDevices(SRadarDevicesModel);
-                                /// iradiar
-                                /// 
-                                if (SRadarDevicesModel.StateConnection == true)
-                                {
-                                    var started = DateTime.Now;
-
-                                    SRadarDevicesModel.IsSavingT = true;
-
-                                    var messagesGenerator = new MessagesGenerator(1);
-                                    var messageToSend = messagesGenerator.GenerateMessageEncender(1, SRadarDevicesModel.IdRadar);
-
-                                    ComunicationToGeoLayer(messageToSend, SRadarDevicesModel.GuidRadar, "TurnOnRadiation");
-                                }
-                                if (_transResult == false)
-                                {
-                                    SRadarDevicesModel.Radiation = false;
-                                    SRadarDevicesModel.IsSaveCompleteT = false;
-                                    UpdateDevices(SRadarDevicesModel);
-                                }
-                                if (_transResult == true && _action == "RadiationDone")
-                                {
-                                    SRadarDevicesModel.Radiation = true;
-                                    SRadarDevicesModel.IsSaveCompleteT = true;
-                                    UpdateDevices(SRadarDevicesModel);
-                                }
-
-                                SRadarDevicesModel.IsSavingT = false;
-                                SRadarDevicesModel.SaveProgressT = 0;
-                                UpdateDevices(SRadarDevicesModel);
-                                double tiempo = (double.Parse(TiempoEjecucion))*1000;
-                                new DispatcherTimer(
-                                    TimeSpan.FromMilliseconds(tiempo),
-                                    DispatcherPriority.Normal,
-                                    new EventHandler((o, e) =>
-                                    {
-                                        // dejar de irradiar 
-                                        Console.WriteLine("dejar de irradiar");
-                                        if (conect == true)
-                                        {
-                                            SRadarDevicesModel.IsSaveCompleteT = false;
-                                            SRadarDevicesModel.SaveProgressT = 0;
-                                            SRadarDevicesModel.Radiation = false;
-
-                                            var messagesGenerator = new MessagesGenerator(1);
-                                            var messageToSend = messagesGenerator.GenerateMessageEncender(0, SRadarDevicesModel.IdRadar);
-                                            ComunicationToGeoLayer(messageToSend, SRadarDevicesModel.GuidRadar, "TurnOffRadiation");
-                                            UpdateDevices(SRadarDevicesModel);
-
-                                            Console.WriteLine("desconectar");
-                                            if (SRadarDevicesModel.IsSaveComplete == true)
-                                            {
-                                                SRadarDevicesModel.IsSaveComplete = false;
-                                                SRadarDevicesModel.StateConnection = false;
-                                                SRadarDevicesModel.IsSaveCompleteT = false;
-                                                SRadarDevicesModel.Radiation = false;
-                                                SRadarDevicesModel.SaveProgressT = 0;
-                                                SRadarDevicesModel.SaveProgress = 0;
-                                                var MessagesGenerator = new MessagesGenerator(1);
-                                                var MessageToSend = MessagesGenerator.GenerateMessageEncender(0, 0);
-                                                ComunicationToGeoLayer(MessageToSend, SRadarDevicesModel.GuidRadar, "Disconnected");
-                                                UpdateDevices(SRadarDevicesModel);
-                                                    
-                                            }
-                                            contador_radiacion++;
-                                            if (contador_radiacion >= RadarDevicesMode2_.Count)
-                                            {
-                                                contador_radiacion = 0;
-                                                Console.WriteLine("ciclo");
-                                                    
-                                            }
-                                            ((DispatcherTimer)o).Stop();
-                                            
-                                            conectar_radar();
-                                            
-
-
-                                        }
-
-                                        else
-                                        {
-
-                                            ((DispatcherTimer)o).Stop();
-                                            Console.WriteLine("cerro ciclo");
-                                            SRadarDevicesModel.IsSaveComplete = true;
-                                            Radiation();
-                                            SRadarDevicesModel.IsSaveComplete = true;
-                                            GetIdRadar();
-
-
-
-                                        }
-                                    }), Dispatcher.CurrentDispatcher);
-
-                            }
-                            else
-                            {
-                                SRadarDevicesModel.IsSaveComplete = false;
-                                SRadarDevicesModel.Radiation = false;
-                                SRadarDevicesModel.StateConnection = false;
-                                UpdateDevices(SRadarDevicesModel);
-
-                            }
-
-                        }
-
-                        SRadarDevicesModel.IsSaving = false;
-                        UpdateDevices(SRadarDevicesModel);
-
-                        /*if (_transResult == false)
-                        {
-                            CustomPopupRequest2.Raise(new Notification { Title = "Notificación", Content = new { Text = _messsageError + SRadarDevicesModel.RadarName, Show = true, ShowAlert = true } }, r => Tittle = "PRORAM Consola de monitoreo");
-                        }*/
-
-                    }
-                    else
-                    {
-                        return;
-
-                    }
-                        
-
-                }
-
-
-
-
-
-            }
-
-
-            
-        }
 
         /// <summary>
         /// Metodo ComunicationToGeoLayer, genera un evento que sera controlado en la vista GeoLayerViewModel
@@ -926,8 +761,6 @@ namespace PRORAM.ViewModels
             _ea.GetEvent<MessageSentEvent<object>>().Publish(SRadarDevicesModel);
 
         }
-
-       
         /// <summary>
         /// Metodo que envia el id que retorna el radar 
         /// </summary>
@@ -938,8 +771,13 @@ namespace PRORAM.ViewModels
             _ea.GetEvent<MsmSentEvent>().Publish(radarActions);
         }
 
-       
-        
+
+        private void ParametersRadar(int idR)
+        {
+            _ea.GetEvent<MessageSentEvent<int>>().Publish(idR);
+
+        }
+
         /// <summary>
         /// Metodo ComunicationToGeoLayer, genera un evento que sera controlado en la vista GeoLayerViewModel
         /// </summary>
@@ -953,10 +791,6 @@ namespace PRORAM.ViewModels
         /// <summary>
         /// Metodo PushDevice, agrega otro dispositivo a la collección de radares
         /// </summary>
-        /// 
-
-      
-        
         private void PushDevice()
         {
 
@@ -964,6 +798,7 @@ namespace PRORAM.ViewModels
             {
                 Port = 7023,
                 Id = RadarConfigurationModel_.Id,
+                IdTextColor = RadarConfigurationModel_.IdTextColor,
                 Latitud = RadarConfigurationModel_.Latitud.Value,
                 Longitud = RadarConfigurationModel_.Longitud.Value,
                 Elevation = RadarConfigurationModel_.Elevation.Value,
@@ -973,6 +808,7 @@ namespace PRORAM.ViewModels
                 TXPower = RadarConfigurationModel_.TXPower.Value,
                 InstallationAngle = RadarConfigurationModel_.InstallationAngle.Value,
                 SChannelFrec = RadarConfigurationModel_.SchannelFrec,
+                SChannelObject = RadarConfigurationModel_.SchannelObject,
                 IdModelo = RadarConfigurationModel_.Modelo,
                 StateConnection = false,
                 Radiation = false,
@@ -995,30 +831,5 @@ namespace PRORAM.ViewModels
             });
         }
         #endregion
-
-       
-       
-        private bool _modo;
-
-        [Obsolete]
-        public bool Modo
-        {
-            get { return _modo; }
-            set
-            {
-                _modo = value;
-                Console.WriteLine("Modo seleccionado: " + value);
-                OnPropertyChanged(nameof(Modo));
-            }
-        }
-
-        public object TiempoOperacio { get; private set; }
     }
-
-    
-
-
-
-
-
 }

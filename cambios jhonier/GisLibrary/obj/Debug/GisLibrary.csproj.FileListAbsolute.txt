@@ -29,81 +29,34 @@ C:\Users\jsant\OneDrive\Escritorio\Radar\Consola-main\proyect_V2\GisLibrary\obj\
 C:\Users\jsant\OneDrive\Escritorio\Radar\Consola-main\proyect_V2\GisLibrary\obj\Debug\GisLibrary.csproj.CopyComplete
 C:\Users\jsant\OneDrive\Escritorio\Radar\Consola-main\proyect_V2\GisLibrary\obj\Debug\GisLibrary.dll
 C:\Users\jsant\OneDrive\Escritorio\Radar\Consola-main\proyect_V2\GisLibrary\obj\Debug\GisLibrary.pdb
-E:\radar PPR\proyect_V2\GisLibrary\bin\Debug\GisLibrary.dll.config
-E:\radar PPR\proyect_V2\GisLibrary\bin\Debug\GisLibrary.dll
-E:\radar PPR\proyect_V2\GisLibrary\bin\Debug\GisLibrary.pdb
-E:\radar PPR\proyect_V2\GisLibrary\bin\Debug\CommonServiceLocator.dll
-E:\radar PPR\proyect_V2\GisLibrary\bin\Debug\CoordinateSharp.dll
-E:\radar PPR\proyect_V2\GisLibrary\bin\Debug\DotSpatial.Data.dll
-E:\radar PPR\proyect_V2\GisLibrary\bin\Debug\DotSpatial.GeoAPI.dll
-E:\radar PPR\proyect_V2\GisLibrary\bin\Debug\DotSpatial.Mono.dll
-E:\radar PPR\proyect_V2\GisLibrary\bin\Debug\DotSpatial.Projections.dll
-E:\radar PPR\proyect_V2\GisLibrary\bin\Debug\DotSpatial.Serialization.dll
-E:\radar PPR\proyect_V2\GisLibrary\bin\Debug\DotSpatial.Topology.dll
-E:\radar PPR\proyect_V2\GisLibrary\bin\Debug\GeoAPI.CoordinateSystems.dll
-E:\radar PPR\proyect_V2\GisLibrary\bin\Debug\GeoAPI.dll
-E:\radar PPR\proyect_V2\GisLibrary\bin\Debug\Prism.dll
-E:\radar PPR\proyect_V2\GisLibrary\bin\Debug\Prism.Wpf.dll
-E:\radar PPR\proyect_V2\GisLibrary\bin\Debug\Proj4Net.dll
-E:\radar PPR\proyect_V2\GisLibrary\bin\Debug\ProjNET.dll
-E:\radar PPR\proyect_V2\GisLibrary\bin\Debug\System.Windows.Interactivity.dll
-E:\radar PPR\proyect_V2\GisLibrary\bin\Debug\CoordinateSharp.xml
-E:\radar PPR\proyect_V2\GisLibrary\bin\Debug\DotSpatial.Data.xml
-E:\radar PPR\proyect_V2\GisLibrary\bin\Debug\DotSpatial.GeoAPI.xml
-E:\radar PPR\proyect_V2\GisLibrary\bin\Debug\DotSpatial.Mono.xml
-E:\radar PPR\proyect_V2\GisLibrary\bin\Debug\DotSpatial.Projections.xml
-E:\radar PPR\proyect_V2\GisLibrary\bin\Debug\DotSpatial.Serialization.xml
-E:\radar PPR\proyect_V2\GisLibrary\bin\Debug\DotSpatial.Topology.xml
-E:\radar PPR\proyect_V2\GisLibrary\bin\Debug\GeoAPI.pdb
-E:\radar PPR\proyect_V2\GisLibrary\bin\Debug\GeoAPI.xml
-E:\radar PPR\proyect_V2\GisLibrary\bin\Debug\GeoAPI.CoordinateSystems.pdb
-E:\radar PPR\proyect_V2\GisLibrary\bin\Debug\GeoAPI.CoordinateSystems.xml
-E:\radar PPR\proyect_V2\GisLibrary\bin\Debug\Prism.pdb
-E:\radar PPR\proyect_V2\GisLibrary\bin\Debug\Prism.xml
-E:\radar PPR\proyect_V2\GisLibrary\bin\Debug\Prism.Wpf.pdb
-E:\radar PPR\proyect_V2\GisLibrary\bin\Debug\Prism.Wpf.xml
-E:\radar PPR\proyect_V2\GisLibrary\bin\Debug\ProjNET.xml
-E:\radar PPR\proyect_V2\GisLibrary\obj\Debug\GisLibrary.csproj.CoreCompileInputs.cache
-E:\radar PPR\proyect_V2\GisLibrary\obj\Debug\GisLibrary.csproj.CopyComplete
-E:\radar PPR\proyect_V2\GisLibrary\obj\Debug\GisLibrary.dll
-E:\radar PPR\proyect_V2\GisLibrary\obj\Debug\GisLibrary.pdb
-E:\radar PPR\proyect_V2\GisLibrary\obj\Debug\GisLibrary.csproj.AssemblyReference.cache
-E:\radar PPR\version 2\proyect_V1\GisLibrary\bin\Debug\GisLibrary.dll.config
-E:\radar PPR\version 2\proyect_V1\GisLibrary\bin\Debug\GisLibrary.dll
-E:\radar PPR\version 2\proyect_V1\GisLibrary\bin\Debug\GisLibrary.pdb
-E:\radar PPR\version 2\proyect_V1\GisLibrary\bin\Debug\CommonServiceLocator.dll
-E:\radar PPR\version 2\proyect_V1\GisLibrary\bin\Debug\CoordinateSharp.dll
-E:\radar PPR\version 2\proyect_V1\GisLibrary\bin\Debug\DotSpatial.Data.dll
-E:\radar PPR\version 2\proyect_V1\GisLibrary\bin\Debug\DotSpatial.GeoAPI.dll
-E:\radar PPR\version 2\proyect_V1\GisLibrary\bin\Debug\DotSpatial.Mono.dll
-E:\radar PPR\version 2\proyect_V1\GisLibrary\bin\Debug\DotSpatial.Projections.dll
-E:\radar PPR\version 2\proyect_V1\GisLibrary\bin\Debug\DotSpatial.Serialization.dll
-E:\radar PPR\version 2\proyect_V1\GisLibrary\bin\Debug\DotSpatial.Topology.dll
-E:\radar PPR\version 2\proyect_V1\GisLibrary\bin\Debug\GeoAPI.CoordinateSystems.dll
-E:\radar PPR\version 2\proyect_V1\GisLibrary\bin\Debug\GeoAPI.dll
-E:\radar PPR\version 2\proyect_V1\GisLibrary\bin\Debug\Prism.dll
-E:\radar PPR\version 2\proyect_V1\GisLibrary\bin\Debug\Prism.Wpf.dll
-E:\radar PPR\version 2\proyect_V1\GisLibrary\bin\Debug\Proj4Net.dll
-E:\radar PPR\version 2\proyect_V1\GisLibrary\bin\Debug\ProjNET.dll
-E:\radar PPR\version 2\proyect_V1\GisLibrary\bin\Debug\System.Windows.Interactivity.dll
-E:\radar PPR\version 2\proyect_V1\GisLibrary\bin\Debug\CoordinateSharp.xml
-E:\radar PPR\version 2\proyect_V1\GisLibrary\bin\Debug\DotSpatial.Data.xml
-E:\radar PPR\version 2\proyect_V1\GisLibrary\bin\Debug\DotSpatial.GeoAPI.xml
-E:\radar PPR\version 2\proyect_V1\GisLibrary\bin\Debug\DotSpatial.Mono.xml
-E:\radar PPR\version 2\proyect_V1\GisLibrary\bin\Debug\DotSpatial.Projections.xml
-E:\radar PPR\version 2\proyect_V1\GisLibrary\bin\Debug\DotSpatial.Serialization.xml
-E:\radar PPR\version 2\proyect_V1\GisLibrary\bin\Debug\DotSpatial.Topology.xml
-E:\radar PPR\version 2\proyect_V1\GisLibrary\bin\Debug\GeoAPI.pdb
-E:\radar PPR\version 2\proyect_V1\GisLibrary\bin\Debug\GeoAPI.xml
-E:\radar PPR\version 2\proyect_V1\GisLibrary\bin\Debug\GeoAPI.CoordinateSystems.pdb
-E:\radar PPR\version 2\proyect_V1\GisLibrary\bin\Debug\GeoAPI.CoordinateSystems.xml
-E:\radar PPR\version 2\proyect_V1\GisLibrary\bin\Debug\Prism.pdb
-E:\radar PPR\version 2\proyect_V1\GisLibrary\bin\Debug\Prism.xml
-E:\radar PPR\version 2\proyect_V1\GisLibrary\bin\Debug\Prism.Wpf.pdb
-E:\radar PPR\version 2\proyect_V1\GisLibrary\bin\Debug\Prism.Wpf.xml
-E:\radar PPR\version 2\proyect_V1\GisLibrary\bin\Debug\ProjNET.xml
-E:\radar PPR\version 2\proyect_V1\GisLibrary\obj\Debug\GisLibrary.csproj.AssemblyReference.cache
-E:\radar PPR\version 2\proyect_V1\GisLibrary\obj\Debug\GisLibrary.csproj.CoreCompileInputs.cache
-E:\radar PPR\version 2\proyect_V1\GisLibrary\obj\Debug\GisLibrary.csproj.CopyComplete
-E:\radar PPR\version 2\proyect_V1\GisLibrary\obj\Debug\GisLibrary.dll
-E:\radar PPR\version 2\proyect_V1\GisLibrary\obj\Debug\GisLibrary.pdb
+Z:\Proyectos\jhonier\entregas_codaltec\radar ppr\proyect_V2\GisLibrary\bin\Debug\GisLibrary.dll.config
+Z:\Proyectos\jhonier\entregas_codaltec\radar ppr\proyect_V2\GisLibrary\bin\Debug\GisLibrary.dll
+Z:\Proyectos\jhonier\entregas_codaltec\radar ppr\proyect_V2\GisLibrary\bin\Debug\GisLibrary.pdb
+Z:\Proyectos\jhonier\entregas_codaltec\radar ppr\proyect_V2\GisLibrary\bin\Debug\CoordinateSharp.dll
+Z:\Proyectos\jhonier\entregas_codaltec\radar ppr\proyect_V2\GisLibrary\bin\Debug\DotSpatial.Data.dll
+Z:\Proyectos\jhonier\entregas_codaltec\radar ppr\proyect_V2\GisLibrary\bin\Debug\DotSpatial.GeoAPI.dll
+Z:\Proyectos\jhonier\entregas_codaltec\radar ppr\proyect_V2\GisLibrary\bin\Debug\DotSpatial.Mono.dll
+Z:\Proyectos\jhonier\entregas_codaltec\radar ppr\proyect_V2\GisLibrary\bin\Debug\DotSpatial.Projections.dll
+Z:\Proyectos\jhonier\entregas_codaltec\radar ppr\proyect_V2\GisLibrary\bin\Debug\DotSpatial.Serialization.dll
+Z:\Proyectos\jhonier\entregas_codaltec\radar ppr\proyect_V2\GisLibrary\bin\Debug\DotSpatial.Topology.dll
+Z:\Proyectos\jhonier\entregas_codaltec\radar ppr\proyect_V2\GisLibrary\bin\Debug\GeoAPI.CoordinateSystems.dll
+Z:\Proyectos\jhonier\entregas_codaltec\radar ppr\proyect_V2\GisLibrary\bin\Debug\GeoAPI.dll
+Z:\Proyectos\jhonier\entregas_codaltec\radar ppr\proyect_V2\GisLibrary\bin\Debug\Proj4Net.dll
+Z:\Proyectos\jhonier\entregas_codaltec\radar ppr\proyect_V2\GisLibrary\bin\Debug\ProjNET.dll
+Z:\Proyectos\jhonier\entregas_codaltec\radar ppr\proyect_V2\GisLibrary\bin\Debug\CoordinateSharp.xml
+Z:\Proyectos\jhonier\entregas_codaltec\radar ppr\proyect_V2\GisLibrary\bin\Debug\DotSpatial.Data.xml
+Z:\Proyectos\jhonier\entregas_codaltec\radar ppr\proyect_V2\GisLibrary\bin\Debug\DotSpatial.GeoAPI.xml
+Z:\Proyectos\jhonier\entregas_codaltec\radar ppr\proyect_V2\GisLibrary\bin\Debug\DotSpatial.Mono.xml
+Z:\Proyectos\jhonier\entregas_codaltec\radar ppr\proyect_V2\GisLibrary\bin\Debug\DotSpatial.Projections.xml
+Z:\Proyectos\jhonier\entregas_codaltec\radar ppr\proyect_V2\GisLibrary\bin\Debug\DotSpatial.Serialization.xml
+Z:\Proyectos\jhonier\entregas_codaltec\radar ppr\proyect_V2\GisLibrary\bin\Debug\DotSpatial.Topology.xml
+Z:\Proyectos\jhonier\entregas_codaltec\radar ppr\proyect_V2\GisLibrary\bin\Debug\GeoAPI.pdb
+Z:\Proyectos\jhonier\entregas_codaltec\radar ppr\proyect_V2\GisLibrary\bin\Debug\GeoAPI.xml
+Z:\Proyectos\jhonier\entregas_codaltec\radar ppr\proyect_V2\GisLibrary\bin\Debug\GeoAPI.CoordinateSystems.pdb
+Z:\Proyectos\jhonier\entregas_codaltec\radar ppr\proyect_V2\GisLibrary\bin\Debug\GeoAPI.CoordinateSystems.xml
+Z:\Proyectos\jhonier\entregas_codaltec\radar ppr\proyect_V2\GisLibrary\bin\Debug\ProjNET.xml
+Z:\Proyectos\jhonier\entregas_codaltec\radar ppr\proyect_V2\GisLibrary\obj\Debug\GisLibrary.csprojAssemblyReference.cache
+Z:\Proyectos\jhonier\entregas_codaltec\radar ppr\proyect_V2\GisLibrary\obj\Debug\GisLibrary.csproj.CoreCompileInputs.cache
+Z:\Proyectos\jhonier\entregas_codaltec\radar ppr\proyect_V2\GisLibrary\obj\Debug\GisLibrary.csproj.CopyComplete
+Z:\Proyectos\jhonier\entregas_codaltec\radar ppr\proyect_V2\GisLibrary\obj\Debug\GisLibrary.dll
+Z:\Proyectos\jhonier\entregas_codaltec\radar ppr\proyect_V2\GisLibrary\obj\Debug\GisLibrary.pdb

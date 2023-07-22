@@ -17,24 +17,24 @@ namespace PRORAM.ViewModels
     /// <summary>
     /// Clase TargetPanelViewModel, controla la interación con la vista TargetPanelView
     /// </summary>
-    public class TargetPanelViewModel : BindableBase
+    public class TargetPanelViewModel: BindableBase
     {
         #region private
-        private ObservableCollection<Plots> _trackList;
+        private ObservableCollection<Tracks> _trackList;        
         private IEventAggregator _ea;
         private IRegionManager _regionManager;
         private bool _expander;
 
-        private Plots _strackList;
+        private Tracks _strackList;
         #endregion
 
         /// <summary>
         /// Propiedad STrackList, contiene la información de un track seleccionado
         /// </summary>
-        public Plots STrackList
+        public Tracks STrackList
         {
             get { return _strackList; }
-            set { SetProperty(ref _strackList, value); }
+            set {SetProperty(ref _strackList, value); }
         }
 
         /// <summary>
@@ -43,15 +43,15 @@ namespace PRORAM.ViewModels
         public bool Expander
         {
             get { return _expander; }
-            set { SetProperty(ref _expander, value); }
+            set {SetProperty(ref _expander, value); }
         }
         /// <summary>
         /// Propiedad TrackList, colección de tracks disponibles
         /// </summary>
-        public ObservableCollection<Plots> TrackList
+        public ObservableCollection<Tracks> TrackList
         {
             get { return _trackList; }
-            set { SetProperty(ref _trackList, value); }
+            set {SetProperty(ref _trackList, value); }
         }
 
         public DelegateCommand DeleteTrackCommand { get; set; }
@@ -66,8 +66,8 @@ namespace PRORAM.ViewModels
             Expander = false;
             _ea = ea;
             _regionManager = regionManager;
-            TrackList = new ObservableCollection<Plots>();
-            _ea.GetEvent<EventPlots>().Subscribe(ShowDetail);
+            TrackList = new ObservableCollection<Tracks>();
+            _ea.GetEvent<EventPanel>().Subscribe(ShowDetail);
             DeleteTrackCommand = new DelegateCommand(DeleteTrack);
         }
         /// <summary>
@@ -75,23 +75,53 @@ namespace PRORAM.ViewModels
         /// </summary>
         private void DeleteTrack()
         {
-            
-            
-            _ea.GetEvent<EventTargets>().Publish(new TargetEvents { Track = STrackList, Action = "Delete", Target = "Track" });
+                        
+            _ea.GetEvent<EventTargets>().Publish(new TargetEvents { Track = STrackList, Action = "Delete", Target = "Track"});
             App.Current.Dispatcher.Invoke(delegate
             {
-                TrackList.Remove(TrackList.Where(x => x.RadarId == STrackList.RadarId && x.Azimuth == STrackList.Azimuth).FirstOrDefault());
+                TrackList.Remove(TrackList.Where(x => x.Id == STrackList.Id && x.RadarOrigin == STrackList.RadarOrigin).FirstOrDefault());
             });
         }
         /// <summary>
         /// Metodo ShowDetail, muestra el panel de blancos        
         /// </summary>
         /// <param name="obj"></param>
-        private void ShowDetail(Plots obj)
+        private void ShowDetail(DetailPanel obj)
         {
+          
+            if(obj.Action == "Add" && obj.Target == "Track")
+            {
+                Expander = true;                
+                TrackList.Add(obj.Track);
+            }
+            if (obj.Action == "Replace" && obj.Target == "Track")
+            {
+                Expander = true;
+                var index = TrackList.IndexOf(TrackList.Where(x => x.Id == obj.Track.Id && x.RadarOrigin ==obj.Track.RadarOrigin).FirstOrDefault());
+                TrackList[index] = obj.Track;
+            }
+            if(obj.Action == "Clear" && obj.Target =="Track")
+            {
+        
+                App.Current.Dispatcher.Invoke(delegate
+                {
+                    try
+                    {
+                        TrackList.Remove(TrackList.Where(x => x.Id == obj.Track.Id && x.RadarOrigin == obj.Track.RadarOrigin).Single());
+                    }
+                    catch(Exception e)
+                    {
+                        Console.WriteLine(e.ToString());
+                    }
+                    return true;
+                });
 
-            TrackList.Add(obj);
-            
+            }
+            if(obj.Action == "Add" && obj.Target == "Plot")
+            {
+                Expander = true;
+  
+            }
         }
     }
 }

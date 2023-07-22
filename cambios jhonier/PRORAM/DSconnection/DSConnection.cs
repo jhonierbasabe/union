@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Linq;
+using static PRORAM.Models.RadarConfigurationModel;
 
 namespace PRORAM.DSconnection
 {
@@ -62,6 +63,7 @@ namespace PRORAM.DSconnection
         /// Metodo AddRadarDeviceRow, añade un dispositivo radar al dataset
         /// </summary>
         /// <param name="obj">objeto RadarDevicesModel que se va agregar al dataset</param>
+        /// Agreguar el dispositivo nuevo
         public static void AddRadarDeviceRow(RadarDevicesModel obj)
         {
             DS.RadarDeviceTable.AddRadarDeviceTableRow(
@@ -77,15 +79,17 @@ namespace PRORAM.DSconnection
                 IdModelo: obj.IdModelo,
                 IpAddress: obj.IpAddress,
                 SchannelFrec: obj.SChannelFrec.Id,
+                Schannelobject: obj.SChannelObject.Value,
                 InstallationAngle: obj.InstallationAngle,
                 TXPower: obj.TXPower,
                 Radiation: obj.Radiation,
                 Guid: obj.GuidRadar,
                 IdChannel: obj.SChannelFrec.Id,
+                IdChannelO: obj.SChannelObject.Value,
                 Frec: obj.SChannelFrec.Frecuency,
+                Object: obj.SChannelObject.Object,
                 MClutter: obj.MClutter,
                 NorthHeiding: obj.NorthHeiding,
-                Check: obj.Check,
                 Altitude: obj.Altitude, 
                 IsSaveComplete: obj.IsSaveComplete, 
                 IsSaveCompleteT: obj.IsSaveCompleteT,
@@ -94,19 +98,8 @@ namespace PRORAM.DSconnection
                 SaveProgress: obj.SaveProgress, 
                 SaveProgressT: obj.SaveProgressT
                );
-
+            
         }
-
-        public static void ModifyCheckRadarDeviceRow(RadarDevicesModel obj)
-        {
-            var radar = DS.RadarDeviceTable.Where(r => r.Id == obj.Id).FirstOrDefault();
-
-            if(radar != null)
-            {
-                radar.Check = obj.Check;
-            }
-        }
-
         /// <summary>
         /// Metodo GetDevicesList, retorna la lista con los dispositivos radar agregados
         /// </summary>
@@ -132,9 +125,11 @@ namespace PRORAM.DSconnection
             Guid guid;
             double frec;
             int idChannel;
+            //Agregue
+            string Object;
+            int idChannelO;
             double northHeiding;
             int altitude;
-            bool check;
             DataRow[] rows = radarTable.Select();
             ObservableCollection<RadarDevicesModel> device = new ObservableCollection<RadarDevicesModel>();
             for (int i = 0; i < rows.Length; i++)
@@ -150,7 +145,6 @@ namespace PRORAM.DSconnection
                 longitud = Convert.ToDouble(rows[i]["Longitud"]);
                 elevation = Convert.ToDouble(rows[i]["Elevation"]);
                 idmodelo = Convert.ToInt32(rows[i]["IdModelo"]);
-
                 ipAddress = Convert.ToString(rows[i]["IpAddress"]);
                 port = Convert.ToInt32(rows[i]["Port"]);
                 installationAngle = Convert.ToDouble(rows[i]["InstallationAngle"]);
@@ -159,6 +153,8 @@ namespace PRORAM.DSconnection
                 guid = new Guid(Convert.ToString(rows[i]["Guid"]));
                 frec = Convert.ToDouble(rows[i]["Frec"]);
                 idChannel = Convert.ToInt32(rows[i]["IdChannel"]);
+                Object = Convert.ToString(rows[i]["Object"]);
+                idChannelO = Convert.ToInt32(rows[i]["IdChannelO"]);
                 northHeiding = Convert.ToDouble(rows[i]["NorthHeiding"]);
                 altitude = Convert.ToInt32(rows[i]["Altitude"]);
                 bool isSaving = Convert.ToBoolean(rows[i]["IsSaving"]);
@@ -168,13 +164,22 @@ namespace PRORAM.DSconnection
                 double saveProgress = Convert.ToDouble(rows[i]["SaveProgress"]);
                 double saveProgressT = Convert.ToDouble(rows[i]["SaveProgressT"]);
 
-                check = Convert.ToBoolean(rows[i]["Check"]);
                 Channels channel = new Channels()
                 {
 
                     Id = idChannel,
                     Frecuency = frec,
                     DisplayName = idChannel + " - " + frec
+                };
+                
+
+                //Agregue
+                Objetivo channelO = new Objetivo()
+                {
+
+                    Value = idChannelO,
+                    Object = Object,
+                    DisplayNameO = idChannelO + " - " + Object
                 };
 
                 device.Add(
@@ -190,7 +195,6 @@ namespace PRORAM.DSconnection
                         Longitud = longitud,
                         Elevation = elevation,
                         IdModelo = idmodelo,
-
                         IpAddress = ipAddress,
                         Port = port,
                         InstallationAngle = installationAngle,
@@ -198,6 +202,7 @@ namespace PRORAM.DSconnection
                         Radiation = radiation,
                         GuidRadar = guid,
                         SChannelFrec = channel,
+                        SChannelObject = channelO,
                         NorthHeiding = northHeiding,
                         Altitude = altitude,
                         IsSaveComplete = isSaveComplete,
@@ -205,8 +210,7 @@ namespace PRORAM.DSconnection
                         IsSaving = isSaving,
                         IsSavingT = isSavingt,
                         SaveProgress = saveProgress,
-                        SaveProgressT = saveProgressT,
-                        Check = check
+                        SaveProgressT = saveProgressT
                     });
             }
             return device;
@@ -248,6 +252,9 @@ namespace PRORAM.DSconnection
             rows[i]["Frec"] = obj.SChannelFrec.Frecuency;
             rows[i]["IdChannel"] = obj.SChannelFrec.Id;
             rows[i]["SchannelFrec"] = obj.SChannelFrec.Id;
+            rows[i]["Object"] = obj.SChannelObject.Object;
+            rows[i]["IdChannelO"] = obj.SChannelObject.Value;
+            rows[i]["Schannelobject"] = obj.SChannelObject.Value;
             rows[i]["NorthHeiding"] = obj.NorthHeiding;
             rows[i]["Altitude"] = obj.Altitude;
             rows[i]["IsSaving"] = obj.IsSaving;

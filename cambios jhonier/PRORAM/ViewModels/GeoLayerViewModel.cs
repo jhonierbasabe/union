@@ -29,7 +29,6 @@ using Microsoft.Win32.SafeHandles;
 using System.Windows.Interop;
 using System.Windows.Threading;
 using PRORAM.ServicesTcp;
-using Prism.Regions;
 
 namespace PRORAM.ViewModels
 {
@@ -52,9 +51,6 @@ namespace PRORAM.ViewModels
         private System.Windows.Forms.Timer _timerObjectlist;
         private ObservableCollection<RadarDevicesModel> _devices;
         private byte[] _messageReceived;
-        
-
-
 
         #endregion
 
@@ -114,6 +110,7 @@ namespace PRORAM.ViewModels
             _ea.GetEvent<MsmSentEvent>().Subscribe(ActionsRadar);
 
             _ea.GetEvent<MessageSentEvent<object>>().Subscribe(ConnectDevice);
+            _ea.GetEvent<MessageSentEvent<int>>().Subscribe(Consultparameters);
             _ea.GetEvent<EventLayers>().Subscribe(ShowLayers);
             _ea.GetEvent<EventTools>().Subscribe(ToolsEvent);
 
@@ -140,7 +137,6 @@ namespace PRORAM.ViewModels
 
             _locationsRule = new LocationCollection();
             _timerObjectlist = new System.Windows.Forms.Timer();
-
 
         }
 
@@ -602,6 +598,89 @@ namespace PRORAM.ViewModels
             }
 
         }
+
+        public void Consultparameters(int p)
+        {
+            byte idRadar = 0;
+            bool step = false;
+            byte[] result = new byte[1024];
+            byte[] ResultGetIdRadar = new byte[1024];
+            string erroCode = "";
+            float Temperatura_alimentacion = 0.0f;
+            float Temperatura_procesador = 0.0f;
+            float Temperatura_antena = 0.0f;
+
+
+            //Generamos el mensaje para obtner la id del radar
+            MessagesGenerator messagesGenerator = new MessagesGenerator(1);
+            byte[] messageToSend = messagesGenerator.GenerateMessageIdRadar(1);
+            if (CollectionServicesTcp[p].IsConnected == true)
+            {
+                result = CollectionServicesTcp[p].SendAndReceive(messageToSend);
+                ResultGetIdRadar = result;
+                idRadar = result[4];
+            }
+            else
+            {
+                erroCode = "\nFallo la conexión ";
+                step = false;
+            }
+
+            // 84 = 0x54 ------ La respuesta cuando se consulta la id del radar en 0x54
+            Thread.Sleep(100);
+            if (result[0] == ListMessages.headerMessages["R_IdRadar"])
+            {
+                //70 = 0x46 ------- La consulta de los parametros de temperaturas del radar
+                Console.WriteLine("R_IdRadar header = " + result[0]);
+                messagesGenerator = new MessagesGenerator(1);
+                messageToSend = messagesGenerator.GetParametersObject(idRadar);
+                result = CollectionServicesTcp[p].SendAndReceive(messageToSend);
+
+            }
+
+            //86 = 0x56 ------- La respuesta para la consulta de los parametros de temperatura del radar
+            if (result[0] == ListMessages.headerMessages["R_GetParametersRadar"])
+            {
+                //Selecciona los bytes 4 y 5 para calcular la temperatura de alimentacion
+                byte[] Temperatura_PotenciaB = new byte[2];
+                Array.Copy(result, 4, Temperatura_PotenciaB, 0, 2);
+                Array.Reverse(Temperatura_PotenciaB);
+                int Temperatura_alimentacion_raw = BitConverter.ToInt16(Temperatura_PotenciaB, 0);
+                Temperatura_alimentacion = Temperatura_alimentacion_raw / 100.0f;
+
+                // Selecciona los bytes 6 y 7 para calcular la temperatura del procesador
+                byte[] Temperatura_ProcesadorB = new byte[2];
+                Array.Copy(result, 6, Temperatura_ProcesadorB, 0, 2);
+                Array.Reverse(Temperatura_ProcesadorB);
+                int Temperatura_procesador_raw = BitConverter.ToInt16(Temperatura_ProcesadorB, 0);
+                Temperatura_procesador = Temperatura_procesador_raw / 100.0f;
+
+                //Selecciona los bytes 8 y 9 para calcular la temperatura de antena
+                byte[] Temperatura_antenaB = new byte[2];
+                Array.Copy(result, 8, Temperatura_antenaB, 0, 2);
+                Array.Reverse(Temperatura_antenaB);
+                int Temperatura_antena_raw = BitConverter.ToInt16(Temperatura_antenaB, 0);
+                Temperatura_antena = Temperatura_antena_raw / 100.0f;
+
+
+                Console.WriteLine(Temperatura_alimentacion);
+                Console.WriteLine(Temperatura_procesador);
+                Console.WriteLine(Temperatura_antena);
+
+                string temperaturasConcatenadas = string.Join(";", Temperatura_alimentacion, Temperatura_procesador, Temperatura_antena);
+
+                _ea.GetEvent<MessageSentEvent<string>>().Publish(temperaturasConcatenadas);
+
+
+
+            }
+            else
+            {
+
+            }
+
+        }
+
         /// <summary>
         /// Metodo ConnectDevice rutina de mensajes entre la consola y el dispositivo radar con el fin establecer la conexión
         /// </summary>
@@ -713,6 +792,23 @@ namespace PRORAM.ViewModels
                     Thread.Sleep(100);
                     if (result[0] == ListMessages.headerMessages["RC_CanalFrecRadar"] && step == true)
                     {
+                        Console.WriteLine("RC_CanalFrecRadar header = " + result[0]);
+                        messagesGenerator = new MessagesGenerator(1);
+                        messageToSend = messagesGenerator.GenerateMessageTXChannelObject((byte)device.SChannelObject.Value, idRadar);
+                        result = CollectionServicesTcp[element].SendAndReceive(messageToSend);
+
+                    }
+                    else if (erroCode == "")
+                    {
+                        erroCode = "\nFallo en el mensaje de canal de frecuencia ";
+                        step = false;
+                    }
+
+                    //Colocar RC_CanalObjectRadar en el if de abajo, en vez de RC_CanalFrecRadar
+                    //RC_CanalObjectRadar
+                    Thread.Sleep(100);
+                    if (result[0] == ListMessages.headerMessages["RC_CanalObjectRadar"] && step == true)
+                    {
 
                         Console.WriteLine("Conexion realizada satisfactoriamente ConnectDone");
                         CollectionServicesTcp[element]._timerGetStatus.Enabled = true;
@@ -722,7 +818,7 @@ namespace PRORAM.ViewModels
                     }
                     else if (erroCode == "")
                     {
-                        erroCode = "\nFallo en el mensaje de SetTxChannel ";
+                        erroCode = "\nFallo en el mensaje de SetChannelObject ";
                         step = false;
                     }
 
@@ -798,7 +894,8 @@ namespace PRORAM.ViewModels
                     
                     CollectionServicesTcp[element].Device.SChannelFrec = device.SChannelFrec;
                     CollectionServicesTcp[element].Device.TXPower = device.TXPower;
-                    
+                    CollectionServicesTcp[element].Device.SChannelObject = device.SChannelObject;
+
                     var msmGenerator = new MessagesGenerator(1);
                     var msmUpdate =msmGenerator.GenerateMessageTXChannel((byte)device.SChannelFrec.Id, device.IdRadar);
         
@@ -807,6 +904,13 @@ namespace PRORAM.ViewModels
                         CollectionServicesTcp[element].sendData(msmUpdate);
                     }
         
+                    Thread.Sleep(100);
+                    msmUpdate = msmGenerator.GenerateMessageTXChannelObject((byte)device.SChannelObject.Value, device.IdRadar);
+                    if (CollectionServicesTcp[element].IsConnected == true && CollectionServicesTcp[element]._isRunning == true)
+                    {
+                        CollectionServicesTcp[element].sendData(msmUpdate);
+                    }
+
                     Thread.Sleep(100);
                     msmUpdate = msmGenerator.GenerateMessageTXPower((byte)device.TXPower, device.IdRadar);
                     if (CollectionServicesTcp[element].IsConnected == true && CollectionServicesTcp[element]._isRunning == true)
@@ -864,8 +968,6 @@ namespace PRORAM.ViewModels
         public DelegateCommand RotateCommand { get; set; }
         public DelegateCommand MeasuringCommand { get; set; }
         public DelegateCommand ClearRuleCommand { get; set; }
-        public bool Azimuth { get; private set; }
-        public object targetPanelViewModel { get; private set; }
 
 
         #endregion Delegados
@@ -1048,8 +1150,6 @@ namespace PRORAM.ViewModels
             var toolTip = new ToolTip();
             toolTip.Placement = System.Windows.Controls.Primitives.PlacementMode.MousePoint;
             toolTip.Content = string.Format("Id: {0} \nDistancia: {1} m \nVelocidad: {0} Km/h", tracks.Id, tracks.DistanceToRadar, tracks.Velocity);
-            Console.WriteLine(toolTip.Content);
-
             t.ToolTip = toolTip;
 
             t.Tag = "Track";
@@ -1059,8 +1159,6 @@ namespace PRORAM.ViewModels
 
             this.GeoLayerMod.MyMap.Children.Add(t);
             this.GeoLayerMod.MyMap.UpdateLayout();
-
-
         }
         /// <summary>
         /// Metodo que genera el evento de informacion del panle lateral
@@ -1213,7 +1311,6 @@ namespace PRORAM.ViewModels
 
 
             GeoLayerMod.MyMap.MouseDoubleClick += MapMouseDoubleClick;
-           
 
             var _layers = DSconnection.DSConnection.GetLayers();
 
@@ -1279,7 +1376,7 @@ namespace PRORAM.ViewModels
                     // var point = gis.Convertion(latitud, longitud, GeoLayerMod.MyMap.Heading, device.Azimuth, 150, 20);
                     var point = gis.ConvertionSurface(latitud, longitud, GeoLayerMod.MyMap.Heading, device.NorthHeiding, 150, 20);
 
-                    var cone = DrawPolygon(point, new Location() { Latitude = device.Latitud, Longitude = device.Longitud }, CollectionServicesTcp.Count);
+                    var cone = DrawPolygon(point, new Location() { Latitude = device.Latitud, Longitude = device.Longitud }, CollectionServicesTcp.Count, device);
                     cone.Uid = Convert.ToString(device.GuidRadar);
 
                     var icon = new PackIcon
@@ -1324,7 +1421,7 @@ namespace PRORAM.ViewModels
             var longitud = device.Longitud;
             var point = gis.ConvertionSurface(latitud, longitud, GeoLayerMod.MyMap.Heading, device.NorthHeiding, 150, 20);
 
-            var cone = DrawPolygon(point, new Location() { Latitude = device.Latitud, Longitude = device.Longitud }, CollectionServicesTcp.Count);
+            var cone = DrawPolygon(point, new Location() { Latitude = device.Latitud, Longitude = device.Longitud }, CollectionServicesTcp.Count, device);
             cone.Uid = Convert.ToString(device.GuidRadar);
 
             var icon = new PackIcon
@@ -1363,7 +1460,7 @@ namespace PRORAM.ViewModels
         /// Metodo DrawPlots, dibuja los plots en el mapa geografico
         /// </summary>
         /// <param name="plts">objeto plot</param>
-        /// <param name="device">dispositivo radar</param>f
+        /// <param name="device">dispositivo radar</param>
         /// <param name="b">bandera de entrada</param>
         private void DrawPlots(Plots plts, RadarDevicesModel device, bool b)
         {
@@ -1386,11 +1483,9 @@ namespace PRORAM.ViewModels
 
             var toolTip = new ToolTip();
             toolTip.Placement = System.Windows.Controls.Primitives.PlacementMode.MousePoint;
-            toolTip.Content = string.Format("Distancia: {0} m \nAzimuth: {1}° \nVelocidad: {2} m/s", plts.Range, Math.Round(plts.Azimuth, 2), plts.Velocity_obj);
+            toolTip.Content = string.Format("Distancia: {0} m \nAzimuth: {1}°", plts.Range, Math.Round(plts.Azimuth, 2));
             myRect.ToolTip = toolTip;
-            //Console.WriteLine(toolTip.Content);
-            //myRect.MouseLeftButtonDown += MyRect_MouseLeftButtonDown;
-            myRect.MouseLeftButtonDown += (sender, e) => MyRect_MouseLeftButtonDown(sender, e, plts);
+
             string _uid = plts.PlotGuid + "-" + plts.RadarId;
             myRect.Tag = "Plots";
             myRect.Uid = _uid;
@@ -1403,28 +1498,8 @@ namespace PRORAM.ViewModels
             MapLayer.SetPosition(myRect, loc);
 
             GeoLayerMod.MyMap.Children.Add(myRect);
-
             GeoLayerMod.MyMap.UpdateLayout();
         }
-
-        /// <summary>
-        /// Metoodo que envia los datos de plos a
-        /// la ventana de blancos 
-        private void MyRect_MouseLeftButtonDown(object sender, MouseButtonEventArgs e, Plots plts)
-        {
-            _ea.GetEvent<EventPlots>().Publish(new Plots {
-                Range = plts.Range,
-                Azimuth = plts.Azimuth,
-                Velocity_obj = plts.Velocity_obj,
-                RadarId= plts.RadarId,
-                
-
-            });
-            
-        }
-
-
-
 
 
         /// <summary>
@@ -1457,12 +1532,12 @@ namespace PRORAM.ViewModels
         /// <param name="startlocation">pocision de inicion </param>
         /// <param name="count">entero que define el color del relleno</param>
         /// <returns>retonar el poligono creado con las caracteristicas definidas</returns>
-        private MapPolygon DrawPolygon(IList<Posicion> locations, Location startlocation, int count)
+        private MapPolygon DrawPolygon(IList<Posicion> locations, Location startlocation, int count, RadarDevicesModel device)
         {
 
             MapPolygon mapPolygon = new MapPolygon();
             mapPolygon.Stroke = Brushes.Black;
-            mapPolygon.Fill = Colors(count);
+            mapPolygon.Fill = Colors(device.Id);
             mapPolygon.StrokeThickness = 1;
             mapPolygon.Opacity = 0.3;
             var points = new LocationCollection();
@@ -1590,30 +1665,6 @@ namespace PRORAM.ViewModels
         private void MapMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             e.Handled = true;
-            /*var latitud = device.Latitud;
-            var longitud = device.Longitud;
-            Posicion point = Proj4.ConvertionLocation(latitud, longitud, device.NorthHeiding, plts.Range, plts.Azimuth);
-
-            var myRect = new System.Windows.Shapes.Rectangle();
-            myRect.Stroke = System.Windows.Media.Brushes.Black;
-            myRect.Fill = System.Windows.Media.Brushes.Yellow;
-            myRect.HorizontalAlignment = HorizontalAlignment.Left;
-            myRect.VerticalAlignment = VerticalAlignment.Center;
-            myRect.Height = 6;
-            myRect.Width = 6;
-            Location location = new Location()
-            {
-                Latitude = point.Lat,
-                Longitude = point.Lon
-            };
-
-            var toolTip = new ToolTip();
-            toolTip.Placement = System.Windows.Controls.Primitives.PlacementMode.MousePoint;
-            toolTip.Content = string.Format("Distancia: {0} m \nAzimuth: {1}° \nVelocidad: {2} Km/h", plts.Range, Math.Round(plts.Azimuth, 2), plts.Velocity_obj);
-            myRect.ToolTip = toolTip;
-            Console.WriteLine(toolTip.Content);*/
-
-
         }
 
         /// <summary>
@@ -1652,16 +1703,15 @@ namespace PRORAM.ViewModels
         {
             switch (i)
             {
-                case 1: return Brushes.AliceBlue;
-                case 2: return Brushes.AntiqueWhite;
-                case 3: return Brushes.BurlyWood;
-                case 4: return Brushes.LightGreen;
-                case 5: return Brushes.LightGoldenrodYellow;
-                case 6: return Brushes.LightPink;
-                case 7: return Brushes.LightSeaGreen;
-                case 8: return Brushes.Magenta;
-                case 9: return Brushes.Maroon;
-                case 10: return Brushes.Tan;
+                case 1: return Brushes.DeepSkyBlue;
+                case 2: return Brushes.DarkOrange;
+                case 3: return Brushes.Gold;
+                case 4: return Brushes.LightCoral;
+                case 5: return Brushes.LimeGreen;
+                case 7: return Brushes.Orchid;
+                case 8: return Brushes.Plum;
+                case 9: return Brushes.RoyalBlue;
+                case 10: return Brushes.Tomato;
 
                 default: return Brushes.Beige;
             }

@@ -14,7 +14,8 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Windows.Media;
+//using static PRORAM.Models.RadarConfigurationModel;
 namespace PRORAM.ViewModels
 {
     /// <summary>
@@ -111,8 +112,8 @@ namespace PRORAM.ViewModels
             RadarConfigurationModel_ = new RadarConfigurationModel();
             RadarConfigurationModel_.Azimuth = 2;
             RadarConfigurationModel_.ChannelFrec = new ObservableCollection<Channels>();
+            RadarConfigurationModel_.ChannelObject = new ObservableCollection<Objetivo>();
             ModeloSelected = false;
-
             RadarConfigurationModel_.Port = 0;
             RadarConfigurationModel_.Elevation = 0;
             RadarConfigurationModel_.ErrorsChanged += (s, e) => Errors = FlattenErrors();
@@ -127,10 +128,6 @@ namespace PRORAM.ViewModels
             CustomPopupCommand = new DelegateCommand(RaiseCustomPopup);
             OnLoadScreenCommand = new DelegateCommand(OnLoadScreen);
             RadarConfigurationModel_.PropertyChanged += CheckSpanader;
-        }
-
-        public RadarConfigurationViewModel()
-        {
         }
 
 
@@ -164,11 +161,13 @@ namespace PRORAM.ViewModels
             {
                 RadarConfigurationModel_ = new RadarConfigurationModel();
                 RadarConfigurationModel_.ChannelFrec = new ObservableCollection<Channels>();
+                RadarConfigurationModel_.ChannelObject = new ObservableCollection<Objetivo>();
 
 
                 var modelos = TextResources.GetJsonContent().PRORAM_RESOURCE_FILE.ModelosRardar;
 
                 RadarConfigurationModel_.ChannelFrec.Clear();
+                RadarConfigurationModel_.ChannelObject.Clear();
 
                 foreach (var i in modelos.Modelo2.ChannelFrec)
                 {
@@ -180,6 +179,20 @@ namespace PRORAM.ViewModels
                     });
                 }
 
+                //Agregue esto
+                foreach (var i in modelos.Modelo2.ChannelObject)
+                {
+                    RadarConfigurationModel_.ChannelObject.Add(new Objetivo
+                    {
+                        Value = i.value,
+                        Object = i.objecto,
+                        DisplayNameO = i.value + " - " + i.objecto
+
+                    });
+
+                }
+                //Fin
+
                 RadarConfigurationModel_.Elevation = 0;
             }
 
@@ -190,11 +203,15 @@ namespace PRORAM.ViewModels
         /// </summary>
         private void SelectionChanged()
         {
+            
             if (RadarConfigurationModel_.SModelo != null)
             {
                 var modelos = TextResources.GetJsonContent().PRORAM_RESOURCE_FILE.ModelosRardar;
-
+                
                 RadarConfigurationModel_.ChannelFrec.Clear();
+                RadarConfigurationModel_.ChannelObject.Clear();
+
+                ModeloSelected = true;
                 if (RadarConfigurationModel_.SModelo.Id == 1)
                 {
                     foreach (var i in modelos.Modelo1.ChannelFrec)
@@ -210,9 +227,8 @@ namespace PRORAM.ViewModels
                     RadarConfigurationModel_.Modelo = RadarConfigurationModel_.SModelo.Id;
                 }
                 if (RadarConfigurationModel_.SModelo.Id == 2)
-                {
-                    ModeloSelected = true;
-
+                {                  
+                    //Aca agrega los valores del combobox de la frecuencia
                     foreach (var i in modelos.Modelo2.ChannelFrec)
                     {
                         RadarConfigurationModel_.ChannelFrec.Add(new Channels
@@ -220,9 +236,25 @@ namespace PRORAM.ViewModels
                             Id = i.Channel,
                             Frecuency = i.Frec,
                             DisplayName = i.Channel + " - " + i.Frec + " GHz"
-                        });
+                            
+                    });
                     }
-                
+
+
+                    //Prueba para cargar el combobox de objetos
+                    foreach (var i in modelos.Modelo2.ChannelObject)
+                    {
+                        RadarConfigurationModel_.ChannelObject.Add(new Objetivo
+                        {
+                            Value = i.value,
+                            Object = i.objecto,
+                            DisplayNameO = i.value + " - " + i.objecto
+                            
+                        });
+                        
+                    }
+
+
                     RadarConfigurationModel_.Modelo = RadarConfigurationModel_.SModelo.Id;
 
                 }
@@ -248,7 +280,8 @@ namespace PRORAM.ViewModels
                 new Modelo()
                 {
                     Id=TextResources.GetJsonContent().PRORAM_RESOURCE_FILE.ModelosRardar.Modelo2.Id,
-                    Name = TextResources.GetJsonContent().PRORAM_RESOURCE_FILE.ModelosRardar.Modelo2.Name
+                    Name = TextResources.GetJsonContent().PRORAM_RESOURCE_FILE.ModelosRardar.Modelo2.Name,
+                    
                 },
             };
         }
@@ -261,17 +294,25 @@ namespace PRORAM.ViewModels
             CustomPopupRequest.Raise(new Notification { Title = _tituloError, Content = new { Text = _mensaje, Show = false } }, r => Tittle = "PRORAM Consola de monitoreo");
         }
 
-
+        
 
         /// <summary>
         /// Metodo SubmitInsRadar, valida los datos de ser correctos confirma la informacion y cierra la vista
         /// </summary>
         private void SubmitInsRadar()
         {
-
-            RadarConfigurationModel_.Azimuth=2;
+            RadarConfigurationModel_.Azimuth = 2;
             RadarConfigurationModel_.ValidateProperties();
             Errors = FlattenErrors();
+            RadarConfigurationModel_.IdTextColor = GetColorById(RadarConfigurationModel_.Id);
+            var Altitude = Errors.Where(p => p.Property.Contains("Altitude"));
+            var TXPower = Errors.Where(p => p.Property.Contains("TXPower"));
+            var InstallationAngle = Errors.Where(p => p.Property.Contains("InstallationAngle"));
+            var NorthHeiding = Errors.Where(p => p.Property.Contains("NorthHeiding"));
+            var ChannelFrec = Errors.Where(p => p.Property.Contains("SchannelFrec"));
+            var ChannelObject = Errors.Where(p => p.Property.Contains("SchannelObject"));
+            var Latitud = Errors.Where(p => p.Property.Contains("Latitud"));
+            var Longitud = Errors.Where(p => p.Property.Contains("Longitud"));
             var _isWithinArea = IsWithinArea();
             if (!RadarConfigurationModel_.HasErrors && _isWithinArea == false)
             {
@@ -284,19 +325,59 @@ namespace PRORAM.ViewModels
             if (Errors.Count > 0)
             {
                 _tituloError = "Alerta";
-                _mensaje = "Ingrese los datos del formulario de manera correcta";
+
+                if (Altitude.Count() != 0)
+                {
+                    _mensaje = "Ingrese un valor valido de altitud, entre 1 y 15";
+                }
+
+                else if (TXPower.Count() != 0)
+                {
+                    _mensaje = "Ingrese un valor valido de potencia de transmision, entre 0 y 100";
+                }
+
+                else if (InstallationAngle.Count() != 0)
+                {
+                    _mensaje = "Ingrese un valor valido de angulo de instalacion, entre -30 y 30";
+                }
+
+                else if (NorthHeiding.Count() != 0)
+                {
+                    _mensaje = "Ingrese un valor valido de NorthHeiding, entre 0 y 360";
+                }
+
+                else if (ChannelFrec.Count() != 0)
+                {
+                    _mensaje = "El campo canal de frecuencia es obligatorio";
+                }
+
+                else if (ChannelObject.Count() != 0)
+                {
+                    _mensaje = "El campo tipo de objetivo es obligatorio";
+                }
+
+                else if (Latitud.Count() != 0)
+                {
+                    _mensaje = "Ingrese un valor valido de Latitud, entre -180 y 180  ";
+                }
+
+                else if (Longitud.Count() != 0)
+                {
+                    _mensaje = "Ingrese un valor valido de longitud, entre -90 y 90 ";
+                }
+
+                
+
                 RaiseCustomPopup();
                 _tituloError = "";
                 _mensaje = "";
             }
-
             if (!RadarConfigurationModel_.HasErrors && _isWithinArea == true)
             {
                 CustomPopupRequest.Raise(new Notification { Title = "Notificación", Content = new { Text = "Dispositivo radar agregado satisfactoriamente", Show = true, ShowAlert = false } }, r => Tittle = "PRORAM Consola de monitoreo");
                 _notification.RadarConfigurationModelI_ = RadarConfigurationModel_;
                 _notification.Confirmed = true;
-                
-                //RadarConfigurationModel_ = new RadarConfigurationModel();
+
                 RadarConfigurationModel_.Expander = false;
                 RadarConfigurationModel_ = null;
                 FinishInteraction?.Invoke();
@@ -327,6 +408,7 @@ namespace PRORAM.ViewModels
         {
             RadarConfigurationModel_.ValidateProperties();
             Errors = FlattenErrors();
+            var NameRadar = Errors.Where(p => p.Property.Contains("RadarName"));
             var errorIp = Errors.Where(p => p.Property.Contains("IpAddress"));
             var modelo = Errors.Where(p => p.Property.Contains("SModelo"));
 
@@ -334,10 +416,24 @@ namespace PRORAM.ViewModels
             {
                 RadarConfigurationModel_.Expander = true;
             }
-            if (errorIp.Count() != 0 || modelo.Count() != 0)
+            if (errorIp.Count() != 0 || modelo.Count() != 0 || NameRadar.Count() !=0)
             {
-                _tituloError = "Alerta";
-                _mensaje = "Ingrese todos los datos del formulario de forma correcta";
+
+                if (NameRadar.Count() != 0)
+                {
+                    _tituloError = "Alerta";
+                    _mensaje = "Ingrese un nombre de radar entre 3 y 10 caracteres de longitud";
+                }
+                else if (modelo.Count() != 0)
+                {
+                    _tituloError = "Alerta";
+                    _mensaje = "Seleccione un modelo de radar";
+                }
+                else if (errorIp.Count() != 0)
+                {
+                    _tituloError = "Alerta";
+                    _mensaje = "Ingrese la IP de forma correcta";
+                }
                 RaiseCustomPopup();
                 _tituloError = "";
                 _mensaje = "";
@@ -375,6 +471,24 @@ namespace PRORAM.ViewModels
         {
             get { return _notification; }
             set { SetProperty(ref _notification, (IRadarConfigurationNotification)value); }
+        }
+
+        public static SolidColorBrush GetColorById(int i)
+        {
+            switch (i)
+            {
+                case 1: return Brushes.DeepSkyBlue;
+                case 2: return Brushes.DarkOrange;
+                case 3: return Brushes.Gold;
+                case 4: return Brushes.LightCoral;
+                case 5: return Brushes.LimeGreen;
+                case 7: return Brushes.Orchid;
+                case 8: return Brushes.Plum;
+                case 9: return Brushes.RoyalBlue;
+                case 10: return Brushes.Tomato;
+
+                default: return Brushes.Beige;
+            }
         }
     }
 }

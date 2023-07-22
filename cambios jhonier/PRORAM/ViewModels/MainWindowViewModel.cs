@@ -28,13 +28,14 @@ namespace PRORAM.ViewModels
         private TargetAreaModel _targetAreaModel = new TargetAreaModel();
         private GeoLayerModel _geoLayerModel = new GeoLayerModel();
         private IEventAggregator _ea;
-        public RadarDevicesModel _RadarDevicesModel;
+        private RadarDevicesModel _RadarDevicesModel;
         private string _mensaje;
         private string _titulo;
         private bool _saveDialog;
         private byte[] _messageReceived;
         private string _username = "aa";
-        public bool EstadorMapa = false;
+
+
         #endregion
 
 
@@ -108,6 +109,14 @@ namespace PRORAM.ViewModels
             RadarDevicesNotificationCommand = new DelegateCommand(RaiseRadarInteraction);
 
             LayersNotificationRequest = new InteractionRequest<INotification>();
+
+            //Linea Nueva
+            MostrarParametros = new InteractionRequest<INotification>();
+
+            //Linea nueva
+            Parametros = new DelegateCommand(Fparametros);
+
+            //Para abrir una pestaña
             LayersNotificationCommand = new DelegateCommand(RaiseLayersNotification);
             _ea = ea;
 
@@ -125,7 +134,6 @@ namespace PRORAM.ViewModels
             ConfirmationCommand = new DelegateCommand(SaveStage);
             EventosCommand = new DelegateCommand<string>(EventosTool);
             LoadStageCommand = new DelegateCommand(LoadStage2);
-            
         }
 
 
@@ -173,8 +181,6 @@ namespace PRORAM.ViewModels
         {
             GeoLayerModel_.DefinedMap = true;
             TargetAreaMod = new TargetAreaModel { LatitudP1 = obj.LatitudP1, LatitudP2 = obj.LatitudP2, LongitudP1 = obj.LongitudP1, LongitudP2 = obj.LongitudP2, NombreArea = obj.NombreArea };
-            /*var sidePanelsViewModel = new SidePanelsViewModel();
-            sidePanelsViewModel.obtener_coordenadas(TargetAreaMod.LatitudP1, TargetAreaMod.LongitudP1, TargetAreaMod.LatitudP2, TargetAreaMod.LongitudP2 );*/
         }
         /// <summary>
         /// Metodo LoadStage2, carga una ventana que se encaga de notificar al momento de guardar un escenario
@@ -188,13 +194,18 @@ namespace PRORAM.ViewModels
                 if (_saveDialog == true)
                 {
                     DialogLoad();
+                    
+
+
+
                 }
             }
             else
             {
                 DialogLoad();
+                
             }
-
+            
         }
         /// <summary>
         /// Metodo DialogLoad, abre una ventana de windows que permite cargar un escenario
@@ -203,11 +214,14 @@ namespace PRORAM.ViewModels
         {
          ////// carga la variable   string load = "";
             Microsoft.Win32.OpenFileDialog openFileDialog = new Microsoft.Win32.OpenFileDialog();
+            //Pregunta si se escogio un archivo valido
             if (openFileDialog.ShowDialog() == true)
             {
                 try
                 {
+                    //Carga el archivo txt en la variable load
                     load = File.ReadAllText(openFileDialog.FileName);
+
                     _ea.GetEvent<MsmSentEvent>().Publish(new RadarActions()
                     {
                         Action = "Reset"
@@ -336,9 +350,9 @@ namespace PRORAM.ViewModels
         {
             _titulo = "Mensaje de notificación ";
             _mensaje = "Necesita definir un área objetivo para poder agregar un dispositivo radar ";
+
             if (GeoLayerModel_.DefinedMap == true)
             {
-                
                 var p1 = new Location() { Latitude = TargetAreaMod.LatitudP1.Value, Longitude = TargetAreaMod.LongitudP1.Value };
                 var p2 = new Location() { Latitude = TargetAreaMod.LatitudP2.Value, Longitude = TargetAreaMod.LongitudP2.Value };
 
@@ -357,7 +371,6 @@ namespace PRORAM.ViewModels
             else
             {
                 RaiseCustomPopup();
-                
             }
             _titulo = string.Empty;
             _mensaje = string.Empty;
@@ -379,6 +392,11 @@ namespace PRORAM.ViewModels
         {
             LayersNotificationRequest.Raise(new Notification { Title = "Capas" }, r => Title = "PRORAM Consola de monitoreo");
         }
+
+        private void Fparametros()
+        {
+            MostrarParametros.Raise(new Notification { Title = "Capas" }, r => Title = "PRORAM Consola de monitoreo");
+        }
         /// <summary>
         /// Metodo RaiseCustomPopup, controla la visualización de la vista modal PopupConfirmationView
         /// </summary>
@@ -391,7 +409,12 @@ namespace PRORAM.ViewModels
 
         #region Delegate
         public InteractionRequest<INotification> LayersNotificationRequest { get; set; }
+        //Linea Nueva
+        public InteractionRequest<INotification> MostrarParametros { get; set; }
         public DelegateCommand LayersNotificationCommand { get; set; }
+        //Linea nueva
+        public DelegateCommand Parametros { get; set; }
+        
         public DelegateCommand<string> NavigateCommand { get; private set; }
         public InteractionRequest<INotification> CustomPopupRequest { get; set; }
         public DelegateCommand CustomPopupCommand { get; set; }

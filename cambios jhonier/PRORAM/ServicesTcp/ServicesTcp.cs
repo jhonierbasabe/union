@@ -51,7 +51,7 @@ namespace PRORAM.ServicesTcp
         private Task _connectionTask;
         private ObservableCollection<Tracks> _tracksFromRadar;
         private IPAddress _ipAddress;
-        private Socket client;
+        private static Socket client;
         private int _Port;
 
         #endregion
@@ -161,7 +161,7 @@ namespace PRORAM.ServicesTcp
         /// <param name="sender">objeto que hace el llamado</param>
         /// <param name="e">EventArgs</param>
         private void GetStatusConnection(object sender, EventArgs e)
-         {
+        {
 
             var messagesGenerator = new MessagesGenerator(1);
             var messageToSend = messagesGenerator.GetSettingTime(85);
@@ -696,7 +696,6 @@ namespace PRORAM.ServicesTcp
                         Range = Convert.ToDouble(BitConverter.ToUInt16((ArraySub.SubArray(plots, i, 2)).Reverse().ToArray(), 0)) / 100,
                         Azimuth = Convert.ToDouble(BitConverter.ToUInt16((ArraySub.SubArray(plots, i + 2, 2)).Reverse().ToArray(), 0)) / 10,
                         Power = Convert.ToInt32(BitConverter.ToUInt16((ArraySub.SubArray(plots, i + 4, 2)).Reverse().ToArray(), 0)),
-                        Velocity_obj = Convert.ToDouble(BitConverter.ToUInt16((ArraySub.SubArray(plots, i + 3, 2)).Reverse().ToArray(), 0)),
                         RadarId = idRadar,
                         PlotGuid = _guidPlot
                     });
@@ -707,7 +706,6 @@ namespace PRORAM.ServicesTcp
                         Range = Convert.ToDouble(BitConverter.ToUInt16((ArraySub.SubArray(plots, i, 2)).Reverse().ToArray(), 0)) / 100,
                         Azimuth = Convert.ToDouble(BitConverter.ToUInt16((ArraySub.SubArray(plots, i + 2, 2)).Reverse().ToArray(), 0)) / 10,
                         Power = Convert.ToInt32(BitConverter.ToUInt16((ArraySub.SubArray(plots, i + 4, 2)).Reverse().ToArray(), 0)),
-                        //Velocity_obj = Convert.ToDouble(BitConverter.ToUInt16((ArraySub.SubArray(plots, i + 2, 2)).Reverse().ToArray(), 0)) / 10,
                         RadarId = idRadar,
                         PlotGuid = _guidPlot,
                     }, "OnAddPlot", Device);
@@ -835,8 +833,6 @@ namespace PRORAM.ServicesTcp
         public double Azimuth { get; set; }
         public int Power { get; set; }
         public DateTime TimeStamp { get; set; }
-        public double Velocity_obj { get; set; }
-        
 
     }
 

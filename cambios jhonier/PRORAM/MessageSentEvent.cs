@@ -1,7 +1,6 @@
 ﻿using Prism.Events;
 using PRORAM.Models;
 using PRORAM.Models.Shared;
-using PRORAM.ServicesTcp;
 
 namespace PRORAM
 {
@@ -28,10 +27,6 @@ namespace PRORAM
 
     }
     public class EventPanel: PubSubEvent<DetailPanel>
-    {
-
-    }
-    public class EventPlots : PubSubEvent<Plots>
     {
 
     }

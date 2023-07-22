@@ -181,6 +181,20 @@
             "Channel": 2,
             "Frec": 24.062727272
           }
+        ],
+        "ChannelObject": [
+          {
+            "value": 1,
+            "objecto": "Peaton"
+          },
+          {
+            "value": 2,
+            "objecto": "Vehiculo"
+          },
+          {
+            "value": 3,
+            "objecto": "Otros"
+          }
         ]
       }
     },
@@ -234,6 +248,24 @@
           },
           "RC_CanalFrecRadar": {
             "IdMess": 51,
+            "Source": 255,
+            "Addressee": 0,
+            "SizeData": 1,
+            "Data": 1,
+            "EndMess": 255,
+            "SizeMess": 6
+          },
+          "CC_CanalObjectRadar": {
+            "IdMess": 39,
+            "Source": 255,
+            "Addressee": 0,
+            "SizeData": 1,
+            "Data": 1,
+            "EndMess": 255,
+            "SizeMess": 6
+          },
+          "RC_CanalObjectRadar": {
+            "IdMess": 55,
             "Source": 255,
             "Addressee": 0,
             "SizeData": 1,
@@ -326,6 +358,24 @@
           },          
           "R_GetSettingTime": {
             "IdMess": 85,
+            "Source": 255,
+            "Addressee": 0,
+            "SizeData": 1,
+            "Data": 4,
+            "EndMess": 255,
+            "SizeMess": 9
+          },
+          "C_GetParametersRadar": {
+            "IdMess": 70,
+            "Source": 255,
+            "Addressee": 0,
+            "SizeData": 1,
+            "Data": 1,
+            "EndMess": 255,
+            "SizeMess": 6
+          },          
+          "R_GetParametersRadar": {
+            "IdMess": 86,
             "Source": 255,
             "Addressee": 0,
             "SizeData": 1,

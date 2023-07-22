@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:prism="http://prismlibrary.com/"
         xmlns:local="clr-namespace:PRORAM.Views"
-        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         mc:Ignorable="d"
         prism:ViewModelLocator.AutoWireViewModel="True"      
         Background="{DynamicResource MaterialDesignPaper}"
@@ -15,7 +15,7 @@
         TextElement.FontWeight="Medium"
         TextElement.FontSize="10"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        xmlns:controls="http://schemas.microsoft.com/netfx/2009/xaml/presentation"
+             xmlns:controls="http://schemas.microsoft.com/netfx/2009/xaml/presentation"
         Height="auto" Width="auto">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
@@ -237,160 +237,154 @@
 
     <Grid>
 
-        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-            <Border CornerRadius="6" BorderBrush="DimGray" BorderThickness="1.5" Padding="2">
-            
-                <Expander  BorderBrush="DimGray" BorderThickness="2"   Margin="2"
-                           Name="Expander1"
-                           Header="Información" 
-                           Background="black"               
-                           Foreground="White"                                   
-                           IsExpanded="{Binding ExpanderPanelDevice, Mode=TwoWay}" >
-                
-                        <materialDesign:ColorZone Mode="Dark" >
-                        <ScrollViewer VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Auto">
+
+        <Border CornerRadius="6" BorderBrush="DimGray" BorderThickness="1.5" Padding="2">
+            <Expander  BorderBrush="DimGray" BorderThickness="1.5"   Margin="2.5"
+                       Name="Expander1"
+                       Header="Información" 
+                       Background="black"               
+                       Foreground="White"                                   
+                       IsExpanded="{Binding ExpanderPanelDevice, Mode=TwoWay}" >
+
+                <materialDesign:ColorZone Mode="Dark" >
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <ContentControl Grid.Row="0" Margin="5"  Visibility="{Binding Path=DetailTrack, Converter={StaticResource VisibleIfTrueConverter}}">
                             <Grid>
-                        
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="auto"/>
                                     <RowDefinition Height="auto"/>
-                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
                                 </Grid.RowDefinitions>
+                                <Label Grid.Row="0" Margin="5" Name="Label1"  Foreground="White" HorizontalAlignment="Center" ></Label>
+                                <DockPanel Grid.Row="1">
+                                    <Label Margin="5,0,0,0" Name="Label2"  Foreground="White"></Label>
+                                    <TextBlock Margin="0,0,0,0" Text="{Binding Track.Id}"  Foreground="DodgerBlue" VerticalAlignment="Center"></TextBlock>
+                                </DockPanel>
+                                <DockPanel Grid.Row="2">
+                                    <Label Margin="5,0,0,0" Name="Label3"  Foreground="White"></Label>
+                                    <TextBlock Margin="0"  Text="{Binding Track.RadarOrigin}" VerticalAlignment="Center" Foreground="LightGray"></TextBlock>
+                                </DockPanel>
+                                <!--<DockPanel Grid.Row="3">
+                                    <Label Margin="5,0,0,0" Name="Label4" Foreground="White"></Label>
+                                    <TextBlock Margin="0" Text="5" Foreground="DodgerBlue" VerticalAlignment="Center" />
+                                </DockPanel>-->
+                                <DockPanel Grid.Row="4">
+                                    <Label Margin="5,0,0,0" Name="Label5"  Foreground="White"></Label>
+                                    <TextBlock Margin="0" Text="{Binding Track.Type}"  Foreground="DodgerBlue" VerticalAlignment="Center" />
+                                </DockPanel>
+                                <DockPanel Grid.Row="5">
+                                    <Label Margin="5,0,0,0" Name="Label6"  Foreground="White"></Label>
+                                    <TextBlock Margin="0" Text="{Binding Track.Velocity,  StringFormat=F2}"  Foreground="DodgerBlue" VerticalAlignment="Center"/>
+                                    <Label Margin="0" Content="Km/h" Foreground="DodgerBlue" Visibility="{Binding Path=DetailTrack, Converter={StaticResource VisibleIfTrueConverter}}"></Label>
+                                </DockPanel>
+                                <DockPanel Grid.Row="6">
+                                    <Label Margin="5,0,0,0" Name="Label7"  Foreground="White"></Label>
+                                    <TextBlock Margin="0" Text="{Binding Track.DistanceToRadar,   StringFormat=F2}" Foreground="DodgerBlue" VerticalAlignment="Center"/>
+                                    <Label Margin="0" Content="m" Foreground="DodgerBlue" Visibility="{Binding Path=DetailTrack, Converter={StaticResource VisibleIfTrueConverter}}"></Label>
+                                </DockPanel>
+                            </Grid>
+                        </ContentControl>
+                        <ContentControl Grid.Row="1" Margin="5"  Visibility="{Binding Path=DetailDevice, Converter={StaticResource VisibleIfTrueConverter}}">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                </Grid.RowDefinitions>
+                                <Label Grid.Row="0" Margin="5" Name="Label8"  Foreground="White" HorizontalAlignment="Center" ></Label>
+                                <DockPanel Grid.Row="1">
+                                    <Label Margin="5,0,0,0" Content="Nombre radar: " Foreground="White"></Label>
+                                    <TextBlock Margin="0" Text="{Binding RadarDeviceModel_.RadarName}"  Foreground="DodgerBlue" VerticalAlignment="Center"/>
+                                </DockPanel>
+                                <DockPanel Grid.Row="2">
+                                    <Label Margin="5,0,0,0" Name="Label9"  Foreground="White"></Label>
+                                    <TextBlock Margin="0" Text="iSYS-3106"  Foreground="DodgerBlue" VerticalAlignment="Center"/>
+                                </DockPanel>
+                                <DockPanel Grid.Row="3">
+                                    <Label Margin="5,0,0,0" Name="Label10" Foreground="White"></Label>
+                                    <TextBlock Margin="0" Text="{Binding RadarDeviceModel_.IpAddress}" VerticalAlignment="Center" Foreground="LightGray"/>
+                                </DockPanel>
+                                <DockPanel Grid.Row="4">
+                                    <Label Margin="5,0,0,0" Name="Label11"  Foreground="White"></Label>
+                                    <TextBlock Margin="0" Text="{Binding RadarDeviceModel_.TXPower}"  Foreground="DodgerBlue" VerticalAlignment="Center"/>
+                                </DockPanel>
+                                <DockPanel Grid.Row="5">
+                                    <Label Margin="5,0,0,0" Name="Label12" Foreground="White"></Label>
+                                    <TextBlock Margin="0" Text="{Binding RadarDeviceModel_.SChannelFrec.Id}"  Foreground="DodgerBlue" VerticalAlignment="Center"/>
+                                </DockPanel>
+                                <Separator Grid.Row="6" />
+                                <DockPanel Grid.Row="7">
+                                    <Label Name="Label13" Margin="5,0,0,0" Grid.Row="6"  HorizontalAlignment="Center" Foreground="White"/>
+                                </DockPanel>
+                                <DockPanel Grid.Row="8">
+                                    <Label Margin="5,0,0,0" Name="Label14"  Foreground="White"></Label>
+                                    <TextBlock Margin="0" Text="{Binding RadarDeviceModel_.Altitude }"  Foreground="DodgerBlue" VerticalAlignment="Center"/>
+                                    <TextBlock Margin="0" Text=" m" Foreground="DodgerBlue" VerticalAlignment="Center"/>
+                                </DockPanel>
+                 
+                                <DockPanel Grid.Row="11">
+                                    <Label Margin="5,0,0,0" Name="Label17"  Foreground="White"></Label>
+                                    <TextBlock Margin="0" Text="{Binding RadarDeviceModel_.InstallationAngle}"  Foreground="DodgerBlue" VerticalAlignment="Center"/>
+                                    <TextBlock Margin="0" Text="°" Foreground="DodgerBlue" VerticalAlignment="Center"/>
+                                </DockPanel>
+                                <Separator Grid.Row="12" Margin="5,0,5,0"/>
+                                <Label Grid.Row="13" Margin="10"  Name="Label18"  Foreground="White" HorizontalAlignment="Center"/>
 
-                                <ContentControl Grid.Row="0" Margin="5"  Visibility="{Binding Path=DetailTrack, Converter={StaticResource VisibleIfTrueConverter}}">
-                                    <Grid>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="auto"/>
-                                            <RowDefinition Height="auto"/>
-                                            <RowDefinition Height="auto"/>
-                                            <RowDefinition Height="auto"/>
-                                            <RowDefinition Height="auto"/>
-                                            <RowDefinition Height="auto"/>
-                                            <RowDefinition Height="auto"/>
-                                        </Grid.RowDefinitions>
-                                        <Label Grid.Row="0" Margin="5" Name="Label1"  Foreground="White" HorizontalAlignment="Center" ></Label>
-                                        <DockPanel Grid.Row="1">
-                                            <Label Margin="5,0,0,0" Name="Label2"  Foreground="White"></Label>
-                                            <TextBlock Margin="0,0,0,0" Text="{Binding Track.Id}"  Foreground="DodgerBlue" VerticalAlignment="Center"></TextBlock>
-                                        </DockPanel>
-                                        <DockPanel Grid.Row="2">
-                                            <Label Margin="5,0,0,0" Name="Label3"  Foreground="White"></Label>
-                                            <TextBlock Margin="0"  Text="{Binding Track.RadarOrigin}" VerticalAlignment="Center" Foreground="LightGray"></TextBlock>
-                                        </DockPanel>
-                                        <!--<DockPanel Grid.Row="3">
-                                            <Label Margin="5,0,0,0" Name="Label4" Foreground="White"></Label>
-                                            <TextBlock Margin="0" Text="5" Foreground="DodgerBlue" VerticalAlignment="Center" />
-                                        </DockPanel>-->
-                                        <DockPanel Grid.Row="4">
-                                            <Label Margin="5,0,0,0" Name="Label5"  Foreground="White"></Label>
-                                            <TextBlock Margin="0" Text="{Binding Track.Type}"  Foreground="DodgerBlue" VerticalAlignment="Center" />
-                                        </DockPanel>
-                                        <DockPanel Grid.Row="5">
-                                            <Label Margin="5,0,0,0" Name="Label6"  Foreground="White"></Label>
-                                            <TextBlock Margin="0" Text="{Binding Track.Velocity,  StringFormat=F2}"  Foreground="DodgerBlue" VerticalAlignment="Center"/>
-                                            <Label Margin="0" Content="Km/h" Foreground="DodgerBlue" Visibility="{Binding Path=DetailTrack, Converter={StaticResource VisibleIfTrueConverter}}"></Label>
-                                        </DockPanel>
-                                        <DockPanel Grid.Row="6">
-                                            <Label Margin="5,0,0,0" Name="Label7"  Foreground="White"></Label>
-                                            <TextBlock Margin="0" Text="{Binding Track.DistanceToRadar,   StringFormat=F2}" Foreground="DodgerBlue" VerticalAlignment="Center"/>
-                                            <Label Margin="0" Content="m" Foreground="DodgerBlue" Visibility="{Binding Path=DetailTrack, Converter={StaticResource VisibleIfTrueConverter}}"></Label>
-                                        </DockPanel>
-                                    </Grid>
-                                </ContentControl>
-                                <ContentControl Grid.Row="1" Margin="5"  Visibility="{Binding Path=DetailDevice, Converter={StaticResource VisibleIfTrueConverter}}">
-                                    <Grid>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="auto"/>
-                                            <RowDefinition Height="auto"/>
-                                            <RowDefinition Height="auto"/>
-                                            <RowDefinition Height="auto"/>
-                                            <RowDefinition Height="auto"/>
-                                            <RowDefinition Height="auto"/>
-                                            <RowDefinition Height="auto"/>
-                                            <RowDefinition Height="auto"/>
-                                            <RowDefinition Height="auto"/>
-                                            <RowDefinition Height="auto"/>
-                                            <RowDefinition Height="auto"/>
-                                            <RowDefinition Height="auto"/>
-                                            <RowDefinition Height="auto"/>
-                                            <RowDefinition Height="auto"/>
-                                            <RowDefinition Height="auto"/>
-                                            <RowDefinition Height="auto"/>
-                                            <RowDefinition Height="auto"/>
-                                            <RowDefinition Height="auto"/>
-                                            <RowDefinition Height="auto"/>
-                                            <RowDefinition Height="auto"/>
-                                            <RowDefinition Height="auto"/>
-                                            <RowDefinition Height="auto"/>
-                                            <RowDefinition Height="auto"/>
-                                            <RowDefinition Height="auto"/>
-                                        </Grid.RowDefinitions>
-                                        <Label Grid.Row="0" Margin="5" Name="Label8"  Foreground="White" HorizontalAlignment="Center" ></Label>
-                                        <DockPanel Grid.Row="1">
-                                            <Label Margin="5,0,0,0" Content="Nombre radar: " Foreground="White"></Label>
-                                            <TextBlock Margin="0" Text="{Binding RadarDeviceModel_.RadarName}"  Foreground="DodgerBlue" VerticalAlignment="Center"/>
-                                        </DockPanel>
-                                        <DockPanel Grid.Row="2">
-                                            <Label Margin="5,0,0,0" Name="Label9"  Foreground="White"></Label>
-                                            <TextBlock Margin="0" Text="iSYS-3106"  Foreground="DodgerBlue" VerticalAlignment="Center"/>
-                                        </DockPanel>
-                                        <DockPanel Grid.Row="3">
-                                            <Label Margin="5,0,0,0" Name="Label10" Foreground="White"></Label>
-                                            <TextBlock Margin="0" Text="{Binding RadarDeviceModel_.IpAddress}" VerticalAlignment="Center" Foreground="LightGray"/>
-                                        </DockPanel>
-                                        <DockPanel Grid.Row="4">
-                                            <Label Margin="5,0,0,0" Name="Label11"  Foreground="White"></Label>
-                                            <TextBlock Margin="0" Text="{Binding RadarDeviceModel_.TXPower}"  Foreground="DodgerBlue" VerticalAlignment="Center"/>
-                                        </DockPanel>
-                                        <DockPanel Grid.Row="5">
-                                            <Label Margin="5,0,0,0" Name="Label12" Foreground="White"></Label>
-                                            <TextBlock Margin="0" Text="{Binding RadarDeviceModel_.SChannelFrec.Id}"  Foreground="DodgerBlue" VerticalAlignment="Center"/>
-                                        </DockPanel>
-                                        <Separator Grid.Row="6" />
-                                        <DockPanel Grid.Row="7">
-                                            <Label Name="Label13" Margin="5,0,0,0" Grid.Row="6"  HorizontalAlignment="Center" Foreground="White"/>
-                                        </DockPanel>
-                                        <DockPanel Grid.Row="8">
-                                            <Label Margin="5,0,0,0" Name="Label14"  Foreground="White"></Label>
-                                            <TextBlock Margin="0" Text="{Binding RadarDeviceModel_.Altitude }"  Foreground="DodgerBlue" VerticalAlignment="Center"/>
-                                            <TextBlock Margin="0" Text=" m" Foreground="DodgerBlue" VerticalAlignment="Center"/>
-                                        </DockPanel>
+                                <Label Grid.Row="14" Name="Label19" Margin="5,0,5,0" Foreground="White" />
+                                <DockPanel Grid.Row="15">
 
-                                        <DockPanel Grid.Row="11">
-                                            <Label Margin="5,0,0,0" Name="Label17"  Foreground="White"></Label>
-                                            <TextBlock Margin="0" Text="{Binding RadarDeviceModel_.InstallationAngle}"  Foreground="DodgerBlue" VerticalAlignment="Center"/>
-                                            <TextBlock Margin="0" Text="°" Foreground="DodgerBlue" VerticalAlignment="Center"/>
-                                        </DockPanel>
-                                        <Separator Grid.Row="12" Margin="5,0,5,0"/>
-                                        <Label Grid.Row="13" Margin="10"  Name="Label18"  Foreground="White" HorizontalAlignment="Center"/>
+                                    <Label Margin="5,0,0,0" Name="Label20"  Foreground="White"></Label>
+                                    <TextBlock Margin="0" Text="{Binding RadarDeviceModel_.Latitud}"  Foreground="DodgerBlue" VerticalAlignment="Center"/>
 
-                                        <Label Grid.Row="14" Name="Label19" Margin="5,0,5,0" Foreground="White" />
-                                        <DockPanel Grid.Row="15">
+                                    <Label Margin="5,0,0,0" Name="Label21" Foreground="White"></Label>
+                                    <TextBlock Margin="0" Text="{Binding RadarDeviceModel_.Longitud}"  Foreground="DodgerBlue" VerticalAlignment="Center"/>
 
-                                            <Label Margin="5,0,0,0" Name="Label20"  Foreground="White"></Label>
-                                            <TextBlock Margin="0" Text="{Binding RadarDeviceModel_.Latitud}"  Foreground="DodgerBlue" VerticalAlignment="Center"/>
-
-                                            <Label Margin="5,0,0,0" Name="Label21" Foreground="White"></Label>
-                                            <TextBlock Margin="0" Text="{Binding RadarDeviceModel_.Longitud}"  Foreground="DodgerBlue" VerticalAlignment="Center"/>
-
-                                        </DockPanel>
-                                        <DockPanel Grid.Row="16">
-                                            <Label Margin="5,0,0,0" Content="Ángulo con respecto al norte: " Foreground="White"></Label>
-                                            <TextBlock Margin="0" Text="{Binding RadarDeviceModel_.NorthHeiding}"  Foreground="DodgerBlue" VerticalAlignment="Center"/>
-                                            <TextBlock Margin="0" Text="°" Foreground="DodgerBlue" VerticalAlignment="Center"/>
-                                        </DockPanel>
-
-
-                                    </Grid>
-                                </ContentControl>
-                        
+                                </DockPanel>
+                                <DockPanel Grid.Row="16">
+                                    <Label Margin="5,0,0,0" Content="Ángulo con respecto al norte: " Foreground="White"></Label>
+                                    <TextBlock Margin="0" Text="{Binding RadarDeviceModel_.NorthHeiding}"  Foreground="DodgerBlue" VerticalAlignment="Center"/>
+                                    <TextBlock Margin="0" Text="°" Foreground="DodgerBlue" VerticalAlignment="Center"/>
+                                </DockPanel>
+                           
 
                             </Grid>
-                        </ScrollViewer>
-                        </materialDesign:ColorZone>
-                    
-                </Expander>
-            </Border>
-        </ScrollViewer>
+                        </ContentControl>
+
+                    </Grid>
+
+                </materialDesign:ColorZone>
+            </Expander>
+        </Border>
     </Grid>
 </UserControl>

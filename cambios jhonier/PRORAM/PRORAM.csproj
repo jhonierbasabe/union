@@ -165,7 +165,10 @@
     <Compile Include="ModulePRORAMModule.cs" />
     <Compile Include="MyConverter.cs" />
     <Compile Include="Notifications\ChannelFrecNotification.cs" />
+    <Compile Include="Notifications\ConsultParametersNotification.cs" />
     <Compile Include="Notifications\IChannelFrecNotification.cs" />
+    <Compile Include="Notifications\IConsultParametersNotification.cs" />
+    <Compile Include="Notifications\IMostrarParametros.cs" />
     <Compile Include="Notifications\IPopupConfirmationnotification.cs" />
     <Compile Include="Notifications\IPowerRadarNotification.cs" />
     <Compile Include="Notifications\PopupConfirmationnotification.cs" />
@@ -196,6 +199,7 @@
     <Compile Include="ViewModels\PopupConfirmationViewModel.cs" />
     <Compile Include="ViewModels\Radar\ChannelFrecViewModel.cs" />
     <Compile Include="ViewModels\Radar\ConfigurationViewModel.cs" />
+    <Compile Include="ViewModels\Radar\ConsultParametersViewModel.cs" />
     <Compile Include="ViewModels\Radar\PowerRadarViewModel.cs" />
     <Compile Include="ViewModels\Radar\RadarConfigurationViewModel.cs" />
     <Compile Include="ViewModels\Radar\RadarDevicesViewModel.cs" />
@@ -227,6 +231,9 @@
     </Compile>
     <Compile Include="Views\Radar\ConfigurationView.xaml.cs">
       <DependentUpon>ConfigurationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Radar\ConsultParametersView.xaml.cs">
+      <DependentUpon>ConsultParametersView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Radar\PowerRadarView.xaml.cs">
       <DependentUpon>PowerRadarView.xaml</DependentUpon>
@@ -292,6 +299,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Radar\ConsultParametersView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Radar\PowerRadarView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -330,15 +341,13 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <EmbeddedResource Include="ResourcesFiles\PRORAM_RESOURCE_FILE.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
     <None Include="PRORAMDATASET.xsc">
       <DependentUpon>PRORAMDATASET.xsd</DependentUpon>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -353,6 +362,7 @@
       <DependentUpon>PRORAMDATASET.xsd</DependentUpon>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="ResourcesFiles\PRORAM_RESOURCE_FILE.json" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

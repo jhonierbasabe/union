@@ -17,7 +17,7 @@
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Medium"
         TextElement.FontSize="14"        
-        Height="auto" Width="626">
+        Height="auto" Width="auto">
 
     <UserControl.Resources>
         <ResourceDictionary>
@@ -262,7 +262,7 @@
                                         </DockPanel>
                                         <DockPanel Grid.Column="1" Grid.Row="1" Margin="5,5,5,1">
                                             <!--Text="{Binding RadarConfigurationModel_.NorthHeiding, Mode=TwoWay , NotifyOnValidationError=true, ValidatesOnExceptions=true, UpdateSourceTrigger=LostFocus}"-->
-                                            <TextBox  TabIndex="8" materialDesign:HintAssist.Hint="Ingrese el angulo con respecto al norte (*)(°)"                                                 
+                                            <TextBox  TabIndex="4" materialDesign:HintAssist.Hint="Ingrese el angulo con respecto al norte (*)(°)"                                                 
                                                       Background="DimGray"  
                                                       BorderBrush="DimGray"
                                                       BorderThickness="2"
@@ -300,11 +300,15 @@
                                             <ColumnDefinition Width="1*"/>
                                             <ColumnDefinition Width="1*"/>
                                         </Grid.ColumnDefinitions>
+                                        
                                         <DockPanel Grid.Column="0" Grid.Row="0" Margin="5,5,5,1">
-                                            <Label Name="Label9"  Target="{Binding ElementName=ChannelFrec}"/>
+                                            <Label Name="Label9" Target="{Binding ElementName=ChannelFrec}" />
+                                        </DockPanel>
+                                        <DockPanel Grid.Column="1" Grid.Row="0" Margin="5,5,5,1">
+                                            <Label Content="Seleccione el tipo de objetivo (*)"  Target="{Binding ElementName=ChannelObject}"/>
                                         </DockPanel>
                                         <DockPanel Grid.Column="0" Grid.Row="1" Margin="5">
-                                            <ComboBox Name="ChannelFrec" TabIndex="7"
+                                            <ComboBox Name="ChannelFrec" TabIndex="5"
                                                     materialDesign:HintAssist.Hint="Seleccione el canal de transmión"
                                             IsEnabled="{Binding ModeloSelected}"
                                             Background="DimGray"
@@ -316,7 +320,32 @@
                                             HorizontalAlignment="Stretch">
                                             </ComboBox>
                                         </DockPanel>
-                                       
+
+                                        <!-- Insertar Combo-->
+
+                                        <DockPanel Grid.Column="1" Grid.Row="1" Margin="5">
+                                            <ComboBox Name="ChannelObject" TabIndex="6"
+                                                    materialDesign:HintAssist.Hint="Seleccione tipo de objetivo"
+                                            IsEnabled="{Binding ModeloSelected}"
+                                            Background="DimGray"
+                                            Width="auto"
+                                                   
+                                            ItemsSource="{Binding RadarConfigurationModel_.ChannelObject}"
+                                            SelectedItem="{Binding RadarConfigurationModel_.SchannelObject, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=true, ValidatesOnExceptions=true, UpdateSourceTrigger=LostFocus}"  
+                                            DisplayMemberPath="DisplayNameO"                                                                                  
+                                            HorizontalAlignment="Stretch">
+                                            </ComboBox>
+                                        </DockPanel>
+                                        <!-- Insertar Combo-->
+
+                                        <!-- <ComboBox  x:Name="TipoObjetivo" : Nombre del Combo -->
+                                        <!-- materialDesign:HintAssist.Hint : Agrega un texto de sugerencia dentro del combo -->
+                                        <!-- ItemsSource="{Binding RadarConfigurationModel_.ChannelFrec}": Elementos que se mostraran en el radar-->
+
+      
+                                        
+                                        <!-- Agregar el combo para seleccionar el tipo de objetivo-->
+
                                     </Grid>
                                 </ContentControl>
                                 <ContentControl Grid.Row="4">
@@ -343,7 +372,7 @@
                                             <DockPanel Grid.Row="2" Grid.Column="0">
                                                 <Label Name="Label10" Target="{Binding ElementName=Latitud}" />
                                                 <!--Text="{Binding RadarConfigurationModel_.Latitud, Mode=TwoWay , NotifyOnValidationError=true, ValidatesOnExceptions=true, UpdateSourceTrigger=LostFocus}"-->
-                                                <TextBox Name="Latitud"    TabIndex="9"        
+                                                <TextBox Name="Latitud"    TabIndex="7"        
                                                    materialDesign:HintAssist.Hint="Ingrese la latitud"                                                 
                                                  Background="DimGray"  
                                                  BorderBrush="DimGray"
@@ -363,7 +392,7 @@
                                             <DockPanel Grid.Row="2" Grid.Column="1">
                                                 <Label Name="Label11"  Target="{Binding ElementName=Longitud}" />
                                                 <!--Text="{Binding RadarConfigurationModel_.Longitud, Mode=TwoWay , NotifyOnValidationError=true, ValidatesOnExceptions=true, UpdateSourceTrigger=PropertyChanged}"-->
-                                                <TextBox Name="Longitud"     TabIndex="10"   
+                                                <TextBox Name="Longitud"     TabIndex="8"   
                                                    materialDesign:HintAssist.Hint="Ingrese la longitud"                                                 
                                                  Background="DimGray"  
                                                  BorderBrush="DimGray"
@@ -374,7 +403,7 @@
                                                         <DropShadowEffect ShadowDepth="2" Color="White" Opacity=".4" RenderingBias="Performance"></DropShadowEffect>
                                                     </TextBox.Effect>
                                                     <Binding Path="RadarConfigurationModel_.Longitud" UpdateSourceTrigger="LostFocus" NotifyOnValidationError="True" Mode="TwoWay"
-                                                            ValidatesOnExceptions="True" Converter="{StaticResource MyConverter}">
+                                             ValidatesOnExceptions="True" Converter="{StaticResource MyConverter}">
 
                                                     </Binding>
                                                 </TextBox>

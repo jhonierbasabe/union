@@ -103,8 +103,14 @@ namespace PRORAM.ViewModels
         /// </summary>
         private void SubmitTargeArea()
         {
+            string Error = "";
+            string NombreArea = "NombreArea:";
+            string LatitudP2 = "LatitudP2:";
+            string LongitudP1 = "LongitudP1:";
+            string LongitudP2 = "LongitudP2:";
+            string LatitudP1 = "LatitudP1:";
             TargetAreaMod.ValidateProperties();
-            Errors = FlattenErrors();
+            Errors = FlattenErrors();                           
             var count = DSconnection.DSConnection.CountDevices();
             var vCordenate = ValidateCordenate();
             int _sizeArea = 0;
@@ -113,9 +119,73 @@ namespace PRORAM.ViewModels
                 _sizeArea = ValidateSizeArea();
             }
             bool isCorrectSize = (_sizeArea == 0) ? true : false;
+            if (Errors.Count > 0)
+            {
+                Error = Errors[0].ToString();
+                if (Error.StartsWith(NombreArea))
+                {
+                    Error = Errors[0].ToString();
+                }
+                else
+                {
+                    Error = Errors[Errors.Count - 1].ToString();
+                }
+            }
+            else
+            {
+                Error = "Sin Errores";
+            }
             if (vCordenate == false)
             {
-                CustomPopupRequest.Raise(new Notification { Title = "Notificación", Content = new { Text = "Ingrese los datos del formulario de manera correcta", Show = true, ShowAlert = true } }, r => Title = "PRORAM Consola de monitoreo");
+                if (Error.StartsWith(NombreArea))
+                {
+                    CustomPopupRequest.Raise(new Notification { Title = "Notificación", Content = new { Text = "Ingrese un nombre de area entre 4 y 20 caracteres de longitud", Show = true, ShowAlert = true } }, r => Title = "PRORAM Consola de monitoreo");
+                }
+
+                else if (Error.StartsWith(LatitudP1))
+                {
+                    CustomPopupRequest.Raise(new Notification { Title = "Notificación", Content = new { Text = "Ingrese un valor valido de Latitud del punto superior izquierdo, entre -180 y 180  ", Show = true, ShowAlert = true } }, r => Title = "PRORAM Consola de monitoreo");
+                }
+
+                else if (Error.StartsWith(LongitudP1))
+                {
+                    CustomPopupRequest.Raise(new Notification { Title = "Notificación", Content = new { Text = "Ingrese un valor valido de longitud del punto superior izquierdo, entre - 90 y 90 ", Show = true, ShowAlert = true } }, r => Title = "PRORAM Consola de monitoreo");
+                }
+
+                else if (Error.StartsWith(LatitudP2))
+                {
+                    CustomPopupRequest.Raise(new Notification { Title = "Notificación", Content = new { Text = "Ingrese un valor valido de Latitud del punto inferior derecho, entre -180 y 180  ", Show = true, ShowAlert = true } }, r => Title = "PRORAM Consola de monitoreo");
+                }
+
+                else if (Error.StartsWith(LongitudP2))
+                {
+                    CustomPopupRequest.Raise(new Notification { Title = "Notificación", Content = new { Text = "Ingrese un valor valido de longitud del punto inferior derecho, entre - 90 y 90 ", Show = true, ShowAlert = true } }, r => Title = "PRORAM Consola de monitoreo");
+                }
+
+                else
+                {
+                    if(TargetAreaMod.LatitudP1 == TargetAreaMod.LatitudP2)
+                    {
+                        CustomPopupRequest.Raise(new Notification { Title = "Notificación", Content = new { Text = "La latitud de los puntos no puede ser igual", Show = true, ShowAlert = true } }, r => Title = "PRORAM Consola de monitoreo");
+                    }
+
+                    else if (TargetAreaMod.LatitudP1 < TargetAreaMod.LatitudP2)
+                    {
+                        CustomPopupRequest.Raise(new Notification { Title = "Notificación", Content = new { Text = "La latitud del punto superior izquierdo tiene que ser mayor a la del punto inferior derecho", Show = true, ShowAlert = true } }, r => Title = "PRORAM Consola de monitoreo");
+                    }
+
+                    else if (TargetAreaMod.LongitudP1 == TargetAreaMod.LongitudP2)
+                    {
+                        CustomPopupRequest.Raise(new Notification { Title = "Notificación", Content = new { Text = "La longitud de los puntos no puede ser igual", Show = true, ShowAlert = true } }, r => Title = "PRORAM Consola de monitoreo");
+                    }
+
+                    else if (TargetAreaMod.LongitudP1 > TargetAreaMod.LongitudP2)
+                    {
+                        CustomPopupRequest.Raise(new Notification { Title = "Notificación", Content = new { Text = "La longitud del punto inferior derecho tiene que ser mayor a la del punto superior izquierdo", Show = true, ShowAlert = true } }, r => Title = "PRORAM Consola de monitoreo");
+                    }
+                }
+
+                //CustomPopupRequest.Raise(new Notification { Title = "Notificación", Content = new { Text = "", Show = true, ShowAlert = true } }, r => Title = "PRORAM Consola de monitoreo");
             }
             if (!isCorrectSize && vCordenate)
             {

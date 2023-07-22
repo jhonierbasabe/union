@@ -63,5 +63,10 @@ namespace PRORAM.Views
         {
 
         }
+
+        private void ChannelFrec_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }
