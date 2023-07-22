@@ -198,7 +198,8 @@
                                     <ContentPresenter Grid.Column="0" Margin="4" ContentSource="Header" RecognizesAccessKey="True" />
 
                                     <ToggleButton HorizontalAlignment="Right" Grid.Column="1" VerticalAlignment="Center" Margin="0,0,5,6"
-                                                  OverridesDefaultStyle="True" Template="{StaticResource ExpanderToggleButton}"             IsChecked="{Binding IsExpanded, Mode=TwoWay,   RelativeSource={RelativeSource TemplatedParent}}">
+                                                  OverridesDefaultStyle="True" Template="{StaticResource ExpanderToggleButton}"             
+                                                  IsChecked="{Binding IsExpanded, Mode=TwoWay,   RelativeSource={RelativeSource TemplatedParent}}">
 
                                     </ToggleButton>
                                 </Grid>
@@ -250,38 +251,41 @@
                             <Separator Grid.Row="0" Margin="5" />
 
                             <ContentControl Grid.Row="1">
-                                <DataGrid Margin="5" ItemsSource="{Binding TrackList, Mode=TwoWay}"  
-                                  SelectedItem="{Binding STrackList}"
-                                  Background="DimGray"                       
-                                  AlternatingRowBackground="Gray" 
-                                  CanUserAddRows="False"
-                                  AutoGenerateColumns="False"                      
-                                  Height="200"                       
-                                  ColumnWidth="Auto">
-                                    <DataGrid.Columns >
-                                        <DataGridTextColumn Width="50" Header="#" Binding="{Binding Path=Id}" IsReadOnly="True" />
-                                        <DataGridTextColumn Width="50" Header="Id" Binding="{Binding Path=Id}" IsReadOnly="True" />
-                                        <DataGridTextColumn Width="100" Header="Azimuth" Binding="{Binding Path=Azimuth}" IsReadOnly="True" />
-                                        <DataGridTemplateColumn Width="80" Header="Acciones" >
-                                            <DataGridTemplateColumn.CellTemplate>
-                                                <DataTemplate>
-                                                    <DockPanel>
-                                                        <Button Margin="2,2,10,0" HorizontalAlignment="Right" Command="{Binding Path=DataContext.DeleteTrackCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
-                                                            VerticalAlignment="Center" Width="24" Height="24" Style="{StaticResource MaterialDesignFloatingActionAccentButton}" Background="Transparent" BorderBrush="Transparent">
-                                                            <Viewbox Width="24" Height="24">
-                                                                <Canvas Width="24" Height="24">
-                                                                    <Path Data="M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2C6.47,2 2,6.47 2,12C2,17.53 6.47,22 12,22C17.53,22 22,17.53 22,12C22,6.47 17.53,2 12,2M14.59,8L12,10.59L9.41,8L8,9.41L10.59,12L8,14.59L9.41,16L12,13.41L14.59,16L16,14.59L13.41,12L16,9.41L14.59,8Z" Fill="Red" />
-                                                                </Canvas>
-                                                            </Viewbox>
-                                                        </Button>
-                                                    </DockPanel>
+                                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                                    <DataGrid Margin="5" ItemsSource="{Binding TrackList, Mode=TwoWay}"  
+                                        SelectedItem="{Binding STrackList}"
+                                        Background="DimGray"                       
+                                        AlternatingRowBackground="Gray" 
+                                        CanUserAddRows="False"
+                                        AutoGenerateColumns="False"                      
+                                        Height="218"                       
+                                        ColumnWidth="Auto">
+                                        <DataGrid.Columns >
+                                            <DataGridTextColumn Width="50" Header="#" Binding="{Binding Path=RadarId}" IsReadOnly="True" />
+                                            <DataGridTextColumn Width="90" Header="Distancia" Binding="{Binding Path=Range}" IsReadOnly="True" />
+                                            <DataGridTextColumn Width="90" Header="Azimuth" Binding="{Binding Path=Azimuth}" IsReadOnly="True" />
+                                            <DataGridTextColumn Width="90" Header="Velocidad" Binding="{Binding Path=Velocity_obj}" IsReadOnly="True" />
+                                            <DataGridTemplateColumn Width="80" Header="Acciones" >
+                                                <DataGridTemplateColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <DockPanel>
+                                                            <Button Margin="2,2,10,0" HorizontalAlignment="Right" Command="{Binding Path=DataContext.DeleteTrackCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                                                VerticalAlignment="Center" Width="24" Height="24" Style="{StaticResource MaterialDesignFloatingActionAccentButton}" Background="Transparent" BorderBrush="Transparent">
+                                                                <Viewbox Width="24" Height="24">
+                                                                    <Canvas Width="24" Height="24">
+                                                                        <Path Data="M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2C6.47,2 2,6.47 2,12C2,17.53 6.47,22 12,22C17.53,22 22,17.53 22,12C22,6.47 17.53,2 12,2M14.59,8L12,10.59L9.41,8L8,9.41L10.59,12L8,14.59L9.41,16L12,13.41L14.59,16L16,14.59L13.41,12L16,9.41L14.59,8Z" Fill="Red" />
+                                                                    </Canvas>
+                                                                </Viewbox>
+                                                            </Button>
+                                                        </DockPanel>
 
-                                                </DataTemplate>
-                                            </DataGridTemplateColumn.CellTemplate>
-                                        </DataGridTemplateColumn>
-                                    </DataGrid.Columns>
-                                </DataGrid>
-                            </ContentControl>
+                                                    </DataTemplate>
+                                                </DataGridTemplateColumn.CellTemplate>
+                                            </DataGridTemplateColumn>
+                                        </DataGrid.Columns>
+                                    </DataGrid>
+                                </ScrollViewer>
+                                </ContentControl>
 
                         </Grid>
                     </materialDesign:ColorZone>

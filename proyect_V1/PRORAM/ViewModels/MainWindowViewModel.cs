@@ -173,6 +173,8 @@ namespace PRORAM.ViewModels
         {
             GeoLayerModel_.DefinedMap = true;
             TargetAreaMod = new TargetAreaModel { LatitudP1 = obj.LatitudP1, LatitudP2 = obj.LatitudP2, LongitudP1 = obj.LongitudP1, LongitudP2 = obj.LongitudP2, NombreArea = obj.NombreArea };
+            /*var sidePanelsViewModel = new SidePanelsViewModel();
+            sidePanelsViewModel.obtener_coordenadas(TargetAreaMod.LatitudP1, TargetAreaMod.LongitudP1, TargetAreaMod.LatitudP2, TargetAreaMod.LongitudP2 );*/
         }
         /// <summary>
         /// Metodo LoadStage2, carga una ventana que se encaga de notificar al momento de guardar un escenario
@@ -237,6 +239,7 @@ namespace PRORAM.ViewModels
                         device.IsSaving = false;
                         device.IsSavingT = false;
                         DSconnection.DSConnection.AddRadarDeviceRow(device);
+                        _ea.GetEvent<SendEventDataSet>().Publish(new EventsDataSet { evento = "GetDevicesList" });
                         _ea.GetEvent<MsmSentEvent>().Publish(new RadarActions()
                         {
                             GuidRadar = device.GuidRadar,

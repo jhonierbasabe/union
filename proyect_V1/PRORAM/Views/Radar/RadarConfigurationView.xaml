@@ -17,7 +17,7 @@
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Medium"
         TextElement.FontSize="14"        
-        Height="auto" Width="auto">
+        Height="auto" Width="626">
 
     <UserControl.Resources>
         <ResourceDictionary>

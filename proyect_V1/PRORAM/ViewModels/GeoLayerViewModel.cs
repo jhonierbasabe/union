@@ -29,6 +29,7 @@ using Microsoft.Win32.SafeHandles;
 using System.Windows.Interop;
 using System.Windows.Threading;
 using PRORAM.ServicesTcp;
+using Prism.Regions;
 
 namespace PRORAM.ViewModels
 {
@@ -51,6 +52,9 @@ namespace PRORAM.ViewModels
         private System.Windows.Forms.Timer _timerObjectlist;
         private ObservableCollection<RadarDevicesModel> _devices;
         private byte[] _messageReceived;
+        
+
+
 
         #endregion
 
@@ -136,6 +140,7 @@ namespace PRORAM.ViewModels
 
             _locationsRule = new LocationCollection();
             _timerObjectlist = new System.Windows.Forms.Timer();
+
 
         }
 
@@ -859,6 +864,8 @@ namespace PRORAM.ViewModels
         public DelegateCommand RotateCommand { get; set; }
         public DelegateCommand MeasuringCommand { get; set; }
         public DelegateCommand ClearRuleCommand { get; set; }
+        public bool Azimuth { get; private set; }
+        public object targetPanelViewModel { get; private set; }
 
 
         #endregion Delegados
@@ -1041,6 +1048,8 @@ namespace PRORAM.ViewModels
             var toolTip = new ToolTip();
             toolTip.Placement = System.Windows.Controls.Primitives.PlacementMode.MousePoint;
             toolTip.Content = string.Format("Id: {0} \nDistancia: {1} m \nVelocidad: {0} Km/h", tracks.Id, tracks.DistanceToRadar, tracks.Velocity);
+            Console.WriteLine(toolTip.Content);
+
             t.ToolTip = toolTip;
 
             t.Tag = "Track";
@@ -1050,6 +1059,8 @@ namespace PRORAM.ViewModels
 
             this.GeoLayerMod.MyMap.Children.Add(t);
             this.GeoLayerMod.MyMap.UpdateLayout();
+
+
         }
         /// <summary>
         /// Metodo que genera el evento de informacion del panle lateral
@@ -1202,6 +1213,7 @@ namespace PRORAM.ViewModels
 
 
             GeoLayerMod.MyMap.MouseDoubleClick += MapMouseDoubleClick;
+           
 
             var _layers = DSconnection.DSConnection.GetLayers();
 
@@ -1351,7 +1363,7 @@ namespace PRORAM.ViewModels
         /// Metodo DrawPlots, dibuja los plots en el mapa geografico
         /// </summary>
         /// <param name="plts">objeto plot</param>
-        /// <param name="device">dispositivo radar</param>
+        /// <param name="device">dispositivo radar</param>f
         /// <param name="b">bandera de entrada</param>
         private void DrawPlots(Plots plts, RadarDevicesModel device, bool b)
         {
@@ -1374,9 +1386,11 @@ namespace PRORAM.ViewModels
 
             var toolTip = new ToolTip();
             toolTip.Placement = System.Windows.Controls.Primitives.PlacementMode.MousePoint;
-            toolTip.Content = string.Format("Distancia: {0} m \nAzimuth: {1}°", plts.Range, Math.Round(plts.Azimuth, 2));
+            toolTip.Content = string.Format("Distancia: {0} m \nAzimuth: {1}° \nVelocidad: {2} m/s", plts.Range, Math.Round(plts.Azimuth, 2), plts.Velocity_obj);
             myRect.ToolTip = toolTip;
-
+            //Console.WriteLine(toolTip.Content);
+            //myRect.MouseLeftButtonDown += MyRect_MouseLeftButtonDown;
+            myRect.MouseLeftButtonDown += (sender, e) => MyRect_MouseLeftButtonDown(sender, e, plts);
             string _uid = plts.PlotGuid + "-" + plts.RadarId;
             myRect.Tag = "Plots";
             myRect.Uid = _uid;
@@ -1389,8 +1403,28 @@ namespace PRORAM.ViewModels
             MapLayer.SetPosition(myRect, loc);
 
             GeoLayerMod.MyMap.Children.Add(myRect);
+
             GeoLayerMod.MyMap.UpdateLayout();
         }
+
+        /// <summary>
+        /// Metoodo que envia los datos de plos a
+        /// la ventana de blancos 
+        private void MyRect_MouseLeftButtonDown(object sender, MouseButtonEventArgs e, Plots plts)
+        {
+            _ea.GetEvent<EventPlots>().Publish(new Plots {
+                Range = plts.Range,
+                Azimuth = plts.Azimuth,
+                Velocity_obj = plts.Velocity_obj,
+                RadarId= plts.RadarId,
+                
+
+            });
+            
+        }
+
+
+
 
 
         /// <summary>
@@ -1556,6 +1590,30 @@ namespace PRORAM.ViewModels
         private void MapMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             e.Handled = true;
+            /*var latitud = device.Latitud;
+            var longitud = device.Longitud;
+            Posicion point = Proj4.ConvertionLocation(latitud, longitud, device.NorthHeiding, plts.Range, plts.Azimuth);
+
+            var myRect = new System.Windows.Shapes.Rectangle();
+            myRect.Stroke = System.Windows.Media.Brushes.Black;
+            myRect.Fill = System.Windows.Media.Brushes.Yellow;
+            myRect.HorizontalAlignment = HorizontalAlignment.Left;
+            myRect.VerticalAlignment = VerticalAlignment.Center;
+            myRect.Height = 6;
+            myRect.Width = 6;
+            Location location = new Location()
+            {
+                Latitude = point.Lat,
+                Longitude = point.Lon
+            };
+
+            var toolTip = new ToolTip();
+            toolTip.Placement = System.Windows.Controls.Primitives.PlacementMode.MousePoint;
+            toolTip.Content = string.Format("Distancia: {0} m \nAzimuth: {1}° \nVelocidad: {2} Km/h", plts.Range, Math.Round(plts.Azimuth, 2), plts.Velocity_obj);
+            myRect.ToolTip = toolTip;
+            Console.WriteLine(toolTip.Content);*/
+
+
         }
 
         /// <summary>

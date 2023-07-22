@@ -218,7 +218,7 @@ namespace ReadingPcap
             using (PacketCommunicator communicator = selectedDevice.Open(readWholePacket, PacketDeviceOpenAttributes.Promiscuous, readTimeOut))
             {
 
-                communicator.ReceivePackets(0, IncommingPacketHandler);
+                communicator.ReceivePackets(0, -IncommingPacketHandler);
             }
         }
 

@@ -36,7 +36,26 @@
                 </prism:PopupWindowAction.WindowContent>
             </prism:PopupWindowAction>
         </prism:InteractionRequestTrigger>
+
+        <prism:InteractionRequestTrigger SourceObject="{Binding CustomPopupRequest}">
+            <prism:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True">
+                <prism:PopupWindowAction.WindowStyle>
+                    <Style TargetType="Window">
+                        <Setter Property="SizeToContent" Value="WidthAndHeight"/>
+                        <Setter Property="ResizeMode" Value="NoResize"/>
+                        <Setter Property="WindowStyle" Value="None"/>
+                        <Setter Property="AllowsTransparency" Value="True"/>
+                        <Setter Property="Background" Value="Transparent"/>
+                    </Style>
+                </prism:PopupWindowAction.WindowStyle>
+                <prism:PopupWindowAction.WindowContent>
+                    <local:CustomPopupView />
+                </prism:PopupWindowAction.WindowContent>
+            </prism:PopupWindowAction>
+        </prism:InteractionRequestTrigger>
+
     </i:Interaction.Triggers>
+    
 
     <UserControl.Resources>
 
@@ -293,83 +312,87 @@
                             </DockPanel>
 
                        
-
+                                        
                             <Separator Grid.Row="1" Grid.ColumnSpan="3" Margin="0,2,0,2"/>
+                            
                             <ContentControl Grid.Row="2" Grid.ColumnSpan="3">
-                                <DataGrid Margin="5" ItemsSource="{Binding RadarDevicesModel_, Mode=TwoWay}"  
-                                  SelectedItem="{Binding SRadarDevicesModel}"
-                                  Background="DimGray"                       
-                                  AlternatingRowBackground="Gray" 
-                                  CanUserAddRows="False"    
-                                  AutoGenerateColumns="False"                      
-                                  Height="auto"                                  
-                                  ColumnWidth="Auto">
+                                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                                    <DataGrid Margin="5" ItemsSource="{Binding RadarDevicesModel_, Mode=TwoWay}"  
+                                      SelectedItem="{Binding SRadarDevicesModel}"
+                                      Background="DimGray"                       
+                                      AlternatingRowBackground="Gray" 
+                                      CanUserAddRows="False"    
+                                      AutoGenerateColumns="False"                      
+                                      Height="217"                                  
+                                      ColumnWidth="Auto">
 
-                                    <DataGrid.Columns >
-                                        <DataGridTextColumn Width="45" Header="Id" Binding="{Binding Path=Id}" IsReadOnly="True" FontSize="10" />
-                                        <DataGridTemplateColumn Width="88">
-                                            <DataGridTemplateColumn.CellTemplate>
-                                                <DataTemplate>
-                                                    <DockPanel>
-                                                        <TextBox Text="{Binding Path=RadarName}"></TextBox>
-                                                    </DockPanel>
-                                                </DataTemplate>
-                                            </DataGridTemplateColumn.CellTemplate>
-                                            <DataGridTemplateColumn.Header>
-                                                <HeaderedContentControl>
-                                                    <TextBox Text="Dispositivos" TextWrapping="Wrap" BorderThickness="0" HorizontalAlignment="Center" FontSize="10"></TextBox>
-                                                </HeaderedContentControl>
+                                        <DataGrid.Columns >
+                                            <DataGridTextColumn Width="45" Header="Id" Binding="{Binding Path=Id}" IsReadOnly="True" FontSize="10" />
+                                            <DataGridTemplateColumn Width="88">
+                                                <DataGridTemplateColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <DockPanel>
+                                                            <TextBox Text="{Binding Path=RadarName}"></TextBox>
+                                                        </DockPanel>
+                                                    </DataTemplate>
+                                                </DataGridTemplateColumn.CellTemplate>
+                                                <DataGridTemplateColumn.Header>
+                                                    <HeaderedContentControl>
+                                                        <TextBox Text="Dispositivos" TextWrapping="Wrap" BorderThickness="0" HorizontalAlignment="Center" FontSize="10"></TextBox>
+                                                    </HeaderedContentControl>
 
-                                            </DataGridTemplateColumn.Header>
-                                        </DataGridTemplateColumn>
-                                        <DataGridTemplateColumn Width="auto"   IsReadOnly="True" >
-                                            <DataGridTemplateColumn.CellTemplate>
-                                                <DataTemplate>
-                                                    <ToggleButton Template="{StaticResource  ComboBoxToggleButton}" 
-                                                                  IsChecked="{Binding Path=StateConnection}" VerticalAlignment="Center" HorizontalAlignment="Center">
-                                                    </ToggleButton>
-                                                </DataTemplate>
-                                            </DataGridTemplateColumn.CellTemplate>
-                                            <DataGridTemplateColumn.Header>
-                                                <HeaderedContentControl>
-                                                    <TextBox Text="Conexión" TextWrapping="Wrap" BorderThickness="0" HorizontalAlignment="Center" FontSize="10"></TextBox>
-                                                </HeaderedContentControl>
-                                            </DataGridTemplateColumn.Header>
-                                        </DataGridTemplateColumn>
-                                        <DataGridTemplateColumn Width="80"  IsReadOnly="True"  >
-                                            <DataGridTemplateColumn.CellTemplate>
-                                                <DataTemplate>
-                                                    <ToggleButton Template="{StaticResource  ComboBoxToggleButton}" 
-                                                                  IsChecked="{Binding Path=Radiation}" VerticalAlignment="Center" HorizontalAlignment="Center">
-                                                    </ToggleButton>
-                                                </DataTemplate>
-                                            </DataGridTemplateColumn.CellTemplate>
-                                            <DataGridTemplateColumn.Header>
-                                                <HeaderedContentControl>
-                                                    <TextBox Text="Radiación" TextWrapping="Wrap" BorderThickness="0" HorizontalAlignment="Center" FontSize="10"></TextBox>
-                                                </HeaderedContentControl>
-                                            </DataGridTemplateColumn.Header>
-                                        </DataGridTemplateColumn>
-                                        <DataGridTemplateColumn Header="Información">
-                                            <DataGridTemplateColumn.CellTemplate>
-                                                <DataTemplate>
-                                                    <StackPanel>
-                                                        <Button Command="{Binding Path=DataContext.DetailRadarCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
-                                                                Background="Transparent" Style="{StaticResource MaterialDesignFlatButton}">
-                                                            <Viewbox Width="24" Height="24">
-                                                                <Canvas Width="24" Height="24">
-                                                                    <Path Data="M11,9H13V7H11M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M11,17H13V11H11V17Z" 
-                                                                          Fill="DodgerBlue"/>
-                                                                </Canvas>
-                                                            </Viewbox>
-                                                        </Button>
-                                                    </StackPanel>
-                                                </DataTemplate>
-                                            </DataGridTemplateColumn.CellTemplate>
-                                        </DataGridTemplateColumn>
-                                    </DataGrid.Columns>
-                                </DataGrid>
+                                                </DataGridTemplateColumn.Header>
+                                            </DataGridTemplateColumn>
+                                            <DataGridTemplateColumn Width="auto"   IsReadOnly="True" >
+                                                <DataGridTemplateColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <ToggleButton Template="{StaticResource  ComboBoxToggleButton}" 
+                                                                      IsChecked="{Binding Path=StateConnection}" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                                        </ToggleButton>
+                                                    </DataTemplate>
+                                                </DataGridTemplateColumn.CellTemplate>
+                                                <DataGridTemplateColumn.Header>
+                                                    <HeaderedContentControl>
+                                                        <TextBox Text="Conexión" TextWrapping="Wrap" BorderThickness="0" HorizontalAlignment="Center" FontSize="10"></TextBox>
+                                                    </HeaderedContentControl>
+                                                </DataGridTemplateColumn.Header>
+                                            </DataGridTemplateColumn>
+                                            <DataGridTemplateColumn Width="80"  IsReadOnly="True"  >
+                                                <DataGridTemplateColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <ToggleButton Template="{StaticResource  ComboBoxToggleButton}" 
+                                                                      IsChecked="{Binding Path=Radiation}" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                                        </ToggleButton>
+                                                    </DataTemplate>
+                                                </DataGridTemplateColumn.CellTemplate>
+                                                <DataGridTemplateColumn.Header>
+                                                    <HeaderedContentControl>
+                                                        <TextBox Text="Radiación" TextWrapping="Wrap" BorderThickness="0" HorizontalAlignment="Center" FontSize="10"></TextBox>
+                                                    </HeaderedContentControl>
+                                                </DataGridTemplateColumn.Header>
+                                            </DataGridTemplateColumn>
+                                            <DataGridTemplateColumn Header="Información">
+                                                <DataGridTemplateColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <StackPanel>
+                                                            <Button Command="{Binding Path=DataContext.DetailRadarCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                                                    Background="Transparent" Style="{StaticResource MaterialDesignFlatButton}">
+                                                                <Viewbox Width="24" Height="24">
+                                                                    <Canvas Width="24" Height="24">
+                                                                        <Path Data="M11,9H13V7H11M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M11,17H13V11H11V17Z" 
+                                                                              Fill="DodgerBlue"/>
+                                                                    </Canvas>
+                                                                </Viewbox>
+                                                            </Button>
+                                                        </StackPanel>
+                                                    </DataTemplate>
+                                                </DataGridTemplateColumn.CellTemplate>
+                                            </DataGridTemplateColumn>
+                                        </DataGrid.Columns>
+                                    </DataGrid>
+                                </ScrollViewer>
                             </ContentControl>
+                            
                         </Grid>
                     </materialDesign:ColorZone>
                 </Expander>

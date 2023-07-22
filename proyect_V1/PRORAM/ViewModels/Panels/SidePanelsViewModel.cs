@@ -23,26 +23,25 @@ namespace PRORAM.ViewModels
     /// <summary>
     /// Clase SidePanelsViewModel, controla la interación con la vista SidePanelsView
     /// </summary>
-    public class SidePanelsViewModel : BindableBase
+    public class SidePanelsViewModel : BindableBase 
     {
-
-
         #region private
-        private ObservableCollection<RadarDevicesModel> _radarDevicesModel;
+        public ObservableCollection<RadarDevicesModel> _RadarDevicesModel;
         private RadarDevicesModel _sradarDevicesModel;
         private string _title;
+        private string _mensaje;
+        private string _titulo;
         private bool _expanderPanelDevice;
         private byte[] _buffer;
         private GeoLayerModel _geoLayerModel = new GeoLayerModel();
         private RadarConfigurationModel _RadarConfigurationModel;
-        public DelegateCommand RadarDevicesNotificationCommand { get; set; }
-        private IRadarDevicesNotification _notification;
         private TargetAreaModel _targetAreaModel = new TargetAreaModel();
         public Action RaiseRadarConfigurationInteraction { get; private set; }
-        //private IRadarDevicesNotification _notification;
         #endregion
-        public RadarDevicesModel _RadarDevicesModel;
-        
+        //RadarDevicesViewModel viewModel = new RadarDevicesViewModel();
+        public  RadarDevicesViewModel radarDevicesViewModel;
+        private IRadarDevicesNotification _notification;
+       
         /// <summary>
         /// Propiedad ExpanderPanelDevice, define si el panal se encuentra visible
         /// </summary>
@@ -60,15 +59,15 @@ namespace PRORAM.ViewModels
         /// Propiedad SRadarDevicesModel, contiene la informacion de dispositivo radar seleccionado
         /// </summary>
         /// 
-        public GeoLayerModel geoLayerModel_
-        {
-            get { return _geoLayerModel; }
-            set { SetProperty(ref _geoLayerModel, value); }
-        }
-        public TargetAreaModel _TargetAreaMod
+        public TargetAreaModel TargetAreaMod
         {
             get { return _targetAreaModel; }
             set { SetProperty(ref _targetAreaModel, value); }
+        }
+        public GeoLayerModel GeoLayerModel_
+        {
+            get { return _geoLayerModel; }
+            set { SetProperty(ref _geoLayerModel, value); }
         }
         public RadarDevicesModel SRadarDevicesModel
         {
@@ -85,12 +84,16 @@ namespace PRORAM.ViewModels
         /// </summary>
         public ObservableCollection<RadarDevicesModel> RadarDevicesModel_
         {
-            get { return _radarDevicesModel; }
-            set { SetProperty(ref _radarDevicesModel, value); }
+            get { return _RadarDevicesModel; }
+            set { SetProperty(ref _RadarDevicesModel, value); }
         }
-        
 
-       
+        public string Title
+        {
+            get { return _title; }
+            set { SetProperty(ref _title, value); }
+        }
+
         /// <summary>
         /// Contructor de la clase SidePanelsViewModel
         /// </summary>
@@ -102,14 +105,17 @@ namespace PRORAM.ViewModels
             _regionManager = regionManager;
             _ea = ea;
             _ea.GetEvent<SendEventDataSet>().Subscribe(GetRadarDevices);
-            //RadarDevicesModel_ = new ObservableCollection<RadarDevicesModel>();
+            
             DetailRadarCommand = new DelegateCommand(DetailRadar);
+            CustomPopupRequest = new InteractionRequest<INotification>();
+            _ea.GetEvent<MessageSentEvent>().Subscribe(LoadStageEvent);
             AgregarRadar = new DelegateCommand(_AgregarRadar);
             RadarConfigurationNotificationRequest = new InteractionRequest<IRadarConfigurationNotification>();
-            CustomPopupRequest = new InteractionRequest<INotification>();
-            _notification = new RadarDevicesNotification();
 
         }
+
+    
+
         /// <summary>
         /// Metodo DetailRadar, publica evento para que se visualize la informacion de un dispositivo radar
         /// </summary>
@@ -117,50 +123,51 @@ namespace PRORAM.ViewModels
         {
             _ea.GetEvent<EventPanel>().Publish(new DetailPanel { Device = SRadarDevicesModel, Action = "Show", Target = "Device" });
         }
-       
-        private void _AgregarRadar()
+
+        private void LoadStageEvent(TargetAreaModel obj)
         {
-            //_ea.GetEvent<EventPanel>().Publish(new DetailPanel { Device = SRadarDevicesModel, Action = "Show", Target = "Device" });
-            Console.WriteLine("entro");
-            
-            
-            var count = RadarDevicesModel_.Count;
-            var idRadar = count + 1;
-
-
-            //var p1 = new Location() { Latitude = TargetAreaMod.LatitudP1.Value, Longitude = TargetAreaMod.LongitudP1.Value };
-            ///var p2 = new Location() { Latitude = TargetAreaMod.LatitudP2.Value, Longitude = TargetAreaMod.LongitudP2.Value };
-
-            
-            var p1 = _notification.Point1;
-            var p2 = _notification.Point2;
-
-            if (count <= 9)
+            GeoLayerModel_.DefinedMap = true;
+            TargetAreaMod = new TargetAreaModel { LatitudP1 = obj.LatitudP1, LatitudP2 = obj.LatitudP2, LongitudP1 = obj.LongitudP1, LongitudP2 = obj.LongitudP2, NombreArea = obj.NombreArea };
+        }
+        public void _AgregarRadar()
+        {
+            _titulo = "Mensaje de notificación ";
+            _mensaje = "Necesita definir un área objetivo para poder agregar un dispositivo radar ";
+            if (GeoLayerModel_.DefinedMap == true)
             {
-                RadarConfigurationNotificationRequest.Raise(new RadarConfigurationNotification { Title = "Registrar radar", Content = idRadar, Point1 = p1, Point2 = p2 }, r =>
+
+                var p1 = new Location() { Latitude = TargetAreaMod.LatitudP1.Value, Longitude = TargetAreaMod.LongitudP1.Value };
+                var p2 = new Location() { Latitude = TargetAreaMod.LatitudP2.Value, Longitude = TargetAreaMod.LongitudP2.Value };
+
+                var count = RadarDevicesModel_.Count;
+                var idRadar = count + 1;
+                if (count <= 9)
                 {
-                    if (r.Confirmed && r.RadarConfigurationModelI_ != null)
+                    RadarConfigurationNotificationRequest.Raise(new RadarConfigurationNotification { Title = "Registrar radar", Content = idRadar, Point1 = p1, Point2 = p2 }, r =>
                     {
-                        RadarConfigurationModel_ = r.RadarConfigurationModelI_;
-                        PushDevice();
-                    }
-                });
+                        if (r.Confirmed && r.RadarConfigurationModelI_ != null)
+                        {
+                            RadarConfigurationModel_ = r.RadarConfigurationModelI_;
+                            PushDevice();
+                        }
+                    });
+                }
             }
-
+            else
+            {
+                RaiseCustomPopup();
+            }
+            _titulo = string.Empty;
+            _mensaje = string.Empty;
         }
-        public RadarDevicesModel radarDevicesModel_
-        {
-            get { return _RadarDevicesModel; }
-            set { SetProperty(ref _RadarDevicesModel, value); }
-        }
 
-        
 
-        
-       
         private RadarDevicesView _radarDevicesView;
 
-
+        private void RaiseCustomPopup()
+        {
+            CustomPopupRequest.Raise(new Notification { Title = _titulo, Content = new { Text = _mensaje, Show = false, ShowAlert = true } }, r => Title = "PRORAM Consola de monitoreo");
+        }
         /// <summary>
         /// Propiedad RadarConfigurationNotificationRequest
         /// </summary>
@@ -174,19 +181,10 @@ namespace PRORAM.ViewModels
         public InteractionRequest<INotification> CustomPopupRequest { get; set; }
         public DelegateCommand DetailRadarCommand { get; set; }
         public DelegateCommand AgregarRadar { get; set; }
-        public InteractionRequest<IRadarDevicesNotification> RadarDevicesNotificationRequest { get; set; }
-        public string _titulo { get; private set; }
-        public string _mensaje { get; private set; }
-        public TargetAreaModel TargetAreaMod
-        {
-            get { return _targetAreaModel; }
-            set { SetProperty(ref _targetAreaModel, value); }
-        }
-        public InteractionRequest<ITargetAreaNotification> TargetAreaNotificationRequest { get; set; }
 
- 
 
         public INotification Notification
+
         {
             get { return _notification; }
             set { SetProperty(ref _notification, (IRadarDevicesNotification)value); }
@@ -249,6 +247,8 @@ namespace PRORAM.ViewModels
                 Logs = "Se agregó un nuevo dispositivo radar bajo el nombre de " + radardevice.RadarName
             });
         }
+
+      
 
 
     }

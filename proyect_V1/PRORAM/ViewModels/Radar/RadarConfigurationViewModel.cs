@@ -268,8 +268,8 @@ namespace PRORAM.ViewModels
         /// </summary>
         private void SubmitInsRadar()
         {
-            
-            
+
+            RadarConfigurationModel_.Azimuth=2;
             RadarConfigurationModel_.ValidateProperties();
             Errors = FlattenErrors();
             var _isWithinArea = IsWithinArea();

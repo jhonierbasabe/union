@@ -51,7 +51,7 @@ namespace PRORAM.ServicesTcp
         private Task _connectionTask;
         private ObservableCollection<Tracks> _tracksFromRadar;
         private IPAddress _ipAddress;
-        private static Socket client;
+        private Socket client;
         private int _Port;
 
         #endregion
@@ -161,7 +161,7 @@ namespace PRORAM.ServicesTcp
         /// <param name="sender">objeto que hace el llamado</param>
         /// <param name="e">EventArgs</param>
         private void GetStatusConnection(object sender, EventArgs e)
-        {
+         {
 
             var messagesGenerator = new MessagesGenerator(1);
             var messageToSend = messagesGenerator.GetSettingTime(85);
@@ -283,13 +283,24 @@ namespace PRORAM.ServicesTcp
 
                 foreach (var plt in plots)
                 {
-                    var timeStamp = plt.TimeStamp.AddSeconds(5);
-                    var now = DateTime.Now;
-
-                    if (timeStamp.CompareTo(DateTime.Now) < 0)
+                    try
                     {
-                        PlotsFromRadar.Remove(plt);
-                        ActionsPlot?.Invoke(plt, "OnDeletePlot", Device);                       
+                        if (plt != null)
+                        {
+                            var timeStamp = plt.TimeStamp.AddSeconds(5);
+                            var now = DateTime.Now;
+
+                            if (timeStamp.CompareTo(DateTime.Now) < 0)
+                            {
+                                PlotsFromRadar.Remove(plt);
+                                ActionsPlot?.Invoke(plt, "OnDeletePlot", Device);
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        System.Diagnostics.StackTrace trace = new System.Diagnostics.StackTrace(ex, true);
+                        Console.WriteLine("plt nulo archivo " + trace.GetFrame(0).GetFileName() + " linea " + trace.GetFrame(0).GetFileLineNumber());
                     }
                 }
             }
@@ -367,8 +378,8 @@ namespace PRORAM.ServicesTcp
                         byte[] time = ArraySub.SubArray(data, endFlag - 4, 4);
                         RepPlots(data, time, endFlag);
                     }
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                    if (ResultTrans[0] == ListMessages.headerMessages["Rep_Tracks"] && _isRunning == true)
+                    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                    if (ResultTrans[0] == ListMessages.headerMessages["Rep_Track"] && _isRunning == true)
                     {
                         byte[] data = ResultTrans;
                         int sizeData = data[3];
@@ -423,7 +434,7 @@ namespace PRORAM.ServicesTcp
                 _isRunning = false;
                 IsConnected = false;
                 this._timerGetStatus.Enabled = false;
-                Status = "Disconect";                
+                Status = "Disconect";
                 Console.WriteLine("We're disconnected");
 
             }
@@ -671,7 +682,7 @@ namespace PRORAM.ServicesTcp
         private void RepPlots(byte[] buffer, byte[] timeStamp, int endflag)
         {
             byte[] plots = ArraySub.SubArray(buffer, 4, endflag - 8);
-            //Console.WriteLine("Reporte de plots, total de plots {0}", plots.Length);
+            Console.WriteLine("Reporte de plots, total de plots {0}", plots.Length);
             int idRadar = buffer[1];
             var dateTimeVar = Utils.ConvertByteToTime(timeStamp);
             if (plots.Length % 6 == 0)
@@ -685,6 +696,7 @@ namespace PRORAM.ServicesTcp
                         Range = Convert.ToDouble(BitConverter.ToUInt16((ArraySub.SubArray(plots, i, 2)).Reverse().ToArray(), 0)) / 100,
                         Azimuth = Convert.ToDouble(BitConverter.ToUInt16((ArraySub.SubArray(plots, i + 2, 2)).Reverse().ToArray(), 0)) / 10,
                         Power = Convert.ToInt32(BitConverter.ToUInt16((ArraySub.SubArray(plots, i + 4, 2)).Reverse().ToArray(), 0)),
+                        Velocity_obj = Convert.ToDouble(BitConverter.ToUInt16((ArraySub.SubArray(plots, i + 3, 2)).Reverse().ToArray(), 0)),
                         RadarId = idRadar,
                         PlotGuid = _guidPlot
                     });
@@ -695,11 +707,16 @@ namespace PRORAM.ServicesTcp
                         Range = Convert.ToDouble(BitConverter.ToUInt16((ArraySub.SubArray(plots, i, 2)).Reverse().ToArray(), 0)) / 100,
                         Azimuth = Convert.ToDouble(BitConverter.ToUInt16((ArraySub.SubArray(plots, i + 2, 2)).Reverse().ToArray(), 0)) / 10,
                         Power = Convert.ToInt32(BitConverter.ToUInt16((ArraySub.SubArray(plots, i + 4, 2)).Reverse().ToArray(), 0)),
+                        //Velocity_obj = Convert.ToDouble(BitConverter.ToUInt16((ArraySub.SubArray(plots, i + 2, 2)).Reverse().ToArray(), 0)) / 10,
                         RadarId = idRadar,
                         PlotGuid = _guidPlot,
-                    }, "OnAddPlot", Device);                  
-                  
+                    }, "OnAddPlot", Device);
+
                 }
+            }
+            else
+            {
+                Console.WriteLine("ServiceTcp tamaño de datos incorrecto");
             }
             ResultTrans = new byte[256];
         }
@@ -793,9 +810,17 @@ namespace PRORAM.ServicesTcp
         /// <returns>retorna una porcion del array byte</returns>
         public static T[] SubArray<T>(this T[] data, int index, int length)
         {
-            T[] result = new T[length];
-            Array.Copy(data, index, result, 0, length);
-            return result;
+            try
+            {
+                T[] result = new T[length];
+                Array.Copy(data, index, result, 0, length);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error ServiceTcp linea 804" + ex.Message);
+            }
+            return null;
         }
     }
     /// <summary>
@@ -810,6 +835,8 @@ namespace PRORAM.ServicesTcp
         public double Azimuth { get; set; }
         public int Power { get; set; }
         public DateTime TimeStamp { get; set; }
+        public double Velocity_obj { get; set; }
+        
 
     }
 
